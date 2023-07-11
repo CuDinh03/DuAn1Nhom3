@@ -4,10 +4,22 @@
  */
 package DAO;
 
+import Utilities.JdbcHelper;
+import com.sun.jdi.connect.spi.Connection;
+import java.sql.PreparedStatement;
+import model.Product;
+
 /**
  *
  * @author maccuacu
  */
 public class ProductDAO {
+    
+    private Connection connection = (Connection) JdbcHelper.getConnection();
+
+    public ProductDAO() {
+    }
+    
+
     
 }
