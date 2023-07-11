@@ -27,13 +27,13 @@ public class ProductService implements IService<Product>{
 
     @Override
     public List<Product> findAll() {
-        return ;
+        return null;
     }
 
     @Override
     public Product findById(String index) {
         
-        return;
+        return null;
     }
     
     
