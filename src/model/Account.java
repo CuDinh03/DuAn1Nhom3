@@ -12,12 +12,12 @@ public class Account {
     private Date ngaySua;
     private String username;
     private String passWord;
-    private boolean status;
+    private int status;
 
     public Account() {
     }
 
-    public Account(String id, String maTk, Date ngayTao, Date ngaySua, String username, String passWord, boolean status) {
+    public Account(String id, String maTk, Date ngayTao, Date ngaySua, String username, String passWord, int status) {
         this.id = id;
         this.maTk = maTk;
         this.ngayTao = ngayTao;
@@ -75,11 +75,11 @@ public class Account {
         this.passWord = passWord;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     
