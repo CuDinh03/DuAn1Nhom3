@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views.LoginForm;
+package view.LoginForm;
 
 import java.awt.Color;
 
@@ -50,7 +50,7 @@ public class JFrLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         lblErrUsername = new javax.swing.JLabel();
         lblErrPassWord = new javax.swing.JLabel();
-        btnClose = new button.MyButton();
+        btnClose = new view.component.button.MyButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -289,7 +289,7 @@ public class JFrLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private button.MyButton btnClose;
+    private view.component.button.MyButton btnClose;
     private javax.swing.JLabel disable;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
