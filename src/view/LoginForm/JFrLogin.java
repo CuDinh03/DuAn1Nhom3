@@ -5,9 +5,17 @@
  */
 package view.LoginForm;
 
+import DAO.AccountDAO;
+import DAO.AccountRoleDAO;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import model.Account;
+import model.AccountRole;
 
 /**
  *
@@ -25,7 +33,17 @@ public class JFrLogin extends javax.swing.JFrame {
         txtusername.setBackground(new java.awt.Color(0,0,0,1));
         txtpassword.setBackground(new java.awt.Color(0,0,0,1));
     }
-
+    private Account getAccount() throws SQLException{
+        
+        AccountDAO adao = new AccountDAO();
+        String name = this.txtusername.getText().trim();
+        String pass = this.txtpassword.getText().trim();
+        
+        
+        
+        Account acc = adao.getAccountByUsername(name);
+        return acc;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -201,18 +219,29 @@ public class JFrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if(this.txtusername.getText().equals("")){
-            this.lblErrUsername.setText("Không để trống username");
-            this.lblErrUsername.setForeground(Color.red);
-        }else if(!this.txtusername.getText().equals("")){
-             this.lblErrUsername.setText("");
+        try {
+            if(this.txtusername.getText().equals("")){
+                this.lblErrUsername.setText("Không để trống username");
+                this.lblErrUsername.setForeground(Color.red);
+            }else if(!this.txtusername.getText().equals("")){
+                this.lblErrUsername.setText("");
+            }
+            
+            if(String.valueOf(this.txtpassword.getPassword()).equals("")){
+                this.lblErrPassWord.setText("Không để trống username");
+                this.lblErrPassWord.setForeground(Color.red);
+            }else if(!String.valueOf(this.txtpassword.getPassword()).equals("")){
+                this.lblErrPassWord.setText("");
+            }
+            
+          AccountRole role =  AccountRoleDAO.getById(getAccount().getUsername());
+          
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(String.valueOf(this.txtpassword.getPassword()).equals("")){
-            this.lblErrPassWord.setText("Không để trống username");
-            this.lblErrPassWord.setForeground(Color.red);
-        }else if(!String.valueOf(this.txtpassword.getPassword()).equals("")){
-             this.lblErrPassWord.setText("");
-        }
+
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed

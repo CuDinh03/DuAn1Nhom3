@@ -17,6 +17,15 @@ public class Account {
     public Account() {
     }
 
+    public Account(String username, String passWord, int status) {
+        this.username = username;
+        this.passWord = passWord;
+        this.status = status;
+    }
+    
+    
+    
+
     public Account(String id, String maTk, Date ngayTao, Date ngaySua, String username, String passWord, int status) {
         this.id = id;
         this.maTk = maTk;
