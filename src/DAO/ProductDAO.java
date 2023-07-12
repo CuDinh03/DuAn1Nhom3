@@ -20,7 +20,7 @@ public class ProductDAO {
 
     // Create
     public void addProduct(Product product) {
-        String query = "INSERT INTO Product (id, ma, ten, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) " +
+        String query = "INSERT INTO sanPham (id, ma, ten, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, product.getId());
@@ -43,7 +43,7 @@ public class ProductDAO {
 
     // Read
     public Product getProductById(String id) {
-        String query = "SELECT * FROM Product WHERE id = ?";
+        String query = "SELECT * FROM sanPham WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -57,7 +57,7 @@ public class ProductDAO {
     }
 
     public List<Product> getAllProducts() {
-        String query = "SELECT * FROM Product";
+        String query = "SELECT * FROM sanPham";
         List<Product> products = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
@@ -73,8 +73,8 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE Product SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hsd = ?, " +
-                "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, status = ? WHERE id = ?";
+        String query = "UPDATE sanPham SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, " +
+                "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, product.getMa());
             statement.setString(2, product.getName());
@@ -96,7 +96,7 @@ public class ProductDAO {
 
     // Delete
     public void deleteProduct(String id) {
-        String query = "DELETE FROM Product WHERE id = ?";
+        String query = "UPDATE sanPham WHERE id = ? SET trangThai=0";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, id);
             statement.executeUpdate();
@@ -112,16 +112,16 @@ public class ProductDAO {
         String nguonGoc = resultSet.getString("nguonGoc");
         double giaGoc = resultSet.getDouble("giaGoc");
         Date ngaySx = resultSet.getDate("ngaySx");
-        Date hsd = resultSet.getDate("hsd");
+        Date hsd = resultSet.getDate("hanSD");
         String idDanhMuc = resultSet.getString("idDanhMuc");
         Date ngayTao = resultSet.getDate("ngayTao");
         Date ngaySua = resultSet.getDate("ngaySua");
-        boolean status = resultSet.getBoolean("status");
+        boolean status = resultSet.getBoolean("trangThai");
 
         return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
     }
     public Product findById(String id) {
-    String query = "SELECT * FROM Product WHERE id = ?";
+    String query = "SELECT * FROM sanPham WHERE id = ?";
     try (PreparedStatement statement = connection.prepareStatement(query)) {
         statement.setString(1, id);
         ResultSet resultSet = statement.executeQuery();
