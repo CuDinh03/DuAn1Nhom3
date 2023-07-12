@@ -1,9 +1,7 @@
-package view.component.button;
+package view.Shopping;
 
 import java.awt.Color;
 import java.awt.Cursor;
-
-import static java.awt.Frame.HAND_CURSOR;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -69,6 +67,7 @@ public class MyButton extends JButton {
         colorOver = new Color(179, 250, 160);
         colorClick = new Color(152, 184, 144);
         borderColor = new Color(30, 136, 56);
+        
         setContentAreaFilled(false);
         //  Add event mouse
         addMouseListener(new MouseAdapter() {
@@ -76,14 +75,15 @@ public class MyButton extends JButton {
             public void mouseEntered(MouseEvent me) {
                 setBackground(colorOver);
                 over = true;
-                setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+                setCursor(new Cursor(12));
+               
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
                 setBackground(color);
                 over = false;
-
+            
             }
 
             @Override

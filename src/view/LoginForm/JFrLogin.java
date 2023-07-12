@@ -36,21 +36,21 @@ public class JFrLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbTitle = new javax.swing.JLabel();
+        lbUserName = new javax.swing.JLabel();
         txtusername = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lbUnderLineUser = new javax.swing.JLabel();
+        lbIconUser = new javax.swing.JLabel();
+        lbPass = new javax.swing.JLabel();
         txtpassword = new javax.swing.JPasswordField();
-        jLabel9 = new javax.swing.JLabel();
-        disable = new javax.swing.JLabel();
-        show = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        lbUnderLinePass = new javax.swing.JLabel();
+        lbIconDisable = new javax.swing.JLabel();
+        lbIconShow = new javax.swing.JLabel();
+        ckbRemember = new javax.swing.JCheckBox();
+        btnLogin = new javax.swing.JButton();
         lblErrUsername = new javax.swing.JLabel();
         lblErrPassWord = new javax.swing.JLabel();
-        btnClose = new view.component.button.MyButton();
+        lblClose = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -65,16 +65,16 @@ public class JFrLogin extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 32)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Đăng nhập");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 47, 420, -1));
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 0, 32)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTitle.setText("Đăng nhập");
+        jPanel2.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 47, 420, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Tên đăng nhập");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 341, -1));
+        lbUserName.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lbUserName.setForeground(new java.awt.Color(255, 255, 255));
+        lbUserName.setText("Tên đăng nhập");
+        jPanel2.add(lbUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 341, -1));
 
         txtusername.setFont(txtusername.getFont().deriveFont(txtusername.getFont().getSize()+2f));
         txtusername.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,19 +86,19 @@ public class JFrLogin extends javax.swing.JFrame {
         });
         jPanel2.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 150, 240, 20));
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("_________________________________________");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 290, -1));
+        lbUnderLineUser.setForeground(new java.awt.Color(255, 255, 255));
+        lbUnderLineUser.setText("_________________________________________");
+        jPanel2.add(lbUnderLineUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 290, -1));
 
-        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/icon/icons8_user_20px_1.png"))); // NOI18N
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 147, 40, 39));
+        lbIconUser.setBackground(new java.awt.Color(0, 0, 0));
+        lbIconUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbIconUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/icons8_user_20px_1.png"))); // NOI18N
+        jPanel2.add(lbIconUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 147, 40, 39));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Mật khẩu");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 341, -1));
+        lbPass.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lbPass.setForeground(new java.awt.Color(255, 255, 255));
+        lbPass.setText("Mật khẩu");
+        jPanel2.add(lbPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 341, -1));
 
         txtpassword.setFont(txtpassword.getFont().deriveFont(txtpassword.getFont().getSize()+2f));
         txtpassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,97 +106,86 @@ public class JFrLogin extends javax.swing.JFrame {
         txtpassword.setCaretColor(new java.awt.Color(255, 255, 255));
         jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 240, 20));
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText("_________________________________________");
-        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 20));
+        lbUnderLinePass.setForeground(new java.awt.Color(255, 255, 255));
+        lbUnderLinePass.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbUnderLinePass.setText("_________________________________________");
+        lbUnderLinePass.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel2.add(lbUnderLinePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 290, 20));
 
-        disable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        disable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/icon/icons8_invisible_20px_1.png"))); // NOI18N
-        disable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        disable.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbIconDisable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbIconDisable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/icons8_invisible_20px_1.png"))); // NOI18N
+        lbIconDisable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbIconDisable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                disableMouseClicked(evt);
+                lbIconDisableMouseClicked(evt);
             }
         });
-        jPanel2.add(disable, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 30, 40));
+        jPanel2.add(lbIconDisable, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 30, 40));
 
-        show.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Views/icon/icons8_eye_20px_1.png"))); // NOI18N
-        show.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        show.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbIconShow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbIconShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/icons8_eye_20px_1.png"))); // NOI18N
+        lbIconShow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbIconShow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showMouseClicked(evt);
+                lbIconShowMouseClicked(evt);
             }
         });
-        jPanel2.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 30, 40));
+        jPanel2.add(lbIconShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 30, 40));
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Nhớ mật khẩu?");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        ckbRemember.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        ckbRemember.setForeground(new java.awt.Color(255, 255, 255));
+        ckbRemember.setText("Nhớ mật khẩu?");
+        ckbRemember.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                ckbRememberActionPerformed(evt);
             }
         });
-        jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        jPanel2.add(ckbRemember, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(25, 118, 211));
-        jButton1.setText("Đăng nhập");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(25, 118, 211));
+        btnLogin.setText("Đăng nhập");
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 341, 40));
+        jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 341, 40));
         jPanel2.add(lblErrUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
         jPanel2.add(lblErrPassWord, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 240, -1));
 
-        btnClose.setBackground(new java.awt.Color(102, 204, 255));
-        btnClose.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnClose.setForeground(new java.awt.Color(255, 255, 255));
-        btnClose.setText("X");
-        btnClose.setBorderColor(new java.awt.Color(102, 204, 255));
-        btnClose.setColorClick(new java.awt.Color(204, 204, 204));
-        btnClose.setColorOver(new java.awt.Color(204, 204, 204));
-        btnClose.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Close Window_3.png"))); // NOI18N
+        lblClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCloseMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCloseMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCloseMouseExited(evt);
+                lblCloseMouseClicked(evt);
             }
         });
-        jPanel2.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 30, 20));
+        jPanel2.add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 30, 20));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 440));
 
-        setSize(new java.awt.Dimension(410, 438));
+        setSize(new java.awt.Dimension(407, 438));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void disableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disableMouseClicked
+    private void lbIconDisableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIconDisableMouseClicked
         txtpassword.setEchoChar((char)0);
-        disable.setVisible(false);
-        disable.setEnabled(false);
-        show.setEnabled(true);
-        show.setEnabled(true);
-    }//GEN-LAST:event_disableMouseClicked
+        lbIconDisable.setVisible(false);
+        lbIconDisable.setEnabled(false);
+        lbIconShow.setEnabled(true);
+        lbIconShow.setEnabled(true);
+    }//GEN-LAST:event_lbIconDisableMouseClicked
 
-    private void showMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMouseClicked
+    private void lbIconShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbIconShowMouseClicked
         txtpassword.setEchoChar((char)8226);
-        disable.setVisible(true);
-        disable.setEnabled(true);
-        show.setEnabled(false);
-        show.setEnabled(false);
-    }//GEN-LAST:event_showMouseClicked
+        lbIconDisable.setVisible(true);
+        lbIconDisable.setEnabled(true);
+        lbIconShow.setEnabled(false);
+        lbIconShow.setEnabled(false);
+    }//GEN-LAST:event_lbIconShowMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         for (double i = 0.0; i <=1.0; i = i+0.1){
@@ -211,7 +200,7 @@ public class JFrLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(this.txtusername.getText().equals("")){
             this.lblErrUsername.setText("Không để trống username");
             this.lblErrUsername.setForeground(Color.red);
@@ -224,33 +213,35 @@ public class JFrLogin extends javax.swing.JFrame {
         }else if(!String.valueOf(this.txtpassword.getPassword()).equals("")){
              this.lblErrPassWord.setText("");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtusernameActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void ckbRememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbRememberActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_ckbRememberActionPerformed
 
     private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
-        this.btnClose.setForeground(Color.white);
-        this.btnClose.setBackground(new Color(102,204,255));
+        
     }//GEN-LAST:event_btnCloseMouseExited
 
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
-        this.btnClose.setForeground(Color.red);
-        this.btnClose.setBackground(Color.gray);
+       
 
     }//GEN-LAST:event_btnCloseMouseEntered
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-       int check = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn thoát?");
-       if(check == 0){
+     
+    }//GEN-LAST:event_btnCloseMouseClicked
+
+    private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
+       int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát không?");
+       if(check ==0){
            System.exit(0);
        }
-    }//GEN-LAST:event_btnCloseMouseClicked
+    }//GEN-LAST:event_lblCloseMouseClicked
 
     /**
      * @param args the command line arguments
@@ -289,20 +280,20 @@ public class JFrLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.component.button.MyButton btnClose;
-    private javax.swing.JLabel disable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JCheckBox ckbRemember;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbIconDisable;
+    private javax.swing.JLabel lbIconShow;
+    private javax.swing.JLabel lbIconUser;
+    private javax.swing.JLabel lbPass;
+    private javax.swing.JLabel lbTitle;
+    private javax.swing.JLabel lbUnderLinePass;
+    private javax.swing.JLabel lbUnderLineUser;
+    private javax.swing.JLabel lbUserName;
+    private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblErrPassWord;
     private javax.swing.JLabel lblErrUsername;
-    private javax.swing.JLabel show;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
