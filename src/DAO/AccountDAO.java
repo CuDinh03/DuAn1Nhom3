@@ -20,7 +20,7 @@ public class AccountDAO {
 
     // Create
     public void addAccount(Account account) {
-        String query = "INSERT INTO Account (id, maTk, ngayTao, ngaySua, username, passWord, status) " +
+        String query = "INSERT INTO taiKhoan (id, ma, ngayTao, ngaySua, taiKhoan, matKhau, trangThai) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, account.getId());
@@ -39,7 +39,7 @@ public class AccountDAO {
 
     // Read
     public Account getAccountById(String id) {
-        String query = "SELECT * FROM Account WHERE id = ?";
+        String query = "SELECT * FROM taiKhoan WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -53,7 +53,7 @@ public class AccountDAO {
     }
 
     public List<Account> getAllAccounts() {
-        String query = "SELECT * FROM Account";
+        String query = "SELECT * FROM taiKhoan";
         List<Account> accounts = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
@@ -69,8 +69,8 @@ public class AccountDAO {
 
     // Update
     public void updateAccount(Account account) {
-        String query = "UPDATE Account SET maTk = ?, ngayTao = ?, ngaySua = ?, username = ?, passWord = ?, " +
-                "status = ? WHERE id = ?";
+        String query = "UPDATE taiKhoan SET maTk = ?, ngayTao = ?, ngaySua = ?, username = ?, passWord = ?, " +
+                "trangThai = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, account.getMaTk());
             statement.setDate(2, new java.sql.Date(account.getNgayTao().getTime()));
@@ -88,7 +88,7 @@ public class AccountDAO {
 
     // Delete
     public void deleteAccount(String id) {
-        String query = "DELETE FROM Account WHERE id = ?";
+        String query = "UPDATE FROM taiKhoan WHERE id = ? SET trangThai = 0 ";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, id);
             statement.executeUpdate();
@@ -99,12 +99,12 @@ public class AccountDAO {
 
     private Account extractAccountFromResultSet(ResultSet resultSet) throws SQLException {
         String id = resultSet.getString("id");
-        String maTk = resultSet.getString("maTk");
+        String maTk = resultSet.getString("ma");
         Date ngayTao = resultSet.getDate("ngayTao");
         Date ngaySua = resultSet.getDate("ngaySua");
-        String username = resultSet.getString("username");
-        String passWord = resultSet.getString("passWord");
-        int status = resultSet.getInt("status");
+        String username = resultSet.getString("taiKhoan");
+        String passWord = resultSet.getString("matKhau");
+        int status = resultSet.getInt("trangThai");
 
         return new Account(id, maTk, ngayTao, ngaySua, username, passWord, status);
     }
