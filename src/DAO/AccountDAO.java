@@ -69,7 +69,7 @@ public class AccountDAO {
 
     // Update
     public void updateAccount(Account account) {
-        String query = "UPDATE taiKhoan SET maTk = ?, ngayTao = ?, ngaySua = ?, username = ?, passWord = ?, " +
+        String query = "UPDATE taiKhoan SET ma = ?, ngayTao = ?, ngaySua = ?, taiKhoan = ?, matKhau = ?, " +
                 "trangThai = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, account.getMaTk());
@@ -88,7 +88,7 @@ public class AccountDAO {
 
     // Delete
     public void deleteAccount(String id) {
-        String query = "UPDATE FROM taiKhoan WHERE id = ? SET trangThai = 0 ";
+        String query = "UPDATE taiKhoan WHERE id = ? SET trangThai = 0 ";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, id);
             statement.executeUpdate();
