@@ -64,7 +64,7 @@ public class MyButton extends JButton {
         //  Init Color
 
         setColor(Color.WHITE);
-        colorOver = new Color(179, 250, 160);
+        colorOver = new Color(102,204,255);
         colorClick = new Color(152, 184, 144);
         borderColor = new Color(30, 136, 56);
         
