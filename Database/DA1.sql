@@ -45,7 +45,7 @@ create table baoCao(
  id uniqueidentifier PRIMARY KEY ,
  maBC varchar(20),
  noiDung varchar(20),
- ten int,
+ ten varchar(20),
  ngayTao date,
  ngaySua date,
  doanhThu decimal(20,5),
