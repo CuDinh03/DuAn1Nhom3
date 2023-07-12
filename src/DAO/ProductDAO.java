@@ -20,19 +20,20 @@ public class ProductDAO {
 
     // Create
     public void addProduct(Product product) {
-        String query = "INSERT INTO Product (id, ma, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Product (id, ma, ten, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, product.getId());
             statement.setString(2, product.getMa());
-            statement.setString(3, product.getNguonGoc());
-            statement.setDouble(4, product.getGiaGoc());
-            statement.setDate(5, new java.sql.Date(product.getNgaySx().getTime()));
-            statement.setDate(6, new java.sql.Date(product.getHsd().getTime()));
-            statement.setString(7, product.getIdDanhMuc());
-            statement.setDate(8, new java.sql.Date(product.getNgayTao().getTime()));
-            statement.setDate(9, new java.sql.Date(product.getNgaySua().getTime()));
-            statement.setBoolean(10, product.isStatus());
+            statement.setString(3, product.getName());
+            statement.setString(4, product.getNguonGoc());
+            statement.setDouble(5, product.getGiaGoc());
+            statement.setDate(6, new java.sql.Date(product.getNgaySx().getTime()));
+            statement.setDate(7, new java.sql.Date(product.getHsd().getTime()));
+            statement.setString(8, product.getIdDanhMuc());
+            statement.setDate(9, new java.sql.Date(product.getNgayTao().getTime()));
+            statement.setDate(10, new java.sql.Date(product.getNgaySua().getTime()));
+            statement.setBoolean(11, product.isStatus());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -72,19 +73,20 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE Product SET ma = ?, nguonGoc = ?, giaGoc = ?, ngaySx = ?, hsd = ?, " +
+        String query = "UPDATE Product SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hsd = ?, " +
                 "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, status = ? WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, product.getMa());
-            statement.setString(2, product.getNguonGoc());
-            statement.setDouble(3, product.getGiaGoc());
-            statement.setDate(4, new java.sql.Date(product.getNgaySx().getTime()));
-            statement.setDate(5, new java.sql.Date(product.getHsd().getTime()));
-            statement.setString(6, product.getIdDanhMuc());
-            statement.setDate(7, new java.sql.Date(product.getNgayTao().getTime()));
-            statement.setDate(8, new java.sql.Date(product.getNgaySua().getTime()));
-            statement.setBoolean(9, product.isStatus());
-            statement.setString(10, product.getId());
+            statement.setString(2, product.getName());
+            statement.setString(3, product.getNguonGoc());
+            statement.setDouble(4, product.getGiaGoc());
+            statement.setDate(5, new java.sql.Date(product.getNgaySx().getTime()));
+            statement.setDate(6, new java.sql.Date(product.getHsd().getTime()));
+            statement.setString(7, product.getIdDanhMuc());
+            statement.setDate(8, new java.sql.Date(product.getNgayTao().getTime()));
+            statement.setDate(9, new java.sql.Date(product.getNgaySua().getTime()));
+            statement.setBoolean(10, product.isStatus());
+            statement.setString(11, product.getId());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -106,6 +108,7 @@ public class ProductDAO {
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
         String id = resultSet.getString("id");
         String ma = resultSet.getString("ma");
+        String ten = resultSet.getString("ten");
         String nguonGoc = resultSet.getString("nguonGoc");
         double giaGoc = resultSet.getDouble("giaGoc");
         Date ngaySx = resultSet.getDate("ngaySx");
@@ -115,7 +118,7 @@ public class ProductDAO {
         Date ngaySua = resultSet.getDate("ngaySua");
         boolean status = resultSet.getBoolean("status");
 
-        return new Product(id, ma, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+        return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
     }
     public Product findById(String id) {
     String query = "SELECT * FROM Product WHERE id = ?";
