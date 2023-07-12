@@ -31,6 +31,7 @@ public class JFrShopping extends javax.swing.JFrame {
 
         jpnNavigation = new javax.swing.JPanel();
         btnBanHang = new view.Shopping.MyButton();
+        btnSanPham = new view.Shopping.MyButton();
         jpnHeader = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -93,17 +94,32 @@ public class JFrShopping extends javax.swing.JFrame {
             }
         });
 
+        btnSanPham.setBackground(new java.awt.Color(102, 204, 255));
+        btnSanPham.setText("Sản phẩm");
+        btnSanPham.setBorderColor(new java.awt.Color(204, 204, 204));
+        btnSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSanPhamMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSanPhamMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnNavigationLayout = new javax.swing.GroupLayout(jpnNavigation);
         jpnNavigation.setLayout(jpnNavigationLayout);
         jpnNavigationLayout.setHorizontalGroup(
             jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+            .addComponent(btnBanHang, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+            .addComponent(btnSanPham, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
         );
         jpnNavigationLayout.setVerticalGroup(
             jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnNavigationLayout.createSequentialGroup()
                 .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 484, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(432, Short.MAX_VALUE))
         );
 
         getContentPane().add(jpnNavigation, java.awt.BorderLayout.LINE_START);
@@ -603,6 +619,14 @@ public class JFrShopping extends javax.swing.JFrame {
        this.btnBanHang.setBackground(new Color(102,204,255));
     }//GEN-LAST:event_btnBanHangMouseExited
 
+    private void btnSanPhamMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSanPhamMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSanPhamMouseEntered
+
+    private void btnSanPhamMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSanPhamMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSanPhamMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -643,6 +667,7 @@ public class JFrShopping extends javax.swing.JFrame {
     private view.Shopping.MyButton btnClearSP;
     private view.Shopping.MyButton btnGiamSP;
     private view.Shopping.MyButton btnHuy;
+    private view.Shopping.MyButton btnSanPham;
     private view.Shopping.MyButton btnTaoHD;
     private view.Shopping.MyButton btnThanhToan;
     private view.Shopping.MyButton btnThemSP;
