@@ -13,10 +13,9 @@ import java.util.Date;
 public class Product {
     private String id;
     private String ma;
-<<<<<<< HEAD
+
     private String name;
-=======
->>>>>>> 1b714497b83a02d801ea7ffb9ffff8a45aa0bc53
+
     private String nguonGoc;
     private double giaGoc;
     private Date ngaySx;
@@ -29,16 +28,16 @@ public class Product {
     public Product() {
     }
 
-<<<<<<< HEAD
+
     public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
         this.id = id;
         this.ma = ma;
         this.name = name;
-=======
+
     public Product(String id, String ma, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
         this.id = id;
         this.ma = ma;
->>>>>>> 1b714497b83a02d801ea7ffb9ffff8a45aa0bc53
+
         this.nguonGoc = nguonGoc;
         this.giaGoc = giaGoc;
         this.ngaySx = ngaySx;
@@ -49,7 +48,7 @@ public class Product {
         this.status = status;
     }
 
-<<<<<<< HEAD
+
     public String getName() {
         return name;
     }
@@ -61,8 +60,7 @@ public class Product {
 
 
 
-=======
->>>>>>> 1b714497b83a02d801ea7ffb9ffff8a45aa0bc53
+
     public String getId() {
         return id;
     }

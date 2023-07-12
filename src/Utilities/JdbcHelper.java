@@ -3,11 +3,10 @@ package Utilities;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
-<<<<<<< HEAD
-=======
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
->>>>>>> 1b714497b83a02d801ea7ffb9ffff8a45aa0bc53
+
 
 public class JdbcHelper {
 
@@ -31,8 +30,7 @@ public class JdbcHelper {
 
         return conn;
     }
-<<<<<<< HEAD
-=======
+
      public static void closeJDBC(Connection cone, PreparedStatement stm, ResultSet rs) {
            if (rs != null) {
                 try {
@@ -57,5 +55,5 @@ public class JdbcHelper {
             }
     }
 
->>>>>>> 1b714497b83a02d801ea7ffb9ffff8a45aa0bc53
+
 }
