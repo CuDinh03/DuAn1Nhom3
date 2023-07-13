@@ -1,10 +1,26 @@
 
 package model;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.util.Date;
 
 
+=======
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ *
+ * @author maccuacu
+ */
+
+
+
+
+
+>>>>>>> 85af030e942fc82d64fcd49e7b4709f105861740
 public class Report {
     private String id;
     private String ma;

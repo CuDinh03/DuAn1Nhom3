@@ -7,7 +7,13 @@ import java.util.Date;
 public class Product {
     private String id;
     private String ma;
+<<<<<<< HEAD
     private String name;
+=======
+
+    private String name;
+
+>>>>>>> 85af030e942fc82d64fcd49e7b4709f105861740
     private String nguonGoc;
     private double giaGoc;
     private Date ngaySx;
@@ -20,10 +26,22 @@ public class Product {
     public Product() {
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85af030e942fc82d64fcd49e7b4709f105861740
     public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
         this.id = id;
         this.ma = ma;
         this.name = name;
+<<<<<<< HEAD
+=======
+    }
+    public Product(String id, String ma, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
+        this.id = id;
+        this.ma = ma;
+
+>>>>>>> 85af030e942fc82d64fcd49e7b4709f105861740
         this.nguonGoc = nguonGoc;
         this.giaGoc = giaGoc;
         this.ngaySx = ngaySx;
@@ -34,6 +52,10 @@ public class Product {
         this.status = status;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85af030e942fc82d64fcd49e7b4709f105861740
     public String getName() {
         return name;
     }
@@ -45,6 +67,10 @@ public class Product {
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85af030e942fc82d64fcd49e7b4709f105861740
     public String getId() {
         return id;
     }
@@ -126,3 +152,4 @@ public class Product {
     }
     
 }
+
