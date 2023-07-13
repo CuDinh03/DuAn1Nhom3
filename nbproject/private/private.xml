@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/E:/Duan1/DuAn1Nhom3/src/model/ProductTypes.java</file>
             <file>file:/E:/Duan1/DuAn1Nhom3/src/service/ProductService.java</file>
             <file>file:/E:/Duan1/DuAn1Nhom3/src/model/Product.java</file>
+=======
+            <file>file:/E:/Duan1/DuAn1Nhom3/src/view/Shopping/pnlBanHang.java</file>
+            <file>file:/E:/Duan1/DuAn1Nhom3/src/view/Shopping/pnlKhachHang.java</file>
+>>>>>>> 11/07/2023/duongpham_Views
             <file>file:/E:/Duan1/DuAn1Nhom3/src/view/Shopping/JFrMain.java</file>
-            <file>file:/E:/Duan1/DuAn1Nhom3/src/view/component/MyButton.java</file>
         </group>
     </open-files>
 </project-private>

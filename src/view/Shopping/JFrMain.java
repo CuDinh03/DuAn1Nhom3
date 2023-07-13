@@ -4,6 +4,7 @@
  */
 package view.Shopping;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -17,8 +18,12 @@ public class JFrMain extends javax.swing.JFrame {
     /**
      * Creates new form JFrShopping
      */
+    CardLayout card;
     public JFrMain() {
         initComponents();
+          setLocationRelativeTo(null);
+        card = (CardLayout) panelBody.getLayout();
+        card.show(panelBody, "pnlBanHang");
     }
 
     /**
@@ -74,7 +79,6 @@ public class JFrMain extends javax.swing.JFrame {
         cboLoc = new javax.swing.JComboBox<>();
         jLabel27 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
-        panelQLSanPham = new javax.swing.JPanel();
         panelSPContent = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -218,9 +222,12 @@ public class JFrMain extends javax.swing.JFrame {
         );
 
         panelBody.setBackground(new java.awt.Color(204, 204, 204));
+        panelBody.setVerifyInputWhenFocusTarget(false);
         panelBody.setLayout(new java.awt.CardLayout());
 
         panelBanHang.setBackground(new java.awt.Color(222, 231, 227));
+        panelBanHang.setMaximumSize(new java.awt.Dimension(928, 520));
+        panelBanHang.setMinimumSize(new java.awt.Dimension(928, 520));
 
         panelGioHang.setBackground(new java.awt.Color(222, 231, 227));
         panelGioHang.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
@@ -570,15 +577,11 @@ public class JFrMain extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(panelGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(panelSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(panelSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
         );
 
-        panelBody.add(panelBanHang, "card2");
-
-        panelQLSanPham.setBackground(new java.awt.Color(222, 231, 227));
-        panelQLSanPham.setMaximumSize(new java.awt.Dimension(825, 520));
-        panelQLSanPham.setMinimumSize(new java.awt.Dimension(825, 520));
-        panelQLSanPham.setPreferredSize(new java.awt.Dimension(922, 493));
+        panelBody.add(panelBanHang, "card3");
 
         panelSPContent.setBackground(new java.awt.Color(222, 231, 227));
         panelSPContent.setMaximumSize(new java.awt.Dimension(922, 493));
@@ -732,9 +735,7 @@ public class JFrMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 34, Short.MAX_VALUE))
+                    .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -779,9 +780,8 @@ public class JFrMain extends javax.swing.JFrame {
                                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel18)
                                     .addComponent(txtGiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                            .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 34, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(222, 231, 227));
@@ -870,27 +870,7 @@ public class JFrMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout panelQLSanPhamLayout = new javax.swing.GroupLayout(panelQLSanPham);
-        panelQLSanPham.setLayout(panelQLSanPhamLayout);
-        panelQLSanPhamLayout.setHorizontalGroup(
-            panelQLSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 922, Short.MAX_VALUE)
-            .addGroup(panelQLSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelQLSanPhamLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelSPContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        panelQLSanPhamLayout.setVerticalGroup(
-            panelQLSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-            .addGroup(panelQLSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelQLSanPhamLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panelSPContent, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)))
-        );
-
-        panelBody.add(panelQLSanPham, "card3");
+        panelBody.add(panelSPContent, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -899,7 +879,7 @@ public class JFrMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelNavigation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -908,7 +888,7 @@ public class JFrMain extends javax.swing.JFrame {
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelNavigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -922,41 +902,6 @@ public class JFrMain extends javax.swing.JFrame {
            System.exit(0);
        }
     }//GEN-LAST:event_lbCloseMouseClicked
-
-    private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
-      
-    }//GEN-LAST:event_tblGioHangMouseClicked
-
-    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
-       
-    }//GEN-LAST:event_tblHoaDonMouseClicked
-
-    private void tblDanhSachSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_tblDanhSachSPMouseClicked
-
-    private void cboLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_cboLocActionPerformed
-
-    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-    
-    }//GEN-LAST:event_txtTimKiemKeyReleased
-
-    private void txtTienKhachDuaTQKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaTQKeyReleased
-
-    }//GEN-LAST:event_txtTienKhachDuaTQKeyReleased
-
-    private void txtSDTTQKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTTQKeyReleased
-
-    }//GEN-LAST:event_txtSDTTQKeyReleased
-
-    private void txtTenKHTaiQuayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenKHTaiQuayKeyReleased
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtTenKHTaiQuayKeyReleased
 
     private void btnBanHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBanHangMouseEntered
         this.btnBanHang.setBackground(Color.WHITE);
@@ -977,16 +922,54 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
      
-       panelBanHang.setVisible(false);
-       panelQLSanPham.setVisible(true);
-  
+//       panelBanHang.setVisible(false);
+//       panelQLSanPham.setVisible(true);
+panelSPContent.setVisible(true);
+panelBanHang.setVisible(false);
            
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
+<<<<<<< HEAD
          panelBanHang.setVisible(true);
         panelQLSanPham.setVisible(false);
+=======
+      panelBanHang.setVisible(true);
+      panelSPContent.setVisible(false);
+>>>>>>> 11/07/2023/duongpham_Views
     }//GEN-LAST:event_btnBanHangActionPerformed
+
+    private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
+
+    }//GEN-LAST:event_tblGioHangMouseClicked
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+
+    }//GEN-LAST:event_tblHoaDonMouseClicked
+
+    private void txtTenKHTaiQuayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenKHTaiQuayKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenKHTaiQuayKeyReleased
+
+    private void txtSDTTQKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTTQKeyReleased
+
+    }//GEN-LAST:event_txtSDTTQKeyReleased
+
+    private void txtTienKhachDuaTQKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaTQKeyReleased
+
+    }//GEN-LAST:event_txtTienKhachDuaTQKeyReleased
+
+    private void tblDanhSachSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDanhSachSPMouseClicked
+
+    private void cboLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboLocActionPerformed
+
+    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
+
+    }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void txtTen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTen1ActionPerformed
         // TODO add your handling code here:
@@ -1100,7 +1083,6 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelHoaDon;
     private javax.swing.JPanel panelNavigation;
-    private javax.swing.JPanel panelQLSanPham;
     private javax.swing.JPanel panelSPContent;
     private javax.swing.JPanel panelSanPham;
     private javax.swing.JPanel panelThanhToan;
