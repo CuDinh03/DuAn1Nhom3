@@ -4,11 +4,14 @@
  */
 package quanlychuoich;
 
+import view.LoginForm.JFrLogin;
+
 public class QuanlyChuoiCH {
 
 
     public static void main(String[] args) {
         // TODO code application logic here
+        new JFrLogin().setVisible(true);
     }
     
 }
