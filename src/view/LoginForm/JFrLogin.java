@@ -327,7 +327,8 @@ public class JFrLogin extends javax.swing.JFrame {
             for (Role role : list) {
                 if (idRole.equals(role.getId())) {
                     if (role.getName().equals("VT001") ) {
-                        new JFrLogin().setVisible(true);
+                      new JFrLogin().setVisible(false);
+                      
                     }
                 }
             }
