@@ -6,6 +6,10 @@ public class AccountRole {
     private String idAccount;
     private String idRole;
 
+    public AccountRole(String idAccount) {
+        this.idAccount = idAccount;
+    }
+
     public AccountRole() {
     }
 

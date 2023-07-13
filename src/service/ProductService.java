@@ -27,13 +27,17 @@ public class ProductService implements IService<Product>{
 
     @Override
     public List<Product> findAll() {
+
         return this.prDao.getAllProducts() ;
+
     }
 
     @Override
     public Product findById(String index) {
         
+
         return this.findById(index) ;
+
     }
     
     
