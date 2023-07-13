@@ -985,7 +985,7 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
          panelBanHang.setVisible(true);
-       panelQLSanPham.setVisible(false);
+        panelQLSanPham.setVisible(false);
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void txtTen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTen1ActionPerformed
