@@ -5,9 +5,20 @@
  */
 package view.LoginForm;
 
+import DAO.AccountDAO;
+import DAO.AccountRoleDAO;
+import DAO.RoleDAO;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import model.Account;
+import model.AccountRole;
+import model.Role;
+import view.Shopping.JFrShopping;
 
 /**
  *
@@ -25,7 +36,17 @@ public class JFrLogin extends javax.swing.JFrame {
         txtusername.setBackground(new java.awt.Color(0,0,0,1));
         txtpassword.setBackground(new java.awt.Color(0,0,0,1));
     }
-
+    private Account getAccount() throws SQLException{
+        
+        AccountDAO adao = new AccountDAO();
+        String name = this.txtusername.getText().trim();
+        String pass = this.txtpassword.getText().trim();
+        
+        
+        
+        Account acc = adao.getAccountByUsername(name);
+        return acc;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -281,18 +302,48 @@ public class JFrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if(this.txtusername.getText().equals("")){
-            this.lblErrUsername.setText("Không để trống username");
-            this.lblErrUsername.setForeground(Color.red);
-        }else if(!this.txtusername.getText().equals("")){
-             this.lblErrUsername.setText("");
+        try {
+            if(this.txtusername.getText().equals("")){
+                this.lblErrUsername.setText("Không để trống username");
+                this.lblErrUsername.setForeground(Color.red);
+            }else if(!this.txtusername.getText().equals("")){
+                this.lblErrUsername.setText("");
+            }
+            
+            if(String.valueOf(this.txtpassword.getPassword()).equals("")){
+                this.lblErrPassWord.setText("Không để trống username");
+                this.lblErrPassWord.setForeground(Color.red);
+            }else if(!String.valueOf(this.txtpassword.getPassword()).equals("")){
+                this.lblErrPassWord.setText("");
+            }
+            String idRole ="";
+            AccountDAO adao = new AccountDAO();
+            List<AccountRole> listRole = AccountRoleDAO.getAll();
+            for (AccountRole accountRole : listRole) {
+                if (adao.getAccountByUsername(getAccount().getUsername()).getId() == null ? accountRole.getIdAccount() == null : adao.getAccountByUsername(getAccount().getUsername()).getId().equals(accountRole.getIdAccount())) {
+                   idRole  = accountRole.getIdRole();
+                   break;
+                }
+                
+            }
+            RoleDAO rdao = new RoleDAO();
+            
+            
+            List<Role> list = rdao.getAllRoles();
+            
+            for (Role role : list) {
+                if (idRole.equals(role.getId())) {
+                    if (role.getName().equals("VT001") ) {
+                        new JFrShopping().setVisible(true);
+                    }
+                }
+            }
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(String.valueOf(this.txtpassword.getPassword()).equals("")){
-            this.lblErrPassWord.setText("Không để trống username");
-            this.lblErrPassWord.setForeground(Color.red);
-        }else if(!String.valueOf(this.txtpassword.getPassword()).equals("")){
-             this.lblErrPassWord.setText("");
-        }
+
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
