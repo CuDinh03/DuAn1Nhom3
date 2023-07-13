@@ -14,6 +14,11 @@ public class Account {
     private String passWord;
     private int status;
 
+    @Override
+    public String toString() {
+        return "Account{" + "id=" + id + ", maTk=" + maTk + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", username=" + username + ", passWord=" + passWord + ", status=" + status + '}';
+    }
+
     public Account() {
     }
 

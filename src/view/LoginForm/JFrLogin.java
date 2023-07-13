@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import model.Account;
 import model.AccountRole;
 import model.Role;
-import view.Shopping.JFrShopping;
+
 
 /**
  *
@@ -334,7 +334,7 @@ public class JFrLogin extends javax.swing.JFrame {
             for (Role role : list) {
                 if (idRole.equals(role.getId())) {
                     if (role.getName().equals("VT001") ) {
-                        new JFrShopping().setVisible(true);
+                        new JFrLogin().setVisible(true);
                     }
                 }
             }

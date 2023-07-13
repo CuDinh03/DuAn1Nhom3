@@ -27,7 +27,7 @@ public class Product {
         this.id = id;
         this.ma = ma;
         this.name = name;
-
+    }
     public Product(String id, String ma, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
         this.id = id;
         this.ma = ma;
@@ -136,3 +136,4 @@ public class Product {
     }
     
 }
+
