@@ -930,13 +930,10 @@ panelBanHang.setVisible(false);
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
-<<<<<<< HEAD
-         panelBanHang.setVisible(true);
-        panelQLSanPham.setVisible(false);
-=======
+
       panelBanHang.setVisible(true);
       panelSPContent.setVisible(false);
->>>>>>> 11/07/2023/duongpham_Views
+
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
