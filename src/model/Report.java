@@ -10,11 +10,10 @@ import java.util.Date;
  * @author maccuacu
  */
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 11/07/2023/duongpham_Views
+
+
 public class Report {
     private String id;
     private String ma;
