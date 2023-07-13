@@ -7,6 +7,7 @@ package view.LoginForm;
 
 import DAO.AccountDAO;
 import DAO.AccountRoleDAO;
+import DAO.RoleDAO;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Account;
 import model.AccountRole;
+import model.Role;
+import view.Shopping.JFrShopping;
 
 /**
  *
@@ -233,9 +236,28 @@ public class JFrLogin extends javax.swing.JFrame {
             }else if(!String.valueOf(this.txtpassword.getPassword()).equals("")){
                 this.lblErrPassWord.setText("");
             }
+            String idRole ="";
+            AccountDAO adao = new AccountDAO();
+            List<AccountRole> listRole = AccountRoleDAO.getAll();
+            for (AccountRole accountRole : listRole) {
+                if (adao.getAccountByUsername(getAccount().getUsername()).getId() == null ? accountRole.getIdAccount() == null : adao.getAccountByUsername(getAccount().getUsername()).getId().equals(accountRole.getIdAccount())) {
+                   idRole  = accountRole.getIdRole();
+                   break;
+                }
+                
+            }
+            RoleDAO rdao = new RoleDAO();
             
-          AccountRole role =  AccountRoleDAO.getById(getAccount().getUsername());
-          
+            
+            List<Role> list = rdao.getAllRoles();
+            
+            for (Role role : list) {
+                if (idRole.equals(role.getId())) {
+                    if (role.getName().equals("VT001") ) {
+                        new JFrShopping().setVisible(true);
+                    }
+                }
+            }
       
         } catch (SQLException ex) {
             Logger.getLogger(JFrLogin.class.getName()).log(Level.SEVERE, null, ex);
