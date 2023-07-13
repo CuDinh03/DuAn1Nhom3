@@ -3,14 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Utilities/JdbcHelper.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/IService.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/ProductService.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Account.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ProductDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Cart.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/AccountDAO.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ProductTypes.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/StoreOrderImport.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/User.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Product.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/IService.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Inventory.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Store.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/StoreOrderImportDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Report.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ProductDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ProductTypes.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Role.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Order.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/ProductService.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ImportOrderDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Account.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/WareHouse.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ImportOrder.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Items.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/OrderDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/SellOrder.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Utilities/JdbcHelper.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/SellOrderDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Income.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/AccountRole.java</file>
         </group>
     </open-files>
 </project-private>
