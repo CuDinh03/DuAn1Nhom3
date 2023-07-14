@@ -4,7 +4,8 @@
  */
 package view;
 
-import view.Shopping.JFrMain;
+import view.Shopping.HomePage;
+
 
 /**
  *
@@ -12,6 +13,6 @@ import view.Shopping.JFrMain;
  */
 public class App {
     public static void main(String[] args) {
-        new JFrMain().setVisible(true);
+        new HomePage().setVisible(true);
     }
 }

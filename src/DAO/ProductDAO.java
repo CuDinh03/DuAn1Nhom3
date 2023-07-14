@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package DAO;
 
 import model.Product;
@@ -136,5 +136,3 @@ public class ProductDAO {
 }
 
 }
-=======
->>>>>>> 85af030e942fc82d64fcd49e7b4709f105861740
