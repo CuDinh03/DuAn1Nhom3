@@ -22,7 +22,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(String username, String passWord, int status) {
+    public Account(String id,String username, String passWord, int status) {
+        this.id =id;
         this.username = username;
         this.passWord = passWord;
         this.status = status;

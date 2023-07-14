@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import model.Account;
 import model.AccountRole;
 import model.Role;
+import view.Shopping.JFrMain;
 
 
 /**
@@ -314,7 +315,7 @@ public class JFrLogin extends javax.swing.JFrame {
             AccountDAO adao = new AccountDAO();
             List<AccountRole> listRole = AccountRoleDAO.getAll();
             for (AccountRole accountRole : listRole) {
-                if (adao.getAccountByUsername(getAccount().getUsername()).getId() == null ? accountRole.getIdAccount() == null : adao.getAccountByUsername(getAccount().getUsername()).getId().equals(accountRole.getIdAccount())) {
+                if (adao.getAccountByUsername(getAccount().getUsername()).getId().equals(accountRole.getIdAccount())) {
                     idRole  = accountRole.getIdRole();
                     break;
                 }
@@ -327,8 +328,10 @@ public class JFrLogin extends javax.swing.JFrame {
             for (Role role : list) {
                 if (idRole.equals(role.getId())) {
                     if (role.getName().equals("VT001") ) {
-                      new JFrLogin().setVisible(false);
                       
+                      new JFrMain().setVisible(true);
+                      JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
+                      break;
                     }
                 }
             }

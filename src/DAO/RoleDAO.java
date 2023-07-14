@@ -9,16 +9,15 @@ import model.Role;
 
 
 public class RoleDAO {
-     private Connection connection;
+     private Connection connection = JdbcHelper.getConnection();
 
-    public RoleDAO() {
-        connection = JdbcHelper.getConnection();
-    }
+
     
     public List<Role> getAllRoles() {
-        String query = "SELECT * FROM sanPham";
+        String query = "SELECT * FROM vaiTro";
         List<Role> roles = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Role role = extractRoleFromResultSet(resultSet);
