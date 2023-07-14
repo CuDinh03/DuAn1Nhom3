@@ -3,26 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/E:/Duan1/DuAn1Nhom3/src/view/Shopping/JFrShopping.java</file>
-            <file>file:/E:/Duan1/DuAn1Nhom3/src/view/Shopping/MyButton.java</file>
-=======
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Utilities/JdbcHelper.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/IService.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/ProductService.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Account.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ProductDAO.java</file>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/quanlychuoich/QuanlyChuoiCH.java</file>
-=======
-=======
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/AccountDAO.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ProductTypes.java</file>
->>>>>>> cudinh
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Product.java</file>
->>>>>>> cudinh
->>>>>>> c31e75fbb424e7ff02d2851bc970f4cf56262400
+            <file>file:/E:/Duan1/DuAn1Nhom3/src/service/ProductService.java</file>
+            <file>file:/E:/Duan1/DuAn1Nhom3/src/view/Shopping/JFrMain.java</file>
+            <file>file:/E:/Duan1/DuAn1Nhom3/src/service/IService.java</file>
+            <file>file:/E:/Duan1/DuAn1Nhom3/src/view/LoginForm/JFrLogin.java</file>
         </group>
     </open-files>
 </project-private>
