@@ -4,6 +4,7 @@
  */
 package view.Shopping;
 
+
 /**
  *
  * @author phamq
@@ -15,6 +16,7 @@ public class pnlSanPham extends javax.swing.JPanel {
      */
     public pnlSanPham() {
         initComponents();
+      
     }
 
     /**
