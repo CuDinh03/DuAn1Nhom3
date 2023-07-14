@@ -12,17 +12,15 @@ import java.util.Date;
 import java.util.List;
 
 public class ProductDAO {
-    private Connection connection;
+    private Connection connection = JdbcHelper.getConnection();
 
-    public ProductDAO() {
-        connection = JdbcHelper.getConnection();
-    }
 
     // Create
     public void addProduct(Product product) {
         String query = "INSERT INTO sanPham (id, ma, ten, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try  {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getId());
             statement.setString(2, product.getMa());
             statement.setString(3, product.getName());
@@ -44,7 +42,8 @@ public class ProductDAO {
     // Read
     public Product getProductById(String id) {
         String query = "SELECT * FROM sanPham WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -59,7 +58,8 @@ public class ProductDAO {
     public List<Product> getAllProducts() {
         String query = "SELECT * FROM sanPham";
         List<Product> products = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try  {
+            PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Product product = extractProductFromResultSet(resultSet);
@@ -75,7 +75,8 @@ public class ProductDAO {
     public void updateProduct(Product product) {
         String query = "UPDATE sanPham SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, " +
                 "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try  {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getMa());
             statement.setString(2, product.getName());
             statement.setString(3, product.getNguonGoc());
@@ -97,7 +98,8 @@ public class ProductDAO {
     // Delete
     public void deleteProduct(String id) {
         String query = "UPDATE sanPham WHERE id = ? SET trangThai=0";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try  {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -122,7 +124,8 @@ public class ProductDAO {
     }
     public Product findById(String id) {
     String query = "SELECT * FROM sanPham WHERE id = ?";
-    try (PreparedStatement statement = connection.prepareStatement(query)) {
+    try {
+        PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
