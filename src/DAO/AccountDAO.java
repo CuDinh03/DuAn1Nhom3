@@ -13,11 +13,7 @@ import java.util.List;
 
 public class AccountDAO {
 
-    private Connection connection;
-
-    public AccountDAO() {
-        connection = JdbcHelper.getConnection();
-    }
+    private Connection connection = JdbcHelper.getConnection() ;
 
     // Create
     public void addAccount(Account account) {
@@ -113,15 +109,17 @@ public class AccountDAO {
         Account account = null;
 
         String query = "SELECT * FROM taiKhoan WHERE taiKhoan = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try  {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
+                String id = resultSet.getString("id");
                 String password = resultSet.getString("matKhau");
                 int status = resultSet.getInt("trangThai");
 
-                account = new Account(username, password, status);
+                account = new Account(id, username, password, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();

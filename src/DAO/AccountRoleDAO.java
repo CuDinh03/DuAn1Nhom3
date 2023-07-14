@@ -11,15 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountRoleDAO {
+    
+    public static Connection conn = JdbcHelper.getConnection();
+
+
 
     public static void create(AccountRole accountRole) {
-        try (Connection conn = JdbcHelper.getConnection()) {
-            String sql = "INSERT INTO taiKhoanVaiTro (idTaiKhoan, idVaiTro) VALUES (?, ?)";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, accountRole.getIdAccount());
-            statement.setString(2, accountRole.getIdRole());
+        String sql = "INSERT INTO taiKhoanVaiTro (idTaiKhoan, idVaiTro) VALUES (?, ?)";
 
-            statement.executeUpdate();
+        try  {
+             PreparedStatement ps = conn.prepareStatement(sql);
+          
+            ResultSet rs = ps.executeQuery();
+            ps.setString(1, accountRole.getIdAccount());
+            ps.setString(2, accountRole.getIdRole());
+
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -27,8 +34,9 @@ public class AccountRoleDAO {
 
     public static AccountRole getById(String idAccount) {
         AccountRole accountRole = null;
-        try (Connection conn = JdbcHelper.getConnection()) {
-            String sql = "SELECT * FROM taiKhoanVaiTro WHERE idTaiKhoan = ?";
+                    String sql = "SELECT * FROM taiKhoanVaiTro WHERE idTaiKhoan = ?";
+
+        try {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, idAccount);
    
@@ -45,14 +53,15 @@ public class AccountRoleDAO {
 
     public static List<AccountRole> getAll() {
         List<AccountRole> accountRoles = new ArrayList<>();
-        try (Connection conn = JdbcHelper.getConnection()) {
-            String sql = "SELECT * FROM taiKhoanVaiTro";
+                    String sql = "SELECT * FROM taiKhoanVaiTro";
+
+        try  {
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
            while (resultSet.next()) {
-                String idAccount = resultSet.getString("idAccount");
-                String idRole = resultSet.getString("idRole");
+                String idAccount = resultSet.getString("idTaiKhoan");
+                String idRole = resultSet.getString("idVaiTro");
 
                 AccountRole accountRole = new AccountRole(idAccount, idRole);
                 accountRoles.add(accountRole);
