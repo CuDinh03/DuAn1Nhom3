@@ -1,4 +1,4 @@
-package view.Shopping;
+package view.component;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -65,7 +65,7 @@ public class MyButton extends JButton {
 
         setColor(Color.WHITE);
         colorOver = new Color(102,204,255);
-        colorClick = new Color(152, 184, 144);
+        colorClick = new Color(222,231,227);
         borderColor = new Color(30, 136, 56);
         
         setContentAreaFilled(false);
