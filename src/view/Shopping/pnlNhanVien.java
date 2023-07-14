@@ -53,7 +53,6 @@ public class pnlNhanVien extends javax.swing.JFrame {
         jLabel50 = new javax.swing.JLabel();
         rNam = new javax.swing.JRadioButton();
         rNu = new javax.swing.JRadioButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         cbbLocTheoChucVu = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -220,8 +219,7 @@ public class pnlNhanVien extends javax.swing.JFrame {
                                     .addGroup(panelNhanVienLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addGroup(panelNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                            .addComponent(txtHoTen)
+                                            .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                                             .addComponent(txtDiaChi)))
                                     .addGroup(panelNhanVienLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
@@ -236,7 +234,7 @@ public class pnlNhanVien extends javax.swing.JFrame {
                                 .addComponent(rNu))
                             .addGroup(panelNhanVienLayout.createSequentialGroup()
                                 .addComponent(jLabel47)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                                 .addComponent(cbbLocTheoChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
                         .addGroup(panelNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,10 +277,8 @@ public class pnlNhanVien extends javax.swing.JFrame {
                         .addGroup(panelNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
                             .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(17, 17, 17)
-                        .addGroup(panelNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel33)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel33)
                         .addGap(17, 17, 17)
                         .addGroup(panelNhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel44)
@@ -405,7 +401,6 @@ public class pnlNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel33;
