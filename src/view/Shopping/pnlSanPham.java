@@ -50,10 +50,10 @@ public class pnlSanPham extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         txtGiaBan = new javax.swing.JTextField();
         panelControl = new javax.swing.JPanel();
-        myButton1 = new view.component.MyButton();
-        myButton2 = new view.component.MyButton();
+        btnAdd = new view.component.MyButton();
+        btnUpdate = new view.component.MyButton();
         myButton3 = new view.component.MyButton();
-        myButton4 = new view.component.MyButton();
+        btnReset = new view.component.MyButton();
         myButton5 = new view.component.MyButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -109,21 +109,26 @@ public class pnlSanPham extends javax.swing.JPanel {
 
         panelControl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        myButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Add New.png"))); // NOI18N
-        myButton1.setText("Thêm");
-        myButton1.setBorderColor(new java.awt.Color(0, 0, 0));
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Add New.png"))); // NOI18N
+        btnAdd.setText("Thêm");
+        btnAdd.setBorderColor(new java.awt.Color(0, 0, 0));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
-        myButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Installing Updates.png"))); // NOI18N
-        myButton2.setText("Cập nhật");
-        myButton2.setBorderColor(new java.awt.Color(0, 0, 0));
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Installing Updates.png"))); // NOI18N
+        btnUpdate.setText("Cập nhật");
+        btnUpdate.setBorderColor(new java.awt.Color(0, 0, 0));
 
         myButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Hide_1.png"))); // NOI18N
         myButton3.setText("Ẩn");
         myButton3.setBorderColor(new java.awt.Color(0, 0, 0));
 
-        myButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Refresh.png"))); // NOI18N
-        myButton4.setText("Làm mới");
-        myButton4.setBorderColor(new java.awt.Color(0, 0, 0));
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Refresh.png"))); // NOI18N
+        btnReset.setText("Làm mới");
+        btnReset.setBorderColor(new java.awt.Color(0, 0, 0));
 
         myButton5.setText("Danh sách ẩn");
         myButton5.setBorderColor(new java.awt.Color(0, 0, 0));
@@ -140,9 +145,9 @@ public class pnlSanPham extends javax.swing.JPanel {
                         .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelControlLayout.createSequentialGroup()
                         .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(myButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -151,13 +156,13 @@ public class pnlSanPham extends javax.swing.JPanel {
             panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelControlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(myButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(myButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(myButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -358,8 +363,15 @@ public class pnlSanPham extends javax.swing.JPanel {
 
     }//GEN-LAST:event_cboLoc1ActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.component.MyButton btnAdd;
+    private view.component.MyButton btnReset;
+    private view.component.MyButton btnUpdate;
     private javax.swing.JComboBox<String> cbbTrangThai;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
     private javax.swing.JComboBox<String> cboLoc1;
@@ -380,10 +392,7 @@ public class pnlSanPham extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane4;
-    private view.component.MyButton myButton1;
-    private view.component.MyButton myButton2;
     private view.component.MyButton myButton3;
-    private view.component.MyButton myButton4;
     private view.component.MyButton myButton5;
     private javax.swing.JPanel panelControl;
     private javax.swing.JTable tblSanPham;

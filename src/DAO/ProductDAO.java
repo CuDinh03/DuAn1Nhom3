@@ -31,7 +31,7 @@ public class ProductDAO {
             statement.setString(8, product.getIdDanhMuc());
             statement.setDate(9, new java.sql.Date(product.getNgayTao().getTime()));
             statement.setDate(10, new java.sql.Date(product.getNgaySua().getTime()));
-            statement.setBoolean(11, product.isStatus());
+            statement.setInt(11, product.getStatus());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -86,7 +86,7 @@ public class ProductDAO {
             statement.setString(7, product.getIdDanhMuc());
             statement.setDate(8, new java.sql.Date(product.getNgayTao().getTime()));
             statement.setDate(9, new java.sql.Date(product.getNgaySua().getTime()));
-            statement.setBoolean(10, product.isStatus());
+            statement.setInt(10, product.getStatus());
             statement.setString(11, product.getId());
 
             statement.executeUpdate();
@@ -118,7 +118,7 @@ public class ProductDAO {
         String idDanhMuc = resultSet.getString("idDanhMuc");
         Date ngayTao = resultSet.getDate("ngayTao");
         Date ngaySua = resultSet.getDate("ngaySua");
-        boolean status = resultSet.getBoolean("trangThai");
+        int status = resultSet.getInt("trangThai");
 
         return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
     }

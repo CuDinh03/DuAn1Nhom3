@@ -8,16 +8,49 @@ public class Items {
     private String id;
     private String idCart;
     private String idOrder;
+    private String maSP;
+    private String tenSp;
     private int soLuong;
     private double giaban;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean status;
+    private int status;
 
     public Items() {
     }
 
-    public Items(String id, String idCart, String idOrder, int soLuong, double giaban, Date ngayTao, Date ngaySua, boolean status) {
+    public Items(String id, String idCart, String idOrder, String maSP, String tenSp, int soLuong, double giaban, int status) {
+        this.id = id;
+        this.idCart = idCart;
+        this.idOrder = idOrder;
+        this.maSP = maSP;
+        this.tenSp = tenSp;
+        this.soLuong = soLuong;
+        this.giaban = giaban;
+        this.status = status;
+    }
+
+
+
+    public String getTenSp() {
+        return tenSp;
+    }
+
+    public void setTenSp(String tenSp) {
+        this.tenSp = tenSp;
+    }
+
+    public String getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
+    }    
+    
+    
+
+    public Items(String id, String idCart, String idOrder, int soLuong, double giaban, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.idCart = idCart;
         this.idOrder = idOrder;
@@ -84,11 +117,11 @@ public class Items {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     
