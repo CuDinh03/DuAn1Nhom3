@@ -15,6 +15,7 @@ public class pnlSanPham extends javax.swing.JPanel {
      * Creates new form pnlSanPham
      */
     public pnlSanPham() {
+         String importFilePath = "/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Excel/Products.xlsx";
         initComponents();
       
     }
@@ -50,11 +51,6 @@ public class pnlSanPham extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         txtGiaBan = new javax.swing.JTextField();
         panelControl = new javax.swing.JPanel();
-        btnAdd = new view.component.MyButton();
-        btnUpdate = new view.component.MyButton();
-        myButton3 = new view.component.MyButton();
-        btnReset = new view.component.MyButton();
-        myButton5 = new view.component.MyButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
@@ -109,63 +105,15 @@ public class pnlSanPham extends javax.swing.JPanel {
 
         panelControl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Add New.png"))); // NOI18N
-        btnAdd.setText("Thêm");
-        btnAdd.setBorderColor(new java.awt.Color(0, 0, 0));
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Installing Updates.png"))); // NOI18N
-        btnUpdate.setText("Cập nhật");
-        btnUpdate.setBorderColor(new java.awt.Color(0, 0, 0));
-
-        myButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Hide_1.png"))); // NOI18N
-        myButton3.setText("Ẩn");
-        myButton3.setBorderColor(new java.awt.Color(0, 0, 0));
-
-        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Refresh.png"))); // NOI18N
-        btnReset.setText("Làm mới");
-        btnReset.setBorderColor(new java.awt.Color(0, 0, 0));
-
-        myButton5.setText("Danh sách ẩn");
-        myButton5.setBorderColor(new java.awt.Color(0, 0, 0));
-
         javax.swing.GroupLayout panelControlLayout = new javax.swing.GroupLayout(panelControl);
         panelControl.setLayout(panelControlLayout);
         panelControlLayout.setHorizontalGroup(
             panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelControlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelControlLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelControlLayout.createSequentialGroup()
-                        .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(myButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addGap(0, 52, Short.MAX_VALUE)
         );
         panelControlLayout.setVerticalGroup(
             panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelControlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 224, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -369,9 +317,6 @@ public class pnlSanPham extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.component.MyButton btnAdd;
-    private view.component.MyButton btnReset;
-    private view.component.MyButton btnUpdate;
     private javax.swing.JComboBox<String> cbbTrangThai;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
     private javax.swing.JComboBox<String> cboLoc1;
@@ -392,8 +337,6 @@ public class pnlSanPham extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane4;
-    private view.component.MyButton myButton3;
-    private view.component.MyButton myButton5;
     private javax.swing.JPanel panelControl;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtGiaBan;

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Items;
 import model.Product;
+import model.UserSession;
 
 /**
  *
@@ -81,7 +82,7 @@ public class JFrMain extends javax.swing.JFrame {
     private void tienThua(double tienKhachdua) {
         double tienthua = tienKhachdua - this.calculateTotalPrice();
         if (tienthua<0) {
-            JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + ( tienthua*(-1)));
+            JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + ( tienthua*(-1)) + "k");
         }
 
         this.txtTienThua.setText(Double.toString(tienthua));
@@ -124,6 +125,8 @@ public class JFrMain extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbClose = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        txtNameUser = new javax.swing.JLabel();
         panelBody = new javax.swing.JPanel();
         panelBanHang = new javax.swing.JPanel();
         panelGioHang = new javax.swing.JPanel();
@@ -263,22 +266,32 @@ public class JFrMain extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setText("Xin chào:");
+
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNameUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelHeaderLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtNameUser))
+                .addContainerGap())
         );
 
         panelBody.setBackground(new java.awt.Color(204, 204, 204));
@@ -431,6 +444,11 @@ public class JFrMain extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.GridLayout(1, 2, 10, 5));
 
         jButton1.setText("Thanh Toán ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel5.add(jButton1);
 
         jButton6.setText("Huỷ ");
@@ -1032,6 +1050,12 @@ public class JFrMain extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnTinhTienActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        this.thanhtoan();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1093,6 +1117,7 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1137,6 +1162,7 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtGiaNhap;
     private javax.swing.JTextField txtMa;
+    private javax.swing.JLabel txtNameUser;
     private javax.swing.JTextField txtSDTTQ;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTen;
@@ -1151,5 +1177,9 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void showTotal() {
         this.txtTongTien.setText(Double.toString(calculateTotalPrice()));
+    }
+
+    private void thanhtoan() {
+        
     }
 }

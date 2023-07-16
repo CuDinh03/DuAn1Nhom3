@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
 import model.Account;
 import model.AccountRole;
 import model.Role;
+import model.UserSession;
 import view.Shopping.JFrMain;
 import view.Shopping.pnlSanPham;
 
@@ -32,9 +34,10 @@ import view.Shopping.pnlSanPham;
  */
 public class JFrLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form login
-     */
+     private HashMap<String, UserSession> loggedInUsers;
+
+    
+    
     public JFrLogin() {
 
         initComponents();
@@ -324,10 +327,14 @@ public class JFrLogin extends javax.swing.JFrame {
             RoleDAO rdao = new RoleDAO();
 
             List<Role> list = rdao.getAllRoles();
+            
 
             for (Role role : list) {
                 if (idRole.equals(role.getId())) {
                     if (role.getName().equals("VT001")) {
+                                    UserSession session = new UserSession(getAccount().getUsername());
+            loggedInUsers.put(getAccount().getUsername(), session);
+
 
                         JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
                         setVisible(false);

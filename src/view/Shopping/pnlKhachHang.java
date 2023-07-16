@@ -36,11 +36,6 @@ public class pnlKhachHang extends javax.swing.JPanel {
         txtTen2 = new javax.swing.JTextField();
         txtSdt = new javax.swing.JTextField();
         txtTrangThai = new javax.swing.JTextField();
-        myButton6 = new view.component.MyButton();
-        myButton7 = new view.component.MyButton();
-        myButton8 = new view.component.MyButton();
-        myButton9 = new view.component.MyButton();
-        myButton10 = new view.component.MyButton();
         jPanel24 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbDanhSachkh = new javax.swing.JTable();
@@ -68,25 +63,6 @@ public class pnlKhachHang extends javax.swing.JPanel {
 
         jLabel28.setText("Trạng thái");
 
-        myButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Add New.png"))); // NOI18N
-        myButton6.setText("Thêm");
-        myButton6.setBorderColor(new java.awt.Color(0, 0, 0));
-
-        myButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Installing Updates.png"))); // NOI18N
-        myButton7.setText("Cập nhật");
-        myButton7.setBorderColor(new java.awt.Color(0, 0, 0));
-
-        myButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Hide_1.png"))); // NOI18N
-        myButton8.setText("Ẩn");
-        myButton8.setBorderColor(new java.awt.Color(0, 0, 0));
-
-        myButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Refresh.png"))); // NOI18N
-        myButton9.setText("Làm mới");
-        myButton9.setBorderColor(new java.awt.Color(0, 0, 0));
-
-        myButton10.setText("Danh sách ẩn");
-        myButton10.setBorderColor(new java.awt.Color(0, 0, 0));
-
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -104,15 +80,7 @@ public class pnlKhachHang extends javax.swing.JPanel {
                     .addComponent(txtTen2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSdt, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTrangThai))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(myButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(myButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(45, 45, 45))
+                .addContainerGap(419, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,17 +102,6 @@ public class pnlKhachHang extends javax.swing.JPanel {
                     .addComponent(jLabel28)
                     .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(97, Short.MAX_VALUE))
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addComponent(myButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(myButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel24.setBackground(new java.awt.Color(222, 231, 227));
@@ -371,11 +328,6 @@ public class pnlKhachHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel26;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private view.component.MyButton myButton10;
-    private view.component.MyButton myButton6;
-    private view.component.MyButton myButton7;
-    private view.component.MyButton myButton8;
-    private view.component.MyButton myButton9;
     private javax.swing.JPanel panelKhachHang;
     private javax.swing.JTable tbDanhSachkh;
     private javax.swing.JTable tblHoaDon1;
