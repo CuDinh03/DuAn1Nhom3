@@ -20,7 +20,7 @@ public class Product {
     }
 
 
-    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
+    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;
         this.name = name;
