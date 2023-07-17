@@ -20,6 +20,12 @@ public class Product {
     public Product() {
     }
 
+    public Product(int status) {
+        this.status = status;
+    }
+
+    
+    
     public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, int status) {
         this.ma = ma;
         this.name = name;
@@ -31,24 +37,7 @@ public class Product {
         this.status = status;
     }
 
-    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
-        this.ma = ma;
-        this.name = name;
-    }
-    public Product(String id, String ma, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
-        this.ma = ma;
 
-        this.nguonGoc = nguonGoc;
-        this.giaGoc = giaGoc;
-        this.ngaySx = ngaySx;
-        this.hsd = hsd;
-        this.idDanhMuc = idDanhMuc;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
-    }
 
 
     public String getName() {
@@ -59,10 +48,6 @@ public class Product {
         this.name = name;
     }
     
-
-
-
-
     public String getId() {
         return id;
     }

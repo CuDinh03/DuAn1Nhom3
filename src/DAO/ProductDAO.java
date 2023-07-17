@@ -1,6 +1,6 @@
 package DAO;
 
-import Utilities.JdbcHelper;
+import  Utilities.JdbcHelper;
 import model.Product;
 import java.io.File;
 import java.io.FileInputStream;
@@ -118,7 +118,6 @@ public class ProductDAO {
     }
 
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
-        String id = resultSet.getString("id");
         String ma = resultSet.getString("ma");
         String ten = resultSet.getString("ten");
         String nguonGoc = resultSet.getString("nguonGoc");
@@ -130,7 +129,7 @@ public class ProductDAO {
         Date ngaySua = resultSet.getDate("ngaySua");
         int status = resultSet.getInt("trangThai");
 
-        return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+        return new Product(ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, status);
     }
 
     public Product findById(String id) {
@@ -169,7 +168,7 @@ public class ProductDAO {
                 Date ngaySua = row.getCell(8).getDateCellValue();
                 int status = (int) row.getCell(9).getNumericCellValue();
 
-                Product product = new Product(ma, name, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+                Product product = new Product(ma, name, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, status);
                 addProduct(product);
             }
         } catch (IOException e) {

@@ -90,10 +90,10 @@ public class JFrQuanLy extends javax.swing.JFrame {
             String hSD = txtHSD.getText().trim();
 
             java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(nSX);
-            java.util.Date utilDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(hSD);
+            java.util.Date utilDate1 = new SimpleDateFormat("dd/MM/yyyy").parse(hSD);
 
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            java.sql.Date sqlDate2 = new java.sql.Date(utilDate.getTime());
+            java.sql.Date sqlDate1 = new java.sql.Date(utilDate1.getTime());
 
             String donGiaStr = txtDonGia.getText().trim();
             String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
@@ -107,7 +107,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
                 }
             }
 
-            this.productService.insert(new Product(ma, nSX, nguonGoc, donGia, sqlDate, sqlDate2, theLoai, trangThai));
+            this.productService.insert(new Product(ma, ten, nguonGoc, donGia, sqlDate, sqlDate1, theLoai, trangThai));
 
             loadTable();
             JOptionPane.showMessageDialog(this, "Nhập kho thành công");
@@ -129,7 +129,8 @@ public class JFrQuanLy extends javax.swing.JFrame {
         String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
         int trangThai = Integer.parseInt(trangThaiStr);
 
-        this.productService.delete(trangThaiStr);
+        Product product = new Product(trangThai);
+        this.productService.delete(product);
 
         loadTable();
         JOptionPane.showMessageDialog(this, "Xóa thành công");
@@ -151,10 +152,10 @@ public class JFrQuanLy extends javax.swing.JFrame {
             String hSD = txtHSD.getText().trim();
 
             java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(nSX);
-            java.util.Date utilDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(hSD);
+            java.util.Date utilDate1 = new SimpleDateFormat("dd/MM/yyyy").parse(hSD);
 
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            java.sql.Date sqlDate2 = new java.sql.Date(utilDate.getTime());
+            java.sql.Date sqlDate1 = new java.sql.Date(utilDate1.getTime());
 
             String donGiaStr = txtDonGia.getText().trim();
             String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
@@ -165,9 +166,9 @@ public class JFrQuanLy extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không được để trống");
                 return;
             }
-            Product p = new Product(ma, nSX, nguonGoc, donGia, utilDate2, utilDate, nguonGoc, 1);
+            Product product = new Product(ma, ten, nguonGoc, donGia, sqlDate, sqlDate1, theLoai, trangThai);
 
-            this.productService.update(p, nSX);
+            this.productService.update(product, nSX);
 
             loadTable();
             JOptionPane.showMessageDialog(this, "Update thành công");
@@ -197,6 +198,8 @@ public class JFrQuanLy extends javax.swing.JFrame {
         cbbLoaiSanPham = new javax.swing.JComboBox<>();
         jpnNavigation = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        btnInput = new javax.swing.JButton();
+        btnOutput = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtMaSP = new javax.swing.JTextField();
@@ -321,16 +324,46 @@ public class JFrQuanLy extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton1.setText("Kho Hàng");
 
+        btnInput.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnInput.setForeground(new java.awt.Color(0, 0, 255));
+        btnInput.setText("Input Excel");
+        btnInput.setBorder(new javax.swing.border.MatteBorder(null));
+        btnInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInputActionPerformed(evt);
+            }
+        });
+
+        btnOutput.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnOutput.setForeground(new java.awt.Color(255, 0, 102));
+        btnOutput.setText("Output Execl");
+        btnOutput.setBorder(new javax.swing.border.MatteBorder(null));
+        btnOutput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOutputActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnNavigationLayout = new javax.swing.GroupLayout(jpnNavigation);
         jpnNavigation.setLayout(jpnNavigationLayout);
         jpnNavigationLayout.setHorizontalGroup(
             jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+            .addGroup(jpnNavigationLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(btnInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnNavigationLayout.setVerticalGroup(
             jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnNavigationLayout.createSequentialGroup()
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addComponent(btnInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -537,18 +570,24 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-
+        delete();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnNhapKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapKhoActionPerformed
-        // TODO add your handling code here:
         add();
     }//GEN-LAST:event_btnNhapKhoActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        delete();
+        update();
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputActionPerformed
+        
+    }//GEN-LAST:event_btnInputActionPerformed
+
+    private void btnOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutputActionPerformed
+        
+    }//GEN-LAST:event_btnOutputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -588,7 +627,9 @@ public class JFrQuanLy extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnInput;
     private javax.swing.JButton btnNhapKho;
+    private javax.swing.JButton btnOutput;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbbLoaiSanPham;
     private javax.swing.JComboBox<String> cbbTheLoai;
