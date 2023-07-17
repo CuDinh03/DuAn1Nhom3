@@ -1,4 +1,5 @@
 create database DuAn1
+go
 use DuAn1
 
 create table vaiTro(
@@ -9,12 +10,26 @@ create table vaiTro(
    trangThai int,
 
 )
+INSERT INTO vaiTro (id, ma, ngayTao, ngaySua, trangThai)
+VALUES
+   ('7E90870D-89E3-4AEB-9130-176566081D76', 'VT001', '2023-07-12', '2023-07-12', 1),
+   ('8A2F1EBD-C1AA-46C4-A7E3-35A1337A60E4', 'VT002', '2023-07-12', '2023-07-12', 1),
+   ('FF9F0D7B-41EF-482A-9E84-2B81E7AA6E29', 'VT003', '2023-07-12', '2023-07-12', 1),
+   ('A8E62E50-9CEA-4B0C-A3C3-91C3B5C3A35D', 'VT004', '2023-07-12', '2023-07-12', 1),
+   ('B387B2D6-3E7F-4F7A-B7DF-32D21A47C3E9', 'VT005', '2023-07-12', '2023-07-12', 1);
 create table taiKhoanVaiTro(
     idVaiTro  uniqueidentifier ,
 	idTaiKhoan uniqueidentifier,
 	FOREIGN KEY (idVaiTro) REFERENCES vaiTro(id),
 	FOREIGN KEY (idTaiKhoan) REFERENCES taiKhoan(id),
 )
+INSERT INTO taiKhoan (id, ma, ngayTao, ngaySua, taiKhoan, matKhau, trangThai)
+VALUES
+   ('7E90870D-89E3-4AEB-9130-176566081D76', 'TK001', '2023-07-12', '2023-07-12', 'tai_khoan_1', 'mat_khau_1', 1),
+   ('8A2F1EBD-C1AA-46C4-A7E3-35A1337A60E4', 'TK002', '2023-07-12', '2023-07-12', 'tai_khoan_2', 'mat_khau_2', 1),
+   ('FF9F0D7B-41EF-482A-9E84-2B81E7AA6E29', 'TK003', '2023-07-12', '2023-07-12', 'tai_khoan_3', 'mat_khau_3', 1),
+   ('A8E62E50-9CEA-4B0C-A3C3-91C3B5C3A35D', 'TK004', '2023-07-12', '2023-07-12', 'tai_khoan_4', 'mat_khau_4', 1),
+   ('B387B2D6-3E7F-4F7A-B7DF-32D21A47C3E9', 'TK005', '2023-07-12', '2023-07-12', 'tai_khoan_5', 'mat_khau_5', 1);
 create table taiKhoan(
  id uniqueidentifier PRIMARY KEY ,
  ma varchar(20),
@@ -24,6 +39,13 @@ create table taiKhoan(
  matKhau varchar(30),
  trangThai int,
 )
+INSERT INTO taiKhoanVaiTro (idVaiTro, idTaiKhoan)
+VALUES
+   ('7E90870D-89E3-4AEB-9130-176566081D76', '7E90870D-89E3-4AEB-9130-176566081D76'),
+   ('8A2F1EBD-C1AA-46C4-A7E3-35A1337A60E4', '8A2F1EBD-C1AA-46C4-A7E3-35A1337A60E4'),
+   ('FF9F0D7B-41EF-482A-9E84-2B81E7AA6E29', 'FF9F0D7B-41EF-482A-9E84-2B81E7AA6E29'),
+   ('A8E62E50-9CEA-4B0C-A3C3-91C3B5C3A35D', 'A8E62E50-9CEA-4B0C-A3C3-91C3B5C3A35D'),
+   ('B387B2D6-3E7F-4F7A-B7DF-32D21A47C3E9', 'B387B2D6-3E7F-4F7A-B7DF-32D21A47C3E9');
 create table NhanVien(
  id uniqueidentifier PRIMARY KEY ,
  maNV varchar(20),
