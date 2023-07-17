@@ -7,6 +7,8 @@ package DAO;
 import Utilities.JdbcHelper;
 import java.sql.Connection;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Order;
 
@@ -18,8 +20,57 @@ public class OrderDAO {
     
     private Connection connection = JdbcHelper.getConnection();
     
+    public List<Order> findAll() {
+        List<Order> orders = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM hoaDon WHERE trangThai = 1 ";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String ma = resultSet.getString("ma");
+                String name = resultSet.getString("ten");
+                String idKh = resultSet.getString("idKh");
+                String idCh = resultSet.getString("idCh");
+                Date ngayTao = resultSet.getDate("ngayTao");
+                Date ngaySua = resultSet.getDate("ngaySua");
+                int status = resultSet.getInt("trangThai");
+
+                Order order = new Order(id, ma, name, idKh, idCh, ngayTao, ngaySua, status);
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orders;
+    }
+    
+    
+    public boolean createOrder(Order order) {
+        try  {
+            String query = "INSERT INTO hoaDon ( ma, ten, idKh, idCh, ngayTao, ngaySua, 1) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, order.getMa());
+            preparedStatement.setString(2, order.getName());
+            preparedStatement.setString(3, order.getIdKh());
+            preparedStatement.setString(4, order.getIdCh());
+            preparedStatement.setDate(5, new java.sql.Date(order.getNgayTao().getTime()));
+            preparedStatement.setDate(6, new java.sql.Date(order.getNgaySua().getTime()));
+            int rowsInserted = preparedStatement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     public Order getOrderById(String orderId) {
-         String query = "SELECT * FROM Orders WHERE id = ?";
+         String query = "SELECT * FROM hoaDon WHERE id = ? and trangThai = 1 ";
         try {
            
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -30,12 +81,12 @@ public class OrderDAO {
             if (resultSet.next()) {
                 String id = resultSet.getString("id");
                 String ma = resultSet.getString("ma");
-                String name = resultSet.getString("name");
+                String name = resultSet.getString("ten");
                 String idKh = resultSet.getString("idKh");
                 String idCh = resultSet.getString("idCh");
                 Date ngayTao = resultSet.getDate("ngayTao");
                 Date ngaySua = resultSet.getDate("ngaySua");
-                boolean status = resultSet.getBoolean("status");
+                int status = resultSet.getInt("trangThai");
 
                 return new Order(id, ma, name, idKh, idCh, ngayTao, ngaySua, status);
             }
@@ -46,8 +97,8 @@ public class OrderDAO {
     }
     
     public boolean updateOrder(Order order) {
-        try (Connection connection = JdbcHelper.getConnection()) {
-            String query = "UPDATE Orders SET ma = ?, name = ?, idKh = ?, idCh = ?, ngayTao = ?, ngaySua = ?, status = ? WHERE id = ?";
+        try  {
+            String query = "UPDATE hoaDon SET ma = ?, ten = ?, idKh = ?, idCh = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, order.getMa());
@@ -56,7 +107,7 @@ public class OrderDAO {
             preparedStatement.setString(4, order.getIdCh());
             preparedStatement.setDate(5, new java.sql.Date(order.getNgayTao().getTime()));
             preparedStatement.setDate(6, new java.sql.Date(order.getNgaySua().getTime()));
-            preparedStatement.setBoolean(7, order.isStatus());
+            preparedStatement.setInt(7, order.getStatus());
             preparedStatement.setString(8, order.getId());
 
             int rowsUpdated = preparedStatement.executeUpdate();
@@ -68,8 +119,8 @@ public class OrderDAO {
     }
     
     public boolean deleteOrder(String orderId) {
-        try (Connection connection = JdbcHelper.getConnection()) {
-            String query = "DELETE FROM Orders WHERE id = ?";
+        try {
+            String query = "UPDATE hoaDon SET trangThai = 0 WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderId);
 
