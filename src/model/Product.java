@@ -7,9 +7,7 @@ import java.util.Date;
 public class Product {
     private String id;
     private String ma;
-
     private String name;
-
     private String nguonGoc;
     private double giaGoc;
     private Date ngaySx;
@@ -17,18 +15,30 @@ public class Product {
     private String idDanhMuc;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean status;
+    private int status;
 
     public Product() {
     }
 
+    public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, int status) {
+        this.ma = ma;
+        this.name = name;
+        this.nguonGoc = nguonGoc;
+        this.giaGoc = giaGoc;
+        this.ngaySx = ngaySx;
+        this.hsd = hsd;
+        this.idDanhMuc = idDanhMuc;
+        this.status = status;
+    }
 
-    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
+
+    
+    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;
         this.name = name;
     }
-    public Product(String id, String ma, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
+    public Product(String id, String ma, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;
 
@@ -127,11 +137,11 @@ public class Product {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
     

@@ -33,7 +33,7 @@ public class ProductDAO {
             statement.setString(8, product.getIdDanhMuc());
             statement.setDate(9, new java.sql.Date(product.getNgayTao().getTime()));
             statement.setDate(10, new java.sql.Date(product.getNgaySua().getTime()));
-            statement.setBoolean(11, product.isStatus());
+            statement.setInt(11, product.getStatus());
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -44,7 +44,8 @@ public class ProductDAO {
     // Read
     public Product getProductById(String id) {
         String query = "SELECT * FROM sanPham WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -59,7 +60,8 @@ public class ProductDAO {
     public List<Product> getAllProducts() {
         String query = "SELECT * FROM sanPham";
         List<Product> products = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try  {
+            PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Product product = extractProductFromResultSet(resultSet);
@@ -70,6 +72,7 @@ public class ProductDAO {
         }
         return products;
     }
+
 
     // Update
     public void updateProduct(Product product) {
@@ -85,7 +88,7 @@ public class ProductDAO {
             statement.setString(7, product.getIdDanhMuc());
             statement.setDate(8, new java.sql.Date(product.getNgayTao().getTime()));
             statement.setDate(9, new java.sql.Date(product.getNgaySua().getTime()));
-            statement.setBoolean(10, product.isStatus());
+            statement.setInt(10, product.getStatus());
             statement.setString(11, product.getId());
 
             statement.executeUpdate();
@@ -116,7 +119,7 @@ public class ProductDAO {
         String idDanhMuc = resultSet.getString("idDanhMuc");
         Date ngayTao = resultSet.getDate("ngayTao");
         Date ngaySua = resultSet.getDate("ngaySua");
-        boolean status = resultSet.getBoolean("trangThai");
+        int status = resultSet.getInt("trangThai");
 
         return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
     }
