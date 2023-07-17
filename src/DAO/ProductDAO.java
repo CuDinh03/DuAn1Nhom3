@@ -69,7 +69,6 @@ public class ProductDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Product product = extractProductFromResultSet(resultSet);
-                System.out.println(product.toString());
                 products.add(product);
             }
         } catch (SQLException e) {
@@ -122,14 +121,11 @@ public class ProductDAO {
         double giaGocdb = giaGoc.doubleValue();
         Date ngaySx = resultSet.getDate("ngaySx");
         java.util.Date ngaySx1 = convertSqlDateToUtilDate(ngaySx);
-        System.out.println(ngaySx);
         Date hsd = resultSet.getDate("hanSD");
         java.util.Date hsd1 = convertSqlDateToUtilDate(hsd);
-
         String idDanhMuc = resultSet.getString("idDanhMuc");
         Date ngayTao = resultSet.getDate("ngayTao");
         java.util.Date ngayTao1 = convertSqlDateToUtilDate(ngayTao);
-
         Date ngaySua = resultSet.getDate("ngaySua");
         java.util.Date ngaySua1 = convertSqlDateToUtilDate(ngaySua);
 
@@ -159,7 +155,6 @@ public class ProductDAO {
             Sheet sheet = workbook.getSheetAt(0);
 
             for (Row row : sheet) {
-                // Skip the header row (assuming the header is in the first row)
                 if (row.getRowNum() == 0) {
                     continue;
                 }
@@ -183,14 +178,12 @@ public class ProductDAO {
         }
     }
 
-    // Export data from the database to an Excel file
     public void exportProductsToExcel(String filePath) {
         try (Workbook workbook = new XSSFWorkbook(); FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath))) {
 
             Sheet sheet = workbook.createSheet("Products");
             List<Product> products = getAllProducts();
 
-            // Create the header row
             Row headerRow = sheet.createRow(0);
             headerRow.createCell(0).setCellValue("ID");
             headerRow.createCell(1).setCellValue("Code");
@@ -204,7 +197,6 @@ public class ProductDAO {
             headerRow.createCell(9).setCellValue("Modified Date");
             headerRow.createCell(10).setCellValue("Status");
 
-            // Populate data rows
             int rowIndex = 1;
             for (Product product : products) {
                 Row dataRow = sheet.createRow(rowIndex++);
@@ -232,7 +224,6 @@ public class ProductDAO {
             return null;
         }
 
-        // Convert java.sql.Date to java.util.Date
         long milliseconds = sqlDate.getTime();
         return new java.util.Date(milliseconds);
     }

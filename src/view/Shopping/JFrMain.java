@@ -71,7 +71,7 @@ public class JFrMain extends javax.swing.JFrame {
         dtmGH.setRowCount(0);
         for (Items items : itemList) {
             Object[] data = {
-                items.getMaSP(), items.getTenSp(), items.getSoLuong(), items.getGiaban() , (items.getGiaban() * (double) items.getSoLuong())
+                items.getMaSP(), items.getTenSp(), items.getSoLuong(), items.getGiaban(), (items.getGiaban() * (double) items.getSoLuong())
             };
             dtmGH.addRow(data);
         }
@@ -250,7 +250,7 @@ public class JFrMain extends javax.swing.JFrame {
             .addGroup(panelNavigationLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addComponent(btnBackMain)
                 .addContainerGap())
         );
@@ -1053,8 +1053,8 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void pnlThongKtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlThongKtActionPerformed
         // TODO add your handling code here:
-        
-         try {
+
+        try {
             panelThanhToan.removeAll();
             panelThanhToan.add(new pnlThongKe());
             panelSanPham.repaint();
@@ -1103,9 +1103,9 @@ public class JFrMain extends javax.swing.JFrame {
         if (row == -1) {
             return;
         }
-        
+
         String ma = tblGioHang.getValueAt(row, 0).toString();
-        
+
         for (Items items : itemList) {
             if (items.getMaSP().equals(ma)) {
                 itemList.remove(items);
@@ -1118,7 +1118,7 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void btnBackMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackMainActionPerformed
         // TODO add your handling code here:
-                                new JFrMain().setVisible(true);
+        new JFrMain().setVisible(true);
 
     }//GEN-LAST:event_btnBackMainActionPerformed
 
