@@ -15,16 +15,15 @@ import model.Store;
  * @author maccuacu
  */
 public class StoreDAO {
+
     private Connection conn = JdbcHelper.getConnection();
-    
-    
+
     public void insertStore(Store store) {
-        
+
         String sql = "INSERT INTO cuaHang ( ma, ten, diaChi, idPhieuNhanHang, ngayTao, ngaySua, trangThai) VALUES ( ?, ?, ?, ?, ?, ?, 1)";
         try {
-    
-    
-             PreparedStatement statement = conn.prepareStatement(sql);
+
+            PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, store.getMa());
             statement.setString(2, store.getTen());
@@ -40,12 +39,13 @@ public class StoreDAO {
             e.printStackTrace();
         }
     }
+
     public List<Store> getAllStores() {
         List<Store> stores = new ArrayList<>();
         String sql = "SELECT * FROM cuaHang where trangThai = 1";
         try {
-             Statement statement = conn.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql); 
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
                 Store store = new Store();
@@ -66,10 +66,11 @@ public class StoreDAO {
 
         return stores;
     }
+
     public void updateStore(Store store) {
         String sql = "UPDATE cuaHang SET ma=?, ten=?, diaChi=?, idPhieuNhanHang=?, ngayTao=?, ngaySua=? WHERE id=?";
-        try{
-             PreparedStatement statement = conn.prepareStatement(sql);
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, store.getMa());
             statement.setString(2, store.getTen());
@@ -88,15 +89,15 @@ public class StoreDAO {
             e.printStackTrace();
         }
     }
-    
+
     public void deleteStoreById(String id) {
         String sql = "UPDATE cuaHang SET trangThai = 0  WHERE id=?";
         try {
-             PreparedStatement statement = conn.prepareStatement(sql);
+            PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, id);
             Store store = new Store();
-                        store.setNgaySua(new java.util.Date());
+            store.setNgaySua(new java.util.Date());
 
             statement.setDate(7, new java.sql.Date(store.getNgaySua().getTime()));
             statement.executeUpdate();
@@ -107,4 +108,3 @@ public class StoreDAO {
         }
     }
 }
-    
