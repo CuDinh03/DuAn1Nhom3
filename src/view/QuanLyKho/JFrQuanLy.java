@@ -21,10 +21,10 @@ import service.ProductService;
  */
 public class JFrQuanLy extends javax.swing.JFrame {
 
-    
-    private DefaultTableModel  dtm = new DefaultTableModel();
-    
+    private DefaultTableModel dtm = new DefaultTableModel();
+
     private ProductService productService;
+
     /**
      * Creates new form JFrQuanLy
      */
@@ -33,12 +33,12 @@ public class JFrQuanLy extends javax.swing.JFrame {
         this.loadTable();
     }
 
-    private void loadTable(){
+    private void loadTable() {
         ProductDAO productDAO = new ProductDAO();
-        
+
         dtm = (DefaultTableModel) tblKhoHang.getModel();
         dtm.setRowCount(0);
-        for (Product product : productDAO.getAllProducts()){
+        for (Product product : productDAO.getAllProducts()) {
             Object[] rowData = {
                 product.getMa(),
                 product.getName(),
@@ -50,17 +50,16 @@ public class JFrQuanLy extends javax.swing.JFrame {
                 product.getStatus()
             };
             dtm.addRow(rowData);
-            
+
         }
     }
-    
-    
-    private void mouseClick(){
+
+    private void mouseClick() {
         int banGhiChon = tblKhoHang.getSelectedRow();
-        if(banGhiChon == -1){
+        if (banGhiChon == -1) {
             return;
-    }
-        
+        }
+
         String ma = tblKhoHang.getValueAt(banGhiChon, 0).toString();
         String ten = tblKhoHang.getValueAt(banGhiChon, 1).toString();
         String theLoai = tblKhoHang.getValueAt(banGhiChon, 2).toString();
@@ -69,7 +68,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
         String hSD = tblKhoHang.getValueAt(banGhiChon, 5).toString();
         String donGia = tblKhoHang.getValueAt(banGhiChon, 6).toString();
         String trangThai = tblKhoHang.getValueAt(banGhiChon, 7).toString();
-        
+
         txtMaSP.setText(ma);
         txtTenSp.setText(ten);
         cbbTheLoai.setSelectedItem(theLoai);
@@ -78,70 +77,11 @@ public class JFrQuanLy extends javax.swing.JFrame {
         txtHSD.setText(hSD);
         txtDonGia.setText(donGia);
         cbbTrangThai.setSelectedItem(trangThai);
-    
+
     }
-    
-    
-    private void add(){
-        try {        
-        String ma = txtMaSP.getText().trim();
-        String ten = txtTenSp.getText().trim();
-        String theLoai = cbbTheLoai.getSelectedItem().toString();
-        String nguonGoc = txtNguonGoc.getText().trim();
-        String nSX = txtNSX.getText().trim();
-        String hSD = txtHSD.getText().trim();
-        
-        java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(nSX).parse(hSD);
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        
-        String donGiaStr = txtDonGia.getText().trim(); 
-        String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
-        double donGia = Double.parseDouble(donGiaStr);
-        int trangThai = Integer.parseInt(trangThaiStr);
-        
-        for (Product product : this.productService.findAll()){
-            if(product.getMa().equals(ma)){
-                JOptionPane.showMessageDialog(this, "Mã này đã tồn tại");
-                return;
-            }
-        }
-        
-        this.productService.insert(new Product(ma, nSX, nguonGoc, donGia, sqlDate, sqlDate, theLoai, trangThai));
-        
-        loadTable();
-        JOptionPane.showMessageDialog(this, "Nhập kho thành công");
-        
-        } catch (ParseException ex) {           
-            Logger.getLogger(JFrQuanLy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    private void delete(){
-       
-            int banGhiChon = this.tblKhoHang.getSelectedRow();
-            if(banGhiChon == -1) {
-                JOptionPane.showMessageDialog(this, "Chọn 1 dòng để Xóa");
-                return;
-            }
-            
-            String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
-            int trangThai = Integer.parseInt(trangThaiStr);
-            
-            this.productService.delete(trangThaiStr);
-            
-            loadTable();
-            JOptionPane.showMessageDialog(this, "Xóa thành công");            
-    }
-    
-    private void update() {
+
+    private void add() {
         try {
-            int banGhiChon = this.tblKhoHang.getSelectedRow();
-            if (banGhiChon == -1) {
-                JOptionPane.showMessageDialog(this, "Chọn 1 dòng để Update");
-                return;
-            }
-            
             String ma = txtMaSP.getText().trim();
             String ten = txtTenSp.getText().trim();
             String theLoai = cbbTheLoai.getSelectedItem().toString();
@@ -149,33 +89,97 @@ public class JFrQuanLy extends javax.swing.JFrame {
             String nSX = txtNSX.getText().trim();
             String hSD = txtHSD.getText().trim();
 
-            java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(nSX).parse(hSD);
+            java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(nSX);
+            java.util.Date utilDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(hSD);
+
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            java.sql.Date sqlDate2 = new java.sql.Date(utilDate.getTime());
 
             String donGiaStr = txtDonGia.getText().trim();
             String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
             double donGia = Double.parseDouble(donGiaStr);
             int trangThai = Integer.parseInt(trangThaiStr);
-            
-            if(ma.length() == 0){
+
+            for (Product product : this.productService.findAll()) {
+                if (product.getMa().equals(ma)) {
+                    JOptionPane.showMessageDialog(this, "Mã này đã tồn tại");
+                    return;
+                }
+            }
+
+            this.productService.insert(new Product(ma, nSX, nguonGoc, donGia, sqlDate, sqlDate2, theLoai, trangThai));
+
+            loadTable();
+            JOptionPane.showMessageDialog(this, "Nhập kho thành công");
+
+        } catch (ParseException ex) {
+            Logger.getLogger(JFrQuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void delete() {
+
+        int banGhiChon = this.tblKhoHang.getSelectedRow();
+        if (banGhiChon == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn 1 dòng để Xóa");
+            return;
+        }
+
+        String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
+        int trangThai = Integer.parseInt(trangThaiStr);
+
+        this.productService.delete(trangThaiStr);
+
+        loadTable();
+        JOptionPane.showMessageDialog(this, "Xóa thành công");
+    }
+
+    private void update() {
+        try {
+            int banGhiChon = this.tblKhoHang.getSelectedRow();
+            if (banGhiChon == -1) {
+                JOptionPane.showMessageDialog(this, "Chọn 1 dòng để Update");
+                return;
+            }
+
+            String ma = txtMaSP.getText().trim();
+            String ten = txtTenSp.getText().trim();
+            String theLoai = cbbTheLoai.getSelectedItem().toString();
+            String nguonGoc = txtNguonGoc.getText().trim();
+            String nSX = txtNSX.getText().trim();
+            String hSD = txtHSD.getText().trim();
+
+            java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(nSX);
+            java.util.Date utilDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(hSD);
+
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            java.sql.Date sqlDate2 = new java.sql.Date(utilDate.getTime());
+
+            String donGiaStr = txtDonGia.getText().trim();
+            String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
+            double donGia = Double.parseDouble(donGiaStr);
+            int trangThai = Integer.parseInt(trangThaiStr);
+
+            if (ma.length() == 0) {
                 JOptionPane.showMessageDialog(this, "Không được để trống");
                 return;
             }
-            
-            this.productService.update(t, nSX);
-            
+            Product p = new Product(ma, nSX, nguonGoc, donGia, utilDate2, utilDate, nguonGoc, 1);
+
+            this.productService.update(p, nSX);
+
             loadTable();
             JOptionPane.showMessageDialog(this, "Update thành công");
-            
+
         } catch (Exception e) {
         }
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-//     * regenerated by the Form Editor.
+     * WARNING: Do NOT modify this code. The content of this method is always //
+     * * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -533,7 +537,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnNhapKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapKhoActionPerformed
