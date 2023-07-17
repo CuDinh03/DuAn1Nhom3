@@ -5,6 +5,7 @@
         <group>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Order.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/ProductService.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/pnlSanPham.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Account.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Cart.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/AccountDAO.java</file>
@@ -14,6 +15,7 @@
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/IService.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/LoginForm/JFrLogin.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Inventory.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/JFrMain.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ProductDAO.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/quanlychuoich/QuanlyChuoiCH.java</file>
         </group>

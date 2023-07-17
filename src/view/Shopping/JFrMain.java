@@ -116,11 +116,12 @@ public class JFrMain extends javax.swing.JFrame {
 
         panelNavigation = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        pnlbanhang = new javax.swing.JButton();
+        pnlThongKt = new javax.swing.JButton();
         btnSanPham = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        btnBackMain = new javax.swing.JButton();
         panelHeader = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -201,13 +202,13 @@ public class JFrMain extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridLayout(5, 1));
 
-        pnlbanhang.setText("jButton1");
-        pnlbanhang.addActionListener(new java.awt.event.ActionListener() {
+        pnlThongKt.setText("Thống kê ");
+        pnlThongKt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pnlbanhangActionPerformed(evt);
+                pnlThongKtActionPerformed(evt);
             }
         });
-        jPanel2.add(pnlbanhang);
+        jPanel2.add(pnlThongKt);
 
         btnSanPham.setText("Sản phẩm");
         btnSanPham.addActionListener(new java.awt.event.ActionListener() {
@@ -226,13 +227,22 @@ public class JFrMain extends javax.swing.JFrame {
         jButton5.setText("jButton5");
         jPanel2.add(jButton5);
 
+        btnBackMain.setText("Back");
+        btnBackMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackMainActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNavigationLayout = new javax.swing.GroupLayout(panelNavigation);
         panelNavigation.setLayout(panelNavigationLayout);
         panelNavigationLayout.setHorizontalGroup(
             panelNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelNavigationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBackMain))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelNavigationLayout.setVerticalGroup(
@@ -240,7 +250,9 @@ public class JFrMain extends javax.swing.JFrame {
             .addGroup(panelNavigationLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBackMain)
+                .addContainerGap())
         );
 
         panelHeader.setBackground(new java.awt.Color(102, 204, 255));
@@ -1039,9 +1051,18 @@ public class JFrMain extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cboLoc1ActionPerformed
 
-    private void pnlbanhangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlbanhangActionPerformed
+    private void pnlThongKtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlThongKtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pnlbanhangActionPerformed
+        
+         try {
+            panelThanhToan.removeAll();
+            panelThanhToan.add(new pnlThongKe());
+            panelSanPham.repaint();
+            panelSanPham.revalidate();
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pnlThongKtActionPerformed
 
     private void btnClearItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearItemsActionPerformed
         // TODO add your handling code here:
@@ -1095,6 +1116,12 @@ public class JFrMain extends javax.swing.JFrame {
         this.loadTableCart();
     }//GEN-LAST:event_btnDeletebyMaActionPerformed
 
+    private void btnBackMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackMainActionPerformed
+        // TODO add your handling code here:
+                                new JFrMain().setVisible(true);
+
+    }//GEN-LAST:event_btnBackMainActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1134,6 +1161,7 @@ public class JFrMain extends javax.swing.JFrame {
 
     private javax.swing.JPanel panelQLSanPham;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackMain;
     private javax.swing.JButton btnClearItems;
     private javax.swing.JButton btnDeletebyMa;
     private javax.swing.JButton btnSanPham;
@@ -1194,7 +1222,7 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelSanPham;
     private javax.swing.JPanel panelThanhToan;
     private javax.swing.JPanel panelWebCam;
-    private javax.swing.JButton pnlbanhang;
+    private javax.swing.JButton pnlThongKt;
     private javax.swing.JTable tblDanhSachSP;
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTable tblHoaDon;
