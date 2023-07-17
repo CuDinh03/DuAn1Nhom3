@@ -332,8 +332,8 @@ public class JFrLogin extends javax.swing.JFrame {
             for (Role role : list) {
                 if (idRole.equals(role.getId())) {
                     if (role.getName().equals("VT001")) {
-                                    UserSession session = new UserSession(getAccount().getUsername());
-            loggedInUsers.put(getAccount().getUsername(), session);
+//                                    UserSession session = new UserSession(getAccount().getUsername());
+//            loggedInUsers.put(getAccount().getUsername(), session);
 
 
                         JOptionPane.showMessageDialog(this, "dang nhap thanh cong");

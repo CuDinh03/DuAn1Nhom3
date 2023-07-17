@@ -38,8 +38,8 @@ public class JFrMain extends javax.swing.JFrame {
         this.loadTable();
 
         Items item = new Items("", "", "", "sp1", "tensp1", 1, 200, 1);
-        Items item2 = new Items("", "", "", "sp2", "tensp2", 1, 300, 1);
-        Items item3 = new Items("", "", "", "sp3", "tensp3", 1, 400, 1);
+        Items item2 = new Items("", "", "", "sp2", "tensp2", 5, 300, 1);
+        Items item3 = new Items("", "", "", "sp3", "tensp3", 2, 400, 1);
 
         itemList = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class JFrMain extends javax.swing.JFrame {
         dtmGH.setRowCount(0);
         for (Items items : itemList) {
             Object[] data = {
-                items.getMaSP(), items.getTenSp(), items.getSoLuong(), (items.getGiaban() * items.getSoLuong())
+                items.getMaSP(), items.getTenSp(), items.getSoLuong(), items.getGiaban() , (items.getGiaban() * (double) items.getSoLuong())
             };
             dtmGH.addRow(data);
         }
@@ -81,8 +81,8 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void tienThua(double tienKhachdua) {
         double tienthua = tienKhachdua - this.calculateTotalPrice();
-        if (tienthua<0) {
-            JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + ( tienthua*(-1)) + "k");
+        if (tienthua < 0) {
+            JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + (tienthua * (-1)) + "k");
         }
 
         this.txtTienThua.setText(Double.toString(tienthua));
@@ -117,7 +117,7 @@ public class JFrMain extends javax.swing.JFrame {
         panelNavigation = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         pnlbanhang = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSanPham = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -133,6 +133,7 @@ public class JFrMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblGioHang = new javax.swing.JTable();
         btnClearItems = new javax.swing.JButton();
+        btnDeletebyMa = new javax.swing.JButton();
         panelHoaDon = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
@@ -208,8 +209,13 @@ public class JFrMain extends javax.swing.JFrame {
         });
         jPanel2.add(pnlbanhang);
 
-        jButton2.setText("jButton2");
-        jPanel2.add(jButton2);
+        btnSanPham.setText("Sản phẩm");
+        btnSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSanPhamActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnSanPham);
 
         jButton3.setText("jButton3");
         jPanel2.add(jButton3);
@@ -316,7 +322,6 @@ public class JFrMain extends javax.swing.JFrame {
                 "Mã SP", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
-        tblGioHang.setEnabled(false);
         tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblGioHangMouseClicked(evt);
@@ -331,6 +336,13 @@ public class JFrMain extends javax.swing.JFrame {
             }
         });
 
+        btnDeletebyMa.setText("Xoá");
+        btnDeletebyMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletebyMaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelGioHangLayout = new javax.swing.GroupLayout(panelGioHang);
         panelGioHang.setLayout(panelGioHangLayout);
         panelGioHangLayout.setHorizontalGroup(
@@ -338,6 +350,8 @@ public class JFrMain extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGioHangLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDeletebyMa)
+                .addGap(18, 18, 18)
                 .addComponent(btnClearItems)
                 .addContainerGap())
         );
@@ -346,7 +360,9 @@ public class JFrMain extends javax.swing.JFrame {
             .addGroup(panelGioHangLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(btnClearItems))
+                .addGroup(panelGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClearItems)
+                    .addComponent(btnDeletebyMa)))
         );
 
         panelHoaDon.setBackground(new java.awt.Color(222, 231, 227));
@@ -935,10 +951,14 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
 
-//       panelBanHang.setVisible(false);
-//       panelQLSanPham.setVisible(true);
-//panelQLSanPham.setVisible(true);
-//panelBanHang.setVisible(false);
+        try {
+            panelSanPham.removeAll();
+            panelSanPham.add(new pnlSanPham());
+            panelSanPham.repaint();
+            panelSanPham.revalidate();
+
+        } catch (Exception e) {
+        }
 
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
@@ -1041,7 +1061,7 @@ public class JFrMain extends javax.swing.JFrame {
         try {
             double tienkdua = Double.parseDouble(tienkd);
             this.tienThua(tienkdua);
-                
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Kiểu dữ liệu chưa đúng");
 
@@ -1052,9 +1072,28 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         this.thanhtoan();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDeletebyMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletebyMaActionPerformed
+        // TODO add your handling code here:
+        int row = tblGioHang.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        
+        String ma = tblGioHang.getValueAt(row, 0).toString();
+        
+        for (Items items : itemList) {
+            if (items.getMaSP().equals(ma)) {
+                itemList.remove(items);
+                JOptionPane.showMessageDialog(this, "Xoá thành công");
+                break;
+            }
+        }
+        this.loadTableCart();
+    }//GEN-LAST:event_btnDeletebyMaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1096,13 +1135,14 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JPanel panelQLSanPham;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClearItems;
+    private javax.swing.JButton btnDeletebyMa;
+    private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnTinhTien;
     private javax.swing.JComboBox<String> cbbTrangThai;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
     private javax.swing.JComboBox<String> cboLoc;
     private javax.swing.JComboBox<String> cboLoc1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -1180,6 +1220,6 @@ public class JFrMain extends javax.swing.JFrame {
     }
 
     private void thanhtoan() {
-        
+
     }
 }
