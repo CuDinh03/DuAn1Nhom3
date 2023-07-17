@@ -2,6 +2,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Inventory {
     private String id;
@@ -9,24 +10,31 @@ public class Inventory {
     private String ten;
     private String idKh;
     private String idCh;
+    private List<Items> items;
+    private double totalAmount; 
     private Date ngayTao;
     private Date ngaySua;
     private int status;
 
     public Inventory() {
     }
-    
 
-    public Inventory(String id, String ma, String ten, String idKh, String idCh, Date ngayTao, Date ngaySua, int status) {
+    public Inventory(String id, String ma, String ten, String idKh, String idCh, List<Items> items, double totalAmount, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.idKh = idKh;
         this.idCh = idCh;
+        this.items = items;
+        this.totalAmount = totalAmount;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.status = status;
     }
+    
+    
+    
+
 
     public String getId() {
         return id;

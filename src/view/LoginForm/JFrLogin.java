@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,8 +24,9 @@ import javax.swing.JOptionPane;
 import model.Account;
 import model.AccountRole;
 import model.Role;
+import model.UserSession;
 import view.Shopping.JFrMain;
-
+import view.Shopping.pnlSanPham;
 
 /**
  *
@@ -32,27 +34,28 @@ import view.Shopping.JFrMain;
  */
 public class JFrLogin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form login
-     */
+     private HashMap<String, UserSession> loggedInUsers;
+
+    
+    
     public JFrLogin() {
-       
+
         initComponents();
-       
-        txtusername.setBackground(new java.awt.Color(0,0,0,1));
-        txtpassword.setBackground(new java.awt.Color(0,0,0,1));
+
+        txtusername.setBackground(new java.awt.Color(0, 0, 0, 1));
+        txtpassword.setBackground(new java.awt.Color(0, 0, 0, 1));
     }
-    private Account getAccount() throws SQLException{
-        
+
+    private Account getAccount() throws SQLException {
+
         AccountDAO adao = new AccountDAO();
         String name = this.txtusername.getText().trim();
         String pass = this.txtpassword.getText().trim();
-        
-        
-        
+
         Account acc = adao.getAccountByUsername(name);
         return acc;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -286,37 +289,37 @@ public class JFrLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
         int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát không?");
-        if(check ==0){
+        if (check == 0) {
             System.exit(0);
         }
     }//GEN-LAST:event_lblCloseMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         try {
-            if(this.txtusername.getText().equals("")){
+            if (this.txtusername.getText().equals("")) {
                 this.lblErrUserName.setText("Không để trống username");
                 this.lblErrUserName.setForeground(Color.red);
-            }else if(!this.txtusername.getText().equals("")){
+            } else if (!this.txtusername.getText().equals("")) {
                 this.lblErrUserName.setText("");
             }
 
-            if(String.valueOf(this.txtpassword.getPassword()).equals("")){
+            if (String.valueOf(this.txtpassword.getPassword()).equals("")) {
                 this.lblErrPass.setText("Không để trống username");
                 this.lblErrPass.setForeground(Color.red);
-            }else if(!String.valueOf(this.txtpassword.getPassword()).equals("")){
+            } else if (!String.valueOf(this.txtpassword.getPassword()).equals("")) {
                 this.lblErrPass.setText("");
             }
-            String idRole ="";
+            String idRole = "";
             AccountDAO adao = new AccountDAO();
             List<AccountRole> listRole = AccountRoleDAO.getAll();
             for (AccountRole accountRole : listRole) {
                 if (adao.getAccountByUsername(getAccount().getUsername()).getId().equals(accountRole.getIdAccount())) {
-                    idRole  = accountRole.getIdRole();
+                    idRole = accountRole.getIdRole();
                     break;
                 }
 
@@ -324,14 +327,25 @@ public class JFrLogin extends javax.swing.JFrame {
             RoleDAO rdao = new RoleDAO();
 
             List<Role> list = rdao.getAllRoles();
+            
 
             for (Role role : list) {
                 if (idRole.equals(role.getId())) {
-                    if (role.getName().equals("VT001") ) {
-                      
-                      new JFrMain().setVisible(true);
-                      JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
-                      break;
+                    if (role.getName().equals("VT001")) {
+                                    UserSession session = new UserSession(getAccount().getUsername());
+            loggedInUsers.put(getAccount().getUsername(), session);
+
+
+                        JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
+                        setVisible(false);
+                        new JFrMain().setVisible(true);
+                        break;
+                    } else if (role.getName().equals("VT002")) {
+                        JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
+                        setVisible(false);
+                        new pnlSanPham().setVisible(true);
+
+                        break;
                     }
                 }
             }
@@ -351,7 +365,7 @@ public class JFrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusernameActionPerformed
 
     private void disableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disableMouseClicked
-        txtpassword.setEchoChar((char)0);
+        txtpassword.setEchoChar((char) 0);
         disable.setVisible(false);
         disable.setEnabled(false);
         show.setEnabled(true);
@@ -359,13 +373,14 @@ public class JFrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_disableMouseClicked
 
     private void showMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMouseClicked
-        txtpassword.setEchoChar((char)8226);
+        txtpassword.setEchoChar((char) 8226);
         disable.setVisible(true);
         disable.setEnabled(true);
         show.setEnabled(false);
         show.setEnabled(false);
     }//GEN-LAST:event_showMouseClicked
-int index =0;
+    int index = 0;
+
     /**
      * @param args the command line arguments
      */
