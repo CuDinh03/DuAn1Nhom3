@@ -19,11 +19,9 @@ public class Product {
     public Product() {
     }
 
-
-    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
-        this.ma = ma;
+    public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
         this.name = name;
+        this.ma = ma;
         this.nguonGoc = nguonGoc;
         this.giaGoc = giaGoc;
         this.ngaySx = ngaySx;
@@ -41,7 +39,8 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-        public String getId() {
+
+    public String getId() {
         return id;
     }
 
