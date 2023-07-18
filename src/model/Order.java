@@ -29,6 +29,15 @@ public class Order {
         this.status = status;
     }
 
+    public Order(String idCh1, String ma, String name, String idKh1, String idch0, Date ngaytao, Date ngaySua) {
+        this.ma = ma;
+        this.name = name;
+        this.idKh = idKh1;
+        this.idCh = idCh1;
+        this.ngayTao = ngaytao;
+        this.ngaySua = ngaySua;
+    }
+
     public String getId() {
         return id;
     }

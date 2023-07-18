@@ -50,9 +50,9 @@ public class OrderDAO {
     }
     
     
-    public boolean createOrder(Order order) {
+    public void createOrder(Order order) {
         try  {
-            String query = "INSERT INTO hoaDon ( ma, ten, idKh, idCh, ngayTao, ngaySua, 1) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO hoaDon ( ma, ten, idKh, idCh, ngayTao, ngaySua,trangThai ) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, order.getMa());
@@ -61,11 +61,10 @@ public class OrderDAO {
             preparedStatement.setString(4, order.getIdCh());
             preparedStatement.setDate(5, new java.sql.Date(order.getNgayTao().getTime()));
             preparedStatement.setDate(6, new java.sql.Date(order.getNgaySua().getTime()));
-            int rowsInserted = preparedStatement.executeUpdate();
-            return rowsInserted > 0;
+            preparedStatement.setInt(7, order.getStatus());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
     
@@ -96,7 +95,7 @@ public class OrderDAO {
         return null;
     }
     
-    public boolean updateOrder(Order order) {
+    public void updateOrder(Order order) {
         try  {
             String query = "UPDATE hoaDon SET ma = ?, ten = ?, idKh = ?, idCh = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -111,24 +110,20 @@ public class OrderDAO {
             preparedStatement.setString(8, order.getId());
 
             int rowsUpdated = preparedStatement.executeUpdate();
-            return rowsUpdated > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
     
-    public boolean deleteOrder(String orderId) {
+    public void deleteOrder(String orderId) {
         try {
             String query = "UPDATE hoaDon SET trangThai = 0 WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderId);
 
             int rowsDeleted = preparedStatement.executeUpdate();
-            return rowsDeleted > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
     

@@ -4,11 +4,14 @@
  */
 package view.Shopping;
 
+import DAO.OrderDAO;
 import DAO.ProductDAO;
 import DAO.StoreDAO;
+import DAO.UserDAO;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +19,7 @@ import model.Items;
 import model.Order;
 import model.Product;
 import model.Store;
+import model.User;
 import model.UserSession;
 
 /**
@@ -46,8 +50,6 @@ public class JFrMain extends javax.swing.JFrame {
         this.loadTableCart();
         this.showTotal();
         this.loadCbb();
-        
-        
 
     }
 
@@ -103,10 +105,14 @@ public class JFrMain extends javax.swing.JFrame {
         }
         return totalPrice;
     }
-    public void loadCbb(){
-        
+
+    public void loadCbb() {
+
         for (Store store : sdao.getAllStores()) {
             this.cbbCH.addItem(store.getTen());
+        }
+        for (User users : UserDAO.getAllUsers()) {
+            this.cbbNhanVien.addItem(users.getTenNV());
         }
     }
 
@@ -150,7 +156,7 @@ public class JFrMain extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
         txtSDTTQ = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
+        txtsdt = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -544,7 +550,7 @@ public class JFrMain extends javax.swing.JFrame {
                                 .addComponent(jLabel14)
                                 .addGap(37, 37, 37)
                                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtsdt, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtSDTTQ))))
                         .addContainerGap())
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
@@ -570,7 +576,7 @@ public class JFrMain extends javax.swing.JFrame {
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(txtSDTTQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
@@ -993,7 +999,7 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
 
-        
+
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
@@ -1075,7 +1081,7 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void pnlThongKtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlThongKtActionPerformed
         // TODO add your handling code here:
-try {
+        try {
             panelBody.removeAll();
             panelBody.add(new pnlThongKe());
             panelBody.repaint();
@@ -1233,7 +1239,6 @@ try {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lbClose;
     private javax.swing.JPanel panelBanHang;
@@ -1266,6 +1271,7 @@ try {
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTimKiem1;
     private javax.swing.JLabel txtTongTien;
+    private javax.swing.JSeparator txtsdt;
     // End of variables declaration//GEN-END:variables
 
     private void showTotal() {
@@ -1273,8 +1279,42 @@ try {
     }
 
     private void thanhtoan() {
-       Order order = new Order();
-       
-       
+//       private String id;
+//    private String ma;
+//    private String name;
+//    private String idKh;
+//    private String idCh;
+//    private Date ngayTao;
+//    private Date ngaySua;
+//    private int status;
+//       
+
+        String ma = "1";
+        String name = "Hoa don " + (new Date()).toString();
+        String idkh = "";
+        Store stores = sdao.findStoreByName(this.cbbCH.getSelectedItem().toString()) ;
+        
+        String idch = stores.getId();
+        Date ngaytao = new Date();
+        Date ngaySua = new Date();
+
+        Order order = new Order(idch, ma, name, idkh, idch, ngaytao, ngaySua,1);
+
+        OrderDAO odao = new OrderDAO();
+        odao.createOrder(order);
+        
+        this.clearALl();
+
+
+    }
+
+    private void clearALl() {
+        itemList.clear();
+        this.txtTenKHTaiQuay.setText("");
+        this.txtTienKhachDuaTQ.setText("");
+        this.txtTienThua.setText("");
+        this.txtSDTTQ.setText("");
+        this.loadTableCart();
+
     }
 }
