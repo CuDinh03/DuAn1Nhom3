@@ -1,15 +1,12 @@
-
 package model;
 
 import java.util.Date;
 
-
 public class Product {
+
     private String id;
     private String ma;
-
     private String name;
-
     private String nguonGoc;
     private double giaGoc;
     private Date ngaySx;
@@ -17,21 +14,14 @@ public class Product {
     private String idDanhMuc;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean status;
+    private int status;
 
     public Product() {
     }
 
-
-    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
-        this.id = id;
-        this.ma = ma;
+    public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
         this.name = name;
-    }
-    public Product(String id, String ma, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, boolean status) {
-        this.id = id;
         this.ma = ma;
-
         this.nguonGoc = nguonGoc;
         this.giaGoc = giaGoc;
         this.ngaySx = ngaySx;
@@ -42,7 +32,6 @@ public class Product {
         this.status = status;
     }
 
-
     public String getName() {
         return name;
     }
@@ -50,10 +39,6 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-    
-
-
-
 
     public String getId() {
         return id;
@@ -127,13 +112,17 @@ public class Product {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
-    
-}
 
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", ma=" + ma + ", name=" + name + ", nguonGoc=" + nguonGoc + ", giaGoc=" + giaGoc + ", ngaySx=" + ngaySx + ", hsd=" + hsd + ", idDanhMuc=" + idDanhMuc + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", status=" + status + '}';
+    }
+
+}

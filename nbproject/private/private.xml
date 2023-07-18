@@ -4,9 +4,38 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/view/QuanLyKho/JFrQuanLyKho.java</file>
 =======
 >>>>>>> 8e37b49d77289dba70eca2c5392c1d09cd716741
+=======
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/AccountRoleDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Cart.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/AccountDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/User.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Product.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/IService.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Inventory.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Store.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Report.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ProductDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/quanlychuoich/QuanlyChuoiCH.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ProductTypes.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Role.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Order.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/service/ProductService.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ShoppingCart.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Account.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/WareHouse.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Items.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/OrderDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Utilities/JdbcHelper.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/LoginForm/JFrLogin.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/JFrMain.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/SellOrderDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/UserSession.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/OrderDAO.java</file>
+>>>>>>> c840c96cdd3a39dd09acef154af31a8ce82fe61f
         </group>
     </open-files>
 </project-private>

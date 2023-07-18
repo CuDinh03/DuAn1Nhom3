@@ -3,8 +3,8 @@ package model;
 
 import java.util.Date;
 
-
 public class User {
+
     private String id;
     private String maNv;
     private String tenNV;
@@ -14,7 +14,7 @@ public class User {
     private int gender;
     private String sdt;
     private String idKho;
-        private Date ngayTao;
+    private Date ngayTao;
     private Date ngaySua;
     private boolean status;
 
@@ -131,6 +131,5 @@ public class User {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-    
+
 }
