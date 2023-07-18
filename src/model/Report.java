@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 
+
 public class Report {
     private String id;
     private String ma;
