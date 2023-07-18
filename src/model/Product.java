@@ -5,6 +5,7 @@ import java.util.Date;
 
 
 public class Product {
+
     private String id;
     private String ma;
     private String name;
@@ -20,25 +21,18 @@ public class Product {
     public Product() {
     }
 
-    public Product(int status) {
-        this.status = status;
-    }
-
-    
-    
-    public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, int status) {
-        this.ma = ma;
+    public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
         this.name = name;
+        this.ma = ma;
         this.nguonGoc = nguonGoc;
         this.giaGoc = giaGoc;
         this.ngaySx = ngaySx;
         this.hsd = hsd;
         this.idDanhMuc = idDanhMuc;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
         this.status = status;
     }
-
-
-
 
     public String getName() {
         return name;
@@ -47,7 +41,7 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -127,6 +121,11 @@ public class Product {
     public void setStatus(int status) {
         this.status = status;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", ma=" + ma + ", name=" + name + ", nguonGoc=" + nguonGoc + ", giaGoc=" + giaGoc + ", ngaySx=" + ngaySx + ", hsd=" + hsd + ", idDanhMuc=" + idDanhMuc + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", status=" + status + '}';
+    }
+
 }
 

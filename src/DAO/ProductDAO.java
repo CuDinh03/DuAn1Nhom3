@@ -107,7 +107,7 @@ public class ProductDAO {
 
     // Delete
     public void deleteProduct(String id) {
-        String query = "UPDATE sanPham WHERE id = ? SET trangThai=0";
+        String query = "UPDATE sanPham SET trangThai=0 WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
@@ -129,7 +129,7 @@ public class ProductDAO {
         Date ngaySua = resultSet.getDate("ngaySua");
         int status = resultSet.getInt("trangThai");
 
-        return new Product(ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, status);
+        return new Product(ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
     }
 
     public Product findById(String id) {
@@ -168,7 +168,7 @@ public class ProductDAO {
                 Date ngaySua = row.getCell(8).getDateCellValue();
                 int status = (int) row.getCell(9).getNumericCellValue();
 
-                Product product = new Product(ma, name, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, status);
+                Product product = new Product(ma, name, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
                 addProduct(product);
             }
         } catch (IOException e) {
