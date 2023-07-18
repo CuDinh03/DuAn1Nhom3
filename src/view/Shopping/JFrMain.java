@@ -1278,16 +1278,7 @@ public class JFrMain extends javax.swing.JFrame {
         this.txtTongTien.setText(Double.toString(calculateTotalPrice()));
     }
 
-    private void thanhtoan() {
-//       private String id;
-//    private String ma;
-//    private String name;
-//    private String idKh;
-//    private String idCh;
-//    private Date ngayTao;
-//    private Date ngaySua;
-//    private int status;
-//       
+    private void thanhtoan() {      
 
         String ma = "1";
         String name = "Hoa don " + (new Date()).toString();
