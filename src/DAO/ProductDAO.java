@@ -2,13 +2,6 @@ package DAO;
 
 import  Utilities.JdbcHelper;
 import model.Product;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +37,8 @@ public class ProductDAO {
             statement.setInt(10, product.getStatus());
 
             statement.executeUpdate();
+            statement.clearParameters();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,7 +78,7 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE sanPham SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
+        String query = "UPDATE sanPham SET ma = ?, ten =?, nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
                 + "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -111,6 +106,7 @@ public class ProductDAO {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
+            
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,6 +114,7 @@ public class ProductDAO {
     }
 
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
+        String id = resultSet.getString("id");
         String ma = resultSet.getString("ma");
         String ten = resultSet.getString("ten");
         String nguonGoc = resultSet.getString("nguonGoc");
@@ -129,7 +126,7 @@ public class ProductDAO {
         Date ngaySua = resultSet.getDate("ngaySua");
         int status = resultSet.getInt("trangThai");
 
-        return new Product(ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+        return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
     }
 
     public Product findById(String id) {
@@ -147,77 +144,6 @@ public class ProductDAO {
         return null;
     }
 
-    public void importProductsFromExcel(String filePath) {
-        try (FileInputStream fileInputStream = new FileInputStream(filePath); Workbook workbook = new XSSFWorkbook(fileInputStream)) {
-            Sheet sheet = workbook.getSheetAt(0);
 
-            for (Row row : sheet) {
-                // Skip the header row (assuming the header is in the first row)
-                if (row.getRowNum() == 0) {
-                    continue;
-                }
-
-                String ma = row.getCell(0).getStringCellValue();
-                String name = row.getCell(1).getStringCellValue();
-                String nguonGoc = row.getCell(2).getStringCellValue();
-                double giaGoc = row.getCell(3).getNumericCellValue();
-                Date ngaySx = row.getCell(4).getDateCellValue();
-                Date hsd = row.getCell(5).getDateCellValue();
-                String idDanhMuc = row.getCell(6).getStringCellValue();
-                Date ngayTao = row.getCell(7).getDateCellValue();
-                Date ngaySua = row.getCell(8).getDateCellValue();
-                int status = (int) row.getCell(9).getNumericCellValue();
-
-                Product product = new Product(ma, name, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
-                addProduct(product);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Export data from the database to an Excel file
-    public void exportProductsToExcel(String filePath) {
-        try (Workbook workbook = new XSSFWorkbook(); FileOutputStream fileOutputStream = new FileOutputStream(new File(filePath))) {
-
-            Sheet sheet = workbook.createSheet("Products");
-            List<Product> products = getAllProducts();
-
-            // Create the header row
-            Row headerRow = sheet.createRow(0);
-            headerRow.createCell(0).setCellValue("ID");
-            headerRow.createCell(1).setCellValue("Code");
-            headerRow.createCell(2).setCellValue("Name");
-            headerRow.createCell(3).setCellValue("Origin");
-            headerRow.createCell(4).setCellValue("Original Price");
-            headerRow.createCell(5).setCellValue("Manufacturing Date");
-            headerRow.createCell(6).setCellValue("Expiration Date");
-            headerRow.createCell(7).setCellValue("Category ID");
-            headerRow.createCell(8).setCellValue("Created Date");
-            headerRow.createCell(9).setCellValue("Modified Date");
-            headerRow.createCell(10).setCellValue("Status");
-
-            // Populate data rows
-            int rowIndex = 1;
-            for (Product product : products) {
-                Row dataRow = sheet.createRow(rowIndex++);
-                dataRow.createCell(0).setCellValue(product.getId());
-                dataRow.createCell(1).setCellValue(product.getMa());
-                dataRow.createCell(2).setCellValue(product.getName());
-                dataRow.createCell(3).setCellValue(product.getNguonGoc());
-                dataRow.createCell(4).setCellValue(product.getGiaGoc());
-                dataRow.createCell(5).setCellValue(product.getNgaySx());
-                dataRow.createCell(6).setCellValue(product.getHsd());
-                dataRow.createCell(7).setCellValue(product.getIdDanhMuc());
-                dataRow.createCell(8).setCellValue(product.getNgayTao());
-                dataRow.createCell(9).setCellValue(product.getNgaySua());
-                dataRow.createCell(10).setCellValue(product.getStatus());
-            }
-
-            workbook.write(fileOutputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

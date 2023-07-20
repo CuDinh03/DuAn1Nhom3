@@ -992,7 +992,7 @@ public class JFrMain extends javax.swing.JFrame {
 
         this.loadTableCart();
 
-        this.showTotal();
+        this.showTotal(); 
     }//GEN-LAST:event_tblDanhSachSPMouseClicked
 
     private void cboLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocActionPerformed
