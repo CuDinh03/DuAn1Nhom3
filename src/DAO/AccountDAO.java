@@ -13,7 +13,11 @@ import java.util.List;
 
 public class AccountDAO {
 
-    private Connection connection = JdbcHelper.getConnection() ;
+    private final Connection connection ;
+
+    public AccountDAO() {
+        this.connection = JdbcHelper.getConnection();
+    }
 
     // Create
     public void addAccount(Account account) {

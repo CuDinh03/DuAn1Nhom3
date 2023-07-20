@@ -13,12 +13,12 @@ public class Order {
     private String idCh;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean status;
+    private int status;
 
     public Order() {
     }
 
-    public Order(String id, String ma, String name, String idKh, String idCh, Date ngayTao, Date ngaySua, boolean status) {
+    public Order(String id, String ma, String name, String idKh, String idCh, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;
         this.name = name;
@@ -27,6 +27,15 @@ public class Order {
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.status = status;
+    }
+
+    public Order(String idCh1, String ma, String name, String idKh1, String idch0, Date ngaytao, Date ngaySua) {
+        this.ma = ma;
+        this.name = name;
+        this.idKh = idKh1;
+        this.idCh = idCh1;
+        this.ngayTao = ngaytao;
+        this.ngaySua = ngaySua;
     }
 
     public String getId() {
@@ -85,11 +94,11 @@ public class Order {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

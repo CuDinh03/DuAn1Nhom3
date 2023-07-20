@@ -2,28 +2,25 @@ package DAO;
 
 import  Utilities.JdbcHelper;
 import model.Product;
+import java.math.BigDecimal;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ProductDAO {
+    private Connection connection = JdbcHelper.getConnection();
 
-    private Connection connection;
-
-    public ProductDAO() {
-        this.connection = JdbcHelper.getConnection();
-    }
 
     // Create
     public void addProduct(Product product) {
-
-        String query = "INSERT INTO sanPham ( ma, ten, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) "
-                + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
+        String query = "INSERT INTO sanPham ( ma, ten, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) " +
+                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try  {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getMa());
             statement.setString(2, product.getName());
@@ -78,9 +75,9 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE sanPham SET ma = ?, ten =?, nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
-                + "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
-        try {
+        String query = "UPDATE sanPham SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, " +
+                "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
+        try  {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getMa());
             statement.setString(2, product.getName());
@@ -102,8 +99,8 @@ public class ProductDAO {
 
     // Delete
     public void deleteProduct(String id) {
-        String query = "UPDATE sanPham SET trangThai=0 WHERE id = ?";
-        try {
+        String query = "UPDATE sanPham WHERE id = ? SET trangThai=0";
+        try  {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
             
@@ -114,36 +111,50 @@ public class ProductDAO {
     }
 
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
-        String id = resultSet.getString("id");
         String ma = resultSet.getString("ma");
         String ten = resultSet.getString("ten");
         String nguonGoc = resultSet.getString("nguonGoc");
-        double giaGoc = resultSet.getDouble("giaGoc");
+        BigDecimal giaGoc = resultSet.getBigDecimal("giaGoc");
+        double giaGocdb = giaGoc.doubleValue();
         Date ngaySx = resultSet.getDate("ngaySx");
+        java.util.Date ngaySx1 = convertSqlDateToUtilDate(ngaySx);
         Date hsd = resultSet.getDate("hanSD");
+        java.util.Date hsd1 = convertSqlDateToUtilDate(hsd);
         String idDanhMuc = resultSet.getString("idDanhMuc");
         Date ngayTao = resultSet.getDate("ngayTao");
+        java.util.Date ngayTao1 = convertSqlDateToUtilDate(ngayTao);
         Date ngaySua = resultSet.getDate("ngaySua");
+        java.util.Date ngaySua1 = convertSqlDateToUtilDate(ngaySua);
+
         int status = resultSet.getInt("trangThai");
 
-        return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+        return new Product(ma, ten, nguonGoc, giaGocdb, ngaySx1, hsd1, idDanhMuc, ngayTao1, ngaySua1, status);
+
     }
 
     public Product findById(String id) {
-        String query = "SELECT * FROM sanPham WHERE id = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return extractProductFromResultSet(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    String query = "SELECT * FROM sanPham WHERE id = ?";
+    try {
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return extractProductFromResultSet(resultSet);
         }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+public static java.util.Date convertSqlDateToUtilDate(java.sql.Date sqlDate) {
+    if (sqlDate == null) {
         return null;
     }
 
+    long milliseconds = sqlDate.getTime();
+    return new java.util.Date(milliseconds);
+}
 
+    
 
 }

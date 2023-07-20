@@ -1,8 +1,6 @@
-
 package model;
 
 import java.util.Date;
-
 
 public class Product {
 
@@ -33,9 +31,7 @@ public class Product {
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.status = status;
-    }
-
-    
+    }    
     
     public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
         this.name = name;
@@ -138,10 +134,4 @@ public class Product {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" + "id=" + id + ", ma=" + ma + ", name=" + name + ", nguonGoc=" + nguonGoc + ", giaGoc=" + giaGoc + ", ngaySx=" + ngaySx + ", hsd=" + hsd + ", idDanhMuc=" + idDanhMuc + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", status=" + status + '}';
-    }
-
 }
-

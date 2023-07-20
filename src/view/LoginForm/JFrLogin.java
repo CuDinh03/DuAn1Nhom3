@@ -334,6 +334,7 @@ public class JFrLogin extends javax.swing.JFrame {
                     for (Role role : list) {
                         if (idRole.equals(role.getId())) {
                             if (role.getName().equals("VT001")) {
+
                                 JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
                                 setVisible(false);
                                 new JFrMain().setVisible(true);
@@ -342,14 +343,13 @@ public class JFrLogin extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
                                 setVisible(false);
                                 new pnlSanPham().setVisible(true);
-                                break;
 
+                                break;
                             }
+
                         }
                     }
-
                 }
-
             }
 
         } catch (SQLException ex) {
