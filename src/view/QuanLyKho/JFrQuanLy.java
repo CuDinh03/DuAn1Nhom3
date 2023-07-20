@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view.QuanLyKho;
 
 import DAO.ProductDAO;
@@ -18,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Product;
 import service.ProductService;
 
+
 /**
  *
  * @author trung
@@ -26,7 +24,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
     
     private DefaultTableModel dtm = new DefaultTableModel();
     
-    private ProductService productService = new ProductService();
+    private ProductService productService ;
     
     private ProductDAO productDAO = new ProductDAO();
 
@@ -37,6 +35,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
         initComponents();
         this.loadTable();
         this.loadCbbDanhMuc();
+        this.productService = new ProductService();
     }
     
     private void loadTable() {

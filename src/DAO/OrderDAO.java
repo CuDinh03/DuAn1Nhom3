@@ -18,7 +18,7 @@ import model.Order;
  */
 public class OrderDAO {
     
-    private Connection connection = JdbcHelper.getConnection();
+    private final Connection connection = JdbcHelper.getConnection();
     
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
@@ -33,13 +33,13 @@ public class OrderDAO {
                 String id = resultSet.getString("id");
                 String ma = resultSet.getString("ma");
                 String name = resultSet.getString("ten");
-                String idKh = resultSet.getString("idKh");
+                String tenKh = resultSet.getString("tenKh");
                 String idCh = resultSet.getString("idCh");
                 Date ngayTao = resultSet.getDate("ngayTao");
                 Date ngaySua = resultSet.getDate("ngaySua");
                 int status = resultSet.getInt("trangThai");
 
-                Order order = new Order(id, ma, name, idKh, idCh, ngayTao, ngaySua, status);
+                Order order = new Order(id, ma, name, tenKh, idCh, ngayTao, ngaySua, status);
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -52,7 +52,7 @@ public class OrderDAO {
     
     public void createOrder(Order order) {
         try  {
-            String query = "INSERT INTO hoaDon ( ma, ten, idKh, idCh, ngayTao, ngaySua,trangThai ) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO hoaDon ( ma, ten, tenKh, idCh, ngayTao, ngaySua,trangThai ) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, order.getMa());
@@ -81,13 +81,13 @@ public class OrderDAO {
                 String id = resultSet.getString("id");
                 String ma = resultSet.getString("ma");
                 String name = resultSet.getString("ten");
-                String idKh = resultSet.getString("idKh");
+                String tenKh = resultSet.getString("tenKh");
                 String idCh = resultSet.getString("idCh");
                 Date ngayTao = resultSet.getDate("ngayTao");
                 Date ngaySua = resultSet.getDate("ngaySua");
                 int status = resultSet.getInt("trangThai");
 
-                return new Order(id, ma, name, idKh, idCh, ngayTao, ngaySua, status);
+                return new Order(id, ma, name, tenKh, idCh, ngayTao, ngaySua, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +97,7 @@ public class OrderDAO {
     
     public void updateOrder(Order order) {
         try  {
-            String query = "UPDATE hoaDon SET ma = ?, ten = ?, idKh = ?, idCh = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
+            String query = "UPDATE hoaDon SET ma = ?, ten = ?, tenKh = ?, idCh = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, order.getMa());
@@ -125,6 +125,24 @@ public class OrderDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public int calculateTotalPaidInvoices() {
+        int totalPaidInvoices = 0;
+        String sql = "SELECT COUNT(*) AS tongHoaDon FROM hoaDon WHERE trangThai = 1 ";
+
+        try{
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                totalPaidInvoices = resultSet.getInt("tongHoaDon");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalPaidInvoices;
     }
     
 }

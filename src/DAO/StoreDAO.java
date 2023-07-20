@@ -16,7 +16,7 @@ import model.Store;
  */
 public class StoreDAO {
 
-    private Connection conn = JdbcHelper.getConnection();
+    private final Connection conn = JdbcHelper.getConnection();
 
     public void insertStore(Store store) {
 

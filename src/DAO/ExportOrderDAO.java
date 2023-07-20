@@ -17,7 +17,7 @@ import model.ExportOrder;
  */
 public class ExportOrderDAO {
     
-    private Connection connection = JdbcHelper.getConnection();
+    private final Connection connection = JdbcHelper.getConnection();
     
     public List <ExportOrder> findAll() {
         List<ExportOrder> exportOrders = new ArrayList<>();

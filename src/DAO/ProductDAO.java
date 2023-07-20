@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
-    private Connection connection = JdbcHelper.getConnection();
+    private final Connection connection = JdbcHelper.getConnection();
 
 
     // Create

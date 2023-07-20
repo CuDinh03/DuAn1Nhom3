@@ -9,7 +9,7 @@ import model.Role;
 
 
 public class RoleDAO {
-     private Connection connection = JdbcHelper.getConnection();
+     private final Connection connection = JdbcHelper.getConnection();
 
 
     

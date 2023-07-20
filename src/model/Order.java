@@ -9,7 +9,7 @@ public class Order {
     private String id;
     private String ma;
     private String name;
-    private String idKh;
+    private String tenKh;
     private String idCh;
     private Date ngayTao;
     private Date ngaySua;
@@ -18,21 +18,21 @@ public class Order {
     public Order() {
     }
 
-    public Order(String id, String ma, String name, String idKh, String idCh, Date ngayTao, Date ngaySua, int status) {
+    public Order(String id, String ma, String name, String tenKh, String idCh, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;
         this.name = name;
-        this.idKh = idKh;
+        this.tenKh = tenKh;
         this.idCh = idCh;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.status = status;
     }
 
-    public Order(String idCh1, String ma, String name, String idKh1, String idch0, Date ngaytao, Date ngaySua) {
+    public Order(String idCh1, String ma, String name, String tenKh1, String idch0, Date ngaytao, Date ngaySua) {
         this.ma = ma;
         this.name = name;
-        this.idKh = idKh1;
+        this.tenKh = tenKh1;
         this.idCh = idCh1;
         this.ngayTao = ngaytao;
         this.ngaySua = ngaySua;
@@ -63,11 +63,11 @@ public class Order {
     }
 
     public String getIdKh() {
-        return idKh;
+        return tenKh;
     }
 
-    public void setIdKh(String idKh) {
-        this.idKh = idKh;
+    public void setIdKh(String tenKh) {
+        this.tenKh = tenKh;
     }
 
     public String getIdCh() {

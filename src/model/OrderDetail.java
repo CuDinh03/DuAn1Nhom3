@@ -13,6 +13,16 @@ public class OrderDetail {
     private Date ngaySua;
     private int status;
 
+    public OrderDetail(String ma, String idHD, double tongTien, Date ngayTao, Date ngaySua, int status) {
+        this.ma = ma;
+        this.idHD = idHD;
+        this.tongTien = tongTien;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.status = status;
+    }
+    
+
     public OrderDetail(String id, String ma, String idHD, double tongTien, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;

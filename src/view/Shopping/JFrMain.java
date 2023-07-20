@@ -5,6 +5,7 @@
 package view.Shopping;
 
 import DAO.OrderDAO;
+import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
 import DAO.StoreDAO;
 import DAO.UserDAO;
@@ -13,14 +14,17 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Items;
 import model.Order;
+import model.OrderDetail;
 import model.Product;
 import model.Store;
 import model.User;
 import model.UserSession;
+import view.QuanLyKho.*;
 
 /**
  *
@@ -36,7 +40,7 @@ public class JFrMain extends javax.swing.JFrame {
     private DefaultTableModel dtm, dtmHD, dtmGH;
     private List<Items> itemList;
     private StoreDAO sdao = new StoreDAO();
-
+    
     public JFrMain() {
         initComponents();
         setLocationRelativeTo(null);
@@ -44,18 +48,18 @@ public class JFrMain extends javax.swing.JFrame {
 //        card = (CardLayout) panelBody.getLayout();
 //        card.show(panelBody, "pnlBanHang");
         this.loadTable();
-
+        
         itemList = new ArrayList<>();
-
+        
         this.loadTableCart();
         this.showTotal();
         this.loadCbb();
-
+        
     }
-
+    
     public void loadTable() {
         ProductDAO prdao = new ProductDAO();
-
+        
         dtm = (DefaultTableModel) tblDanhSachSP.getModel();
         dtm.setRowCount(0);
         for (Product pr : prdao.getAllProducts()) {
@@ -64,9 +68,9 @@ public class JFrMain extends javax.swing.JFrame {
             };
             dtm.addRow(data);
         }
-
+        
     }
-
+    
     private void loadTableCart() {
         dtmGH = (DefaultTableModel) tblGioHang.getModel();
         dtmGH.setRowCount(0);
@@ -77,18 +81,18 @@ public class JFrMain extends javax.swing.JFrame {
             dtmGH.addRow(data);
         }
         this.showTotal();
-
+        
     }
-
+    
     private void tienThua(double tienKhachdua) {
         double tienthua = tienKhachdua - this.calculateTotalPrice();
         if (tienthua < 0) {
             JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + (tienthua * (-1)) + "k");
         }
-
+        
         this.txtTienThua.setText(Double.toString(tienthua));
     }
-
+    
     private Items findItemByProductId(String maSP) {
         for (Items item : itemList) {
             if (item.getMaSP().equals(maSP)) {
@@ -97,7 +101,7 @@ public class JFrMain extends javax.swing.JFrame {
         }
         return null;
     }
-
+    
     public double calculateTotalPrice() {
         double totalPrice = 0.0;
         for (Items item : itemList) {
@@ -105,9 +109,9 @@ public class JFrMain extends javax.swing.JFrame {
         }
         return totalPrice;
     }
-
+    
     public void loadCbb() {
-
+        
         for (Store store : sdao.getAllStores()) {
             this.cbbCH.addItem(store.getTen());
         }
@@ -129,7 +133,7 @@ public class JFrMain extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         pnlThongKt = new javax.swing.JButton();
         btnSanPham = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnQuanLy = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnBackMain = new javax.swing.JButton();
@@ -234,8 +238,13 @@ public class JFrMain extends javax.swing.JFrame {
         });
         jPanel2.add(btnSanPham);
 
-        jButton3.setText("jButton3");
-        jPanel2.add(jButton3);
+        btnQuanLy.setText("Quản Lý");
+        btnQuanLy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuanLyActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnQuanLy);
 
         jButton4.setText("jButton4");
         jPanel2.add(jButton4);
@@ -998,7 +1007,7 @@ public class JFrMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSanPhamMouseExited
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-
+        
 
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
@@ -1038,21 +1047,21 @@ public class JFrMain extends javax.swing.JFrame {
         String ma = this.tblDanhSachSP.getValueAt(col, 0).toString();
         String name = this.tblDanhSachSP.getValueAt(col, 1).toString();
         String pr = this.tblDanhSachSP.getValueAt(col, 6).toString();
-
+        
         double price = Double.parseDouble(pr) * 2;
-
+        
         Items existingItem = this.findItemByProductId(ma);
-
+        
         if (existingItem != null) {
             existingItem.setSoLuong(existingItem.getSoLuong() + 1);
         } else {
             Items item = new Items("", "", "", ma, name, 1, price, 1);
             itemList.add(item);
         }
-
+        
         this.loadTableCart();
-
-        this.showTotal(); 
+        
+        this.showTotal();
     }//GEN-LAST:event_tblDanhSachSPMouseClicked
 
     private void cboLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocActionPerformed
@@ -1104,16 +1113,16 @@ public class JFrMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách đưa");
             return;
         }
-
+        
         try {
             double tienkdua = Double.parseDouble(tienkd);
             this.tienThua(tienkdua);
-
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Kiểu dữ liệu chưa đúng");
-
+            
         }
-
+        
 
     }//GEN-LAST:event_btnTinhTienActionPerformed
 
@@ -1129,9 +1138,9 @@ public class JFrMain extends javax.swing.JFrame {
         if (row == -1) {
             return;
         }
-
+        
         String ma = tblGioHang.getValueAt(row, 0).toString();
-
+        
         for (Items items : itemList) {
             if (items.getMaSP().equals(ma)) {
                 itemList.remove(items);
@@ -1147,6 +1156,13 @@ public class JFrMain extends javax.swing.JFrame {
         new JFrMain().setVisible(true);
 
     }//GEN-LAST:event_btnBackMainActionPerformed
+
+    private void btnQuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        JFrQuanLy quanLy = new JFrQuanLy();
+        quanLy.setVisible(true);
+    }//GEN-LAST:event_btnQuanLyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1180,16 +1196,17 @@ public class JFrMain extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFrMain().setVisible(true);
-
+                
             }
         });
     }
-
+    
     private javax.swing.JPanel panelQLSanPham;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackMain;
     private javax.swing.JButton btnClearItems;
     private javax.swing.JButton btnDeletebyMa;
+    private javax.swing.JButton btnQuanLy;
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnTinhTien;
     private javax.swing.JComboBox<String> cbbCH;
@@ -1199,7 +1216,6 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboLoc;
     private javax.swing.JComboBox<String> cboLoc1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1277,28 +1293,40 @@ public class JFrMain extends javax.swing.JFrame {
     private void showTotal() {
         this.txtTongTien.setText(Double.toString(calculateTotalPrice()));
     }
-
-    private void thanhtoan() {      
-
-        String ma = "1";
+    
+    private void thanhtoan() {
+        double tienThua = Double.parseDouble(this.txtTienThua.getText());
+        if (tienThua < 0) {
+            JOptionPane.showMessageDialog(this, "yeu cau khach tra du tien moi thanh toan");
+            return;
+        }
+        Random random = new Random();
+        
+        String ma = String.valueOf(random.nextInt(100 - 1 + 1) + 2);
         String name = "Hoa don " + (new Date()).toString();
-        String idkh = "";
-        Store stores = sdao.findStoreByName(this.cbbCH.getSelectedItem().toString()) ;
+        String tenkh = "";
+        Store stores = sdao.findStoreByName(this.cbbCH.getSelectedItem().toString());
         
         String idch = stores.getId();
         Date ngaytao = new Date();
         Date ngaySua = new Date();
-
-        Order order = new Order(idch, ma, name, idkh, idch, ngaytao, ngaySua,1);
-
+        
+        Order order = new Order(idch, ma, name, tenkh, idch, ngaytao, ngaySua, 1);
+        
         OrderDAO odao = new OrderDAO();
         odao.createOrder(order);
         
+        double total = Double.parseDouble(this.txtTongTien.getText());
+        OrderDetailDAO odDao = new OrderDetailDAO();
+        
+        String maDetail = String.valueOf(random.nextInt(100 - 1 + 1) + 1);
+        
+        OrderDetail detail = new OrderDetail(maDetail, ma, total, ngaytao, ngaySua, 1);
+        odDao.addOrderDetail(detail);
         this.clearALl();
-
-
+        
     }
-
+    
     private void clearALl() {
         itemList.clear();
         this.txtTenKHTaiQuay.setText("");
@@ -1306,6 +1334,6 @@ public class JFrMain extends javax.swing.JFrame {
         this.txtTienThua.setText("");
         this.txtSDTTQ.setText("");
         this.loadTableCart();
-
+        
     }
 }
