@@ -83,7 +83,7 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE sanPham SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
+        String query = "UPDATE sanPham SET ma = ?, ten =?, nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
                 + "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -111,6 +111,7 @@ public class ProductDAO {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
+            
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,6 +119,7 @@ public class ProductDAO {
     }
 
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
+        String id = resultSet.getString("id");
         String ma = resultSet.getString("ma");
         String ten = resultSet.getString("ten");
         String nguonGoc = resultSet.getString("nguonGoc");
@@ -129,7 +131,7 @@ public class ProductDAO {
         Date ngaySua = resultSet.getDate("ngaySua");
         int status = resultSet.getInt("trangThai");
 
-        return new Product(ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+        return new Product(id, ma, ten, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
     }
 
     public Product findById(String id) {

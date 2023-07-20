@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/DAO/ProductDAO.java</file>
-            <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/view/QuanLyKho/JFrQuanLy.java</file>
-            <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/model/Product.java</file>
-            <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/service/ProductService.java</file>
+            <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/view/QuanLyKho/JFrXuatKho.java</file>
+            <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/model/ProductXuatKho.java</file>
+            <file>file:/D:/DuAn1_Java_PTPM/Du_an_1/DuAn1Nhom3/src/DAO/ExportOrderDAO.java</file>
         </group>
     </open-files>
 </project-private>
