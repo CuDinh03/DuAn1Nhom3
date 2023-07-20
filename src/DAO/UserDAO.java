@@ -13,7 +13,7 @@ import model.User;
 
 public class UserDAO {
 
-    private static Connection connection = JdbcHelper.getConnection();
+    private static final Connection connection = JdbcHelper.getConnection();
 
     // Method to insert a new user record into the database
     public static void insertUser(User user) {
