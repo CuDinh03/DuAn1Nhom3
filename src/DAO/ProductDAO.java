@@ -75,7 +75,7 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE sanPham SET ma = ?, ten =? nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, " +
+        String query = "UPDATE sanPham SET ma = ?, ten =? , nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, " +
                 "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
         try  {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -111,24 +111,21 @@ public class ProductDAO {
     }
 
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
+        String id = resultSet.getString("id");
         String ma = resultSet.getString("ma");
         String ten = resultSet.getString("ten");
         String nguonGoc = resultSet.getString("nguonGoc");
         BigDecimal giaGoc = resultSet.getBigDecimal("giaGoc");
         double giaGocdb = giaGoc.doubleValue();
         Date ngaySx = resultSet.getDate("ngaySx");
-        java.util.Date ngaySx1 = convertSqlDateToUtilDate(ngaySx);
         Date hsd = resultSet.getDate("hanSD");
-        java.util.Date hsd1 = convertSqlDateToUtilDate(hsd);
         String idDanhMuc = resultSet.getString("idDanhMuc");
         Date ngayTao = resultSet.getDate("ngayTao");
-        java.util.Date ngayTao1 = convertSqlDateToUtilDate(ngayTao);
         Date ngaySua = resultSet.getDate("ngaySua");
-        java.util.Date ngaySua1 = convertSqlDateToUtilDate(ngaySua);
 
         int status = resultSet.getInt("trangThai");
 
-        return new Product(ma, ten, nguonGoc, giaGocdb, ngaySx1, hsd1, idDanhMuc, ngayTao1, ngaySua1, status);
+        return new Product(id,ma, ten, nguonGoc, giaGocdb, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
 
     }
 
