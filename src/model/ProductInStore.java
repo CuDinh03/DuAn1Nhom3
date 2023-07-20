@@ -4,10 +4,14 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author maccuacu
  */
 public class ProductInStore {
+    private String id;
+    private List<StoreProducts> listPr;
     
 }
