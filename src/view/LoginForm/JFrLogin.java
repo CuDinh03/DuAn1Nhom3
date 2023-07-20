@@ -25,6 +25,7 @@ import model.Account;
 import model.AccountRole;
 import model.Role;
 import model.UserSession;
+import view.QuanLyKho.JFrQuanLy;
 import view.Shopping.JFrMain;
 import view.Shopping.pnlSanPham;
 
@@ -300,7 +301,7 @@ public class JFrLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCloseMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        try {
+                try {
             if (this.txtusername.getText().equals("")) {
                 this.lblErrUserName.setText("Không để trống username");
                 this.lblErrUserName.setForeground(Color.red);
@@ -332,9 +333,6 @@ public class JFrLogin extends javax.swing.JFrame {
             for (Role role : list) {
                 if (idRole.equals(role.getId())) {
                     if (role.getName().equals("VT001")) {
-                                    UserSession session = new UserSession(getAccount().getUsername());
-            loggedInUsers.put(getAccount().getUsername(), session);
-
 
                         JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
                         setVisible(false);
@@ -344,7 +342,11 @@ public class JFrLogin extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
                         setVisible(false);
                         new pnlSanPham().setVisible(true);
-
+                        break;
+                    } else if (role.getName().equals("VT003")) {
+                        JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                        setVisible(false);
+                        new JFrQuanLy().setVisible(true);
                         break;
                     }
                 }
@@ -353,7 +355,6 @@ public class JFrLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(JFrLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void ckbRememberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbRememberActionPerformed
