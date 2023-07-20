@@ -4,6 +4,7 @@ import  Utilities.JdbcHelper;
 import model.Product;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import org.apache.poi.ss.usermodel.*;
@@ -149,32 +150,28 @@ public class ProductDAO {
         return null;
     }
 
-    public void importProductsFromExcel(String filePath) {
-        try (FileInputStream fileInputStream = new FileInputStream(filePath); Workbook workbook = new XSSFWorkbook(fileInputStream)) {
-            Sheet sheet = workbook.getSheetAt(0);
-
-            for (Row row : sheet) {
-                // Skip the header row (assuming the header is in the first row)
-                if (row.getRowNum() == 0) {
-                    continue;
-                }
-
-                String ma = row.getCell(0).getStringCellValue();
-                String name = row.getCell(1).getStringCellValue();
-                String nguonGoc = row.getCell(2).getStringCellValue();
-                double giaGoc = row.getCell(3).getNumericCellValue();
-                Date ngaySx = row.getCell(4).getDateCellValue();
-                Date hsd = row.getCell(5).getDateCellValue();
-                String idDanhMuc = row.getCell(6).getStringCellValue();
-                Date ngayTao = row.getCell(7).getDateCellValue();
-                Date ngaySua = row.getCell(8).getDateCellValue();
-                int status = (int) row.getCell(9).getNumericCellValue();
-
-                Product product = new Product(ma, name, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
-                addProduct(product);
+    public void importProductsFromExcel(String filePath) throws FileNotFoundException, IOException {
+        FileInputStream fileInputStream = new FileInputStream(filePath); Workbook workbook = new XSSFWorkbook(fileInputStream);
+        Sheet sheet = workbook.getSheetAt(0);
+        for (Row row : sheet) {
+            // Skip the header row (assuming the header is in the first row)
+            if (row.getRowNum() == 0) {
+                continue;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            
+            String ma = row.getCell(0).getStringCellValue();
+            String name = row.getCell(1).getStringCellValue();
+            String nguonGoc = row.getCell(2).getStringCellValue();
+            double giaGoc = row.getCell(3).getNumericCellValue();
+            Date ngaySx = row.getCell(4).getDateCellValue();
+            Date hsd = row.getCell(5).getDateCellValue();
+            String idDanhMuc = row.getCell(6).getStringCellValue();
+            Date ngayTao = row.getCell(7).getDateCellValue();
+            Date ngaySua = row.getCell(8).getDateCellValue();
+            int status = (int) row.getCell(9).getNumericCellValue();
+            
+            Product product = new Product(ma, name, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+            addProduct(product);
         }
     }
 

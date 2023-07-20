@@ -5,6 +5,7 @@
 package view.QuanLyKho;
 
 import DAO.ProductDAO;
+import java.io.IOException;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
@@ -705,8 +706,12 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
     private void btnInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputActionPerformed
         
-        String importFilePath = "Products.xlsx";
-        productDAO.importProductsFromExcel(importFilePath);
+        String importFilePath = "D:\\DuAn1_Java_PTPM\\Du_an_1\\DuAn1Nhom3\\src\\Excel\\Products.xlsx" ;
+        try {
+            productDAO.importProductsFromExcel(importFilePath);
+        } catch (IOException ex) {
+            Logger.getLogger(JFrQuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
         loadTable();
 
     }//GEN-LAST:event_btnInputActionPerformed
