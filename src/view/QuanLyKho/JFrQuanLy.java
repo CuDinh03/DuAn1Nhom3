@@ -3,8 +3,6 @@ package view.QuanLyKho;
 
 import DAO.ProductDAO;
 import IO.ReadFileExcel;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
@@ -16,15 +14,11 @@ import model.Product;
 import service.ProductService;
 
 
-/**
- *
- * @author trung
- */
 public class JFrQuanLy extends javax.swing.JFrame {
     
     private DefaultTableModel dtm = new DefaultTableModel();
     
-    private ProductService productService ;
+    private  ProductService productService;
     
     private ProductDAO productDAO = new ProductDAO();
 
