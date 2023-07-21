@@ -9,6 +9,7 @@ import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
 import DAO.StoreDAO;
 import DAO.UserDAO;
+import IO.InvoicePDFGenerator;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import model.Items;
 import model.Order;
 import model.OrderDetail;
 import model.Product;
+import model.ShoppingCart;
 import model.Store;
 import model.User;
 import model.UserSession;
@@ -1302,14 +1304,17 @@ public class JFrMain extends javax.swing.JFrame {
         }
         Random random = new Random();
         
-        String ma = String.valueOf(random.nextInt(100 - 1 + 1) + 2);
+        String ma = String.valueOf(random.nextInt(10000 - 1 + 1) + 2);
         String name = "Hoa don " + (new Date()).toString();
-        String tenkh = "";
+        String tenkh = this.txtTenKHTaiQuay.getText().trim();
+        String tenNv = this.cbbNhanVien.getSelectedItem().toString();
         Store stores = sdao.findStoreByName(this.cbbCH.getSelectedItem().toString());
         
         String idch = stores.getId();
         Date ngaytao = new Date();
         Date ngaySua = new Date();
+        
+        ShoppingCart shopping = new ShoppingCart(idch, itemList, tenkh, tenNv);
         
         Order order = new Order(idch, ma, name, tenkh, idch, ngaytao, ngaySua, 1);
         
@@ -1319,10 +1324,14 @@ public class JFrMain extends javax.swing.JFrame {
         double total = Double.parseDouble(this.txtTongTien.getText());
         OrderDetailDAO odDao = new OrderDetailDAO();
         
-        String maDetail = String.valueOf(random.nextInt(100 - 1 + 1) + 1);
+        String maDetail = String.valueOf(random.nextInt(10000 - 1 + 1) + 1);
         
         OrderDetail detail = new OrderDetail(maDetail, ma, total, ngaytao, ngaySua, 1);
         odDao.addOrderDetail(detail);
+        
+        InvoicePDFGenerator.exportPDF(order, detail, shopping);
+        itemList.clear();
+
         this.clearALl();
         
     }
