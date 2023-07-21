@@ -92,7 +92,7 @@ public class ProductDAO {
     //show toan bo san pham
 
     public List<Product> getAllProducts() {
-        String query = "SELECT * FROM sanPham WHERE trangThai = 1 AND soLuong > 0";
+        String query = "SELECT * FROM sanPham WHERE trangThai = 1 AND soLuong > 0 AND hanSD >= CURDATE()";
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
