@@ -1330,6 +1330,7 @@ public class JFrMain extends javax.swing.JFrame {
         odDao.addOrderDetail(detail);
         
         InvoicePDFGenerator.exportPDF(order, detail, shopping);
+        JOptionPane.showMessageDialog(this, "Tạo hoá đợn thành công");
         itemList.clear();
 
         this.clearALl();
