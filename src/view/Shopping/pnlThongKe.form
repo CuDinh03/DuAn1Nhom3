@@ -83,7 +83,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel21" pref="916" max="32767" attributes="0"/>
+                          <Component id="jPanel21" pref="813" max="32767" attributes="0"/>
                           <Component id="jPanel10" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -227,7 +227,7 @@
                           <Font name="Segoe UI" size="12" style="1"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="&#x110;&#xe3; nh&#x1ead;n "/>
+                        <Property name="text" type="java.lang.String" value="&#x110;&#xe3; thanh to&#xe1;n"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbDaNhanHoaDon">
@@ -489,6 +489,8 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtTimKiemHoaDon" min="-2" pref="219" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnLoadTb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -498,6 +500,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtTimKiemHoaDon" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLoadTb" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                           </Group>
@@ -513,6 +516,14 @@
                     <Component class="javax.swing.JTextField" name="txtTimKiemHoaDon">
                       <Events>
                         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTimKiemHoaDonKeyReleased"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnLoadTb">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Load"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadTbActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>

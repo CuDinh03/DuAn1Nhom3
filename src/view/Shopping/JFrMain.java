@@ -4,19 +4,32 @@
  */
 package view.Shopping;
 
+import DAO.OrderDAO;
+import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
 import DAO.StoreDAO;
+import DAO.UserDAO;
+import Erro.InsufficientProductQuantityException;
+import IO.InvoicePDFGenerator;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Items;
 import model.Order;
+import model.OrderDetail;
 import model.Product;
+import model.ShoppingCart;
 import model.Store;
+import model.User;
 import model.UserSession;
+import view.QuanLyKho.*;
 
 /**
  *
@@ -32,7 +45,7 @@ public class JFrMain extends javax.swing.JFrame {
     private DefaultTableModel dtm, dtmHD, dtmGH;
     private List<Items> itemList;
     private StoreDAO sdao = new StoreDAO();
-
+    
     public JFrMain() {
         initComponents();
         setLocationRelativeTo(null);
@@ -40,20 +53,18 @@ public class JFrMain extends javax.swing.JFrame {
 //        card = (CardLayout) panelBody.getLayout();
 //        card.show(panelBody, "pnlBanHang");
         this.loadTable();
-
+        
         itemList = new ArrayList<>();
-
+        
         this.loadTableCart();
         this.showTotal();
         this.loadCbb();
         
-        
-
     }
-
+    
     public void loadTable() {
         ProductDAO prdao = new ProductDAO();
-
+        
         dtm = (DefaultTableModel) tblDanhSachSP.getModel();
         dtm.setRowCount(0);
         for (Product pr : prdao.getAllProducts()) {
@@ -62,9 +73,9 @@ public class JFrMain extends javax.swing.JFrame {
             };
             dtm.addRow(data);
         }
-
+        
     }
-
+    
     private void loadTableCart() {
         dtmGH = (DefaultTableModel) tblGioHang.getModel();
         dtmGH.setRowCount(0);
@@ -75,18 +86,18 @@ public class JFrMain extends javax.swing.JFrame {
             dtmGH.addRow(data);
         }
         this.showTotal();
-
+        
     }
-
+    
     private void tienThua(double tienKhachdua) {
         double tienthua = tienKhachdua - this.calculateTotalPrice();
         if (tienthua < 0) {
             JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + (tienthua * (-1)) + "k");
         }
-
+        
         this.txtTienThua.setText(Double.toString(tienthua));
     }
-
+    
     private Items findItemByProductId(String maSP) {
         for (Items item : itemList) {
             if (item.getMaSP().equals(maSP)) {
@@ -95,7 +106,7 @@ public class JFrMain extends javax.swing.JFrame {
         }
         return null;
     }
-
+    
     public double calculateTotalPrice() {
         double totalPrice = 0.0;
         for (Items item : itemList) {
@@ -103,10 +114,14 @@ public class JFrMain extends javax.swing.JFrame {
         }
         return totalPrice;
     }
-    public void loadCbb(){
+    
+    public void loadCbb() {
         
         for (Store store : sdao.getAllStores()) {
             this.cbbCH.addItem(store.getTen());
+        }
+        for (User users : UserDAO.getAllUsers()) {
+            this.cbbNhanVien.addItem(users.getTenNV());
         }
     }
 
@@ -123,7 +138,7 @@ public class JFrMain extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         pnlThongKt = new javax.swing.JButton();
         btnSanPham = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnQuanLy = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnBackMain = new javax.swing.JButton();
@@ -150,7 +165,7 @@ public class JFrMain extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
         txtSDTTQ = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
+        txtsdt = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -228,8 +243,13 @@ public class JFrMain extends javax.swing.JFrame {
         });
         jPanel2.add(btnSanPham);
 
-        jButton3.setText("jButton3");
-        jPanel2.add(jButton3);
+        btnQuanLy.setText("Quản Lý");
+        btnQuanLy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuanLyActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnQuanLy);
 
         jButton4.setText("jButton4");
         jPanel2.add(jButton4);
@@ -544,7 +564,7 @@ public class JFrMain extends javax.swing.JFrame {
                                 .addComponent(jLabel14)
                                 .addGap(37, 37, 37)
                                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtsdt, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtSDTTQ))))
                         .addContainerGap())
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
@@ -570,7 +590,7 @@ public class JFrMain extends javax.swing.JFrame {
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(txtSDTTQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
@@ -992,8 +1012,8 @@ public class JFrMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSanPhamMouseExited
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-
         
+
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
@@ -1032,20 +1052,20 @@ public class JFrMain extends javax.swing.JFrame {
         String ma = this.tblDanhSachSP.getValueAt(col, 0).toString();
         String name = this.tblDanhSachSP.getValueAt(col, 1).toString();
         String pr = this.tblDanhSachSP.getValueAt(col, 6).toString();
-
+        
         double price = Double.parseDouble(pr) * 2;
-
+        
         Items existingItem = this.findItemByProductId(ma);
-
+        
         if (existingItem != null) {
             existingItem.setSoLuong(existingItem.getSoLuong() + 1);
         } else {
             Items item = new Items("", "", "", ma, name, 1, price, 1);
             itemList.add(item);
         }
-
+        
         this.loadTableCart();
-
+        
         this.showTotal();
     }//GEN-LAST:event_tblDanhSachSPMouseClicked
 
@@ -1075,7 +1095,7 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void pnlThongKtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlThongKtActionPerformed
         // TODO add your handling code here:
-try {
+        try {
             panelBody.removeAll();
             panelBody.add(new pnlThongKe());
             panelBody.repaint();
@@ -1098,16 +1118,16 @@ try {
             JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách đưa");
             return;
         }
-
+        
         try {
             double tienkdua = Double.parseDouble(tienkd);
             this.tienThua(tienkdua);
-
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Kiểu dữ liệu chưa đúng");
-
+            
         }
-
+        
 
     }//GEN-LAST:event_btnTinhTienActionPerformed
 
@@ -1123,9 +1143,9 @@ try {
         if (row == -1) {
             return;
         }
-
+        
         String ma = tblGioHang.getValueAt(row, 0).toString();
-
+        
         for (Items items : itemList) {
             if (items.getMaSP().equals(ma)) {
                 itemList.remove(items);
@@ -1141,6 +1161,13 @@ try {
         new JFrMain().setVisible(true);
 
     }//GEN-LAST:event_btnBackMainActionPerformed
+
+    private void btnQuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        JFrQuanLy quanLy = new JFrQuanLy();
+        quanLy.setVisible(true);
+    }//GEN-LAST:event_btnQuanLyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1174,16 +1201,17 @@ try {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFrMain().setVisible(true);
-
+                
             }
         });
     }
-
+    
     private javax.swing.JPanel panelQLSanPham;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackMain;
     private javax.swing.JButton btnClearItems;
     private javax.swing.JButton btnDeletebyMa;
+    private javax.swing.JButton btnQuanLy;
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnTinhTien;
     private javax.swing.JComboBox<String> cbbCH;
@@ -1193,7 +1221,6 @@ try {
     private javax.swing.JComboBox<String> cboLoc;
     private javax.swing.JComboBox<String> cboLoc1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1233,7 +1260,6 @@ try {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lbClose;
     private javax.swing.JPanel panelBanHang;
@@ -1266,15 +1292,87 @@ try {
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTimKiem1;
     private javax.swing.JLabel txtTongTien;
+    private javax.swing.JSeparator txtsdt;
     // End of variables declaration//GEN-END:variables
 
     private void showTotal() {
         this.txtTongTien.setText(Double.toString(calculateTotalPrice()));
     }
-
+    
     private void thanhtoan() {
-       Order order = new Order();
-       
-       
+    try {
+        double tienThua = Double.parseDouble(this.txtTienThua.getText());
+        if (tienThua < 0) {
+            JOptionPane.showMessageDialog(this, "Yêu cầu khách trả đủ tiền mới thanh toán.");
+            return;
+        }
+        
+        Random random = new Random();
+        
+        String ma = String.valueOf(random.nextInt(10000 - 1 + 1) + 2);
+        String name = "Hoa don " + (new Date()).toString();
+        String tenkh = this.txtTenKHTaiQuay.getText().trim();
+        String tenNv = this.cbbNhanVien.getSelectedItem().toString();
+        Store stores = sdao.findStoreByName(this.cbbCH.getSelectedItem().toString());
+        
+        String idch = stores.getId();
+        Date ngaytao = new Date();
+        Date ngaySua = new Date();
+        
+        ShoppingCart shopping = new ShoppingCart(idch, itemList, tenkh, tenNv);
+        
+        Order order = new Order(idch, ma, name, tenkh, idch, ngaytao, ngaySua, 1);
+        
+        OrderDAO odao = new OrderDAO();
+        odao.createOrder(order);
+        
+        double total = Double.parseDouble(this.txtTongTien.getText());
+        OrderDetailDAO odDao = new OrderDetailDAO();
+        
+        String maDetail = String.valueOf(random.nextInt(10000 - 1 + 1) + 1);
+        
+        OrderDetail detail = new OrderDetail(maDetail, ma, total, ngaytao, ngaySua, 1);
+        odDao.addOrderDetail(detail);
+        
+        InvoicePDFGenerator.exportPDF(order, detail, shopping);
+        JOptionPane.showMessageDialog(this, "Tạo hoá đợn thành công");
+        
+        ProductDAO pdao = new ProductDAO();
+        for (Items items : itemList) {
+            String productCode = items.getMaSP();
+            Product product = pdao.getProductByCode(productCode);
+
+            if (product != null) {
+                int quantityToAdd = items.getSoLuong();
+                if (quantityToAdd > 0) {
+                    try {
+                        pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
+                    } catch (InsufficientProductQuantityException ex) {
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getName() + "' không đủ.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với mã '" + productCode + "'.");
+            }
+        }
+        itemList.clear();
+
+        this.clearALl();
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập số tiền thanh toán hợp lệ.");
+}
+        
+    }
+    
+    private void clearALl() {
+        itemList.clear();
+        this.txtTenKHTaiQuay.setText("");
+        this.txtTienKhachDuaTQ.setText("");
+        this.txtTienThua.setText("");
+        this.txtSDTTQ.setText("");
+        this.loadTableCart();
+        
     }
 }

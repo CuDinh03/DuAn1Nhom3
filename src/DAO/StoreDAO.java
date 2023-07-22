@@ -16,7 +16,7 @@ import model.Store;
  */
 public class StoreDAO {
 
-    private Connection conn = JdbcHelper.getConnection();
+    private final Connection conn = JdbcHelper.getConnection();
 
     public void insertStore(Store store) {
 
@@ -106,5 +106,32 @@ public class StoreDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public Store findStoreByName(String storeName) {
+        String sql = "SELECT * FROM cuaHang WHERE ten LIKE ? AND trangThai = 1";
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, "%" + storeName + "%");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                Store store = new Store();
+                store.setId(resultSet.getString("id"));
+                store.setMa(resultSet.getString("ma"));
+                store.setTen(resultSet.getString("ten"));
+                store.setDiaChi(resultSet.getString("diaChi"));
+                store.setIdPhieuNhanHang(resultSet.getString("idPhieuNhanHang"));
+                store.setNgayTao(resultSet.getDate("ngayTao"));
+                store.setNgaySua(resultSet.getDate("ngaySua"));
+                store.setStatus(resultSet.getInt("trangThai"));
+                return store;
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
