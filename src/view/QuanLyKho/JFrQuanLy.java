@@ -38,7 +38,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
         for (Product product : productDAO.getAllProducts()) {
             String status;
-            if (product.getStatus() == 0) {
+            if (product.getStatus() == 0 || product.getQuantity() == 0) {
                 status = "Hết hàng";
             } else {
                 status = "Còn hàng";
@@ -46,7 +46,8 @@ public class JFrQuanLy extends javax.swing.JFrame {
             Object[] rowData = {
                 product.getId(),
                 product.getMa(),
-                product.getName(),
+                product.getName(), 
+                product.getQuantity(),
                 product.getIdDanhMuc(),
                 product.getNguonGoc(),
                 product.getNgayTao(),
@@ -78,18 +79,20 @@ public class JFrQuanLy extends javax.swing.JFrame {
         String id = tblKhoHang.getValueAt(banGhiChon, 0).toString();
         String ma = tblKhoHang.getValueAt(banGhiChon, 1).toString();
         String ten = tblKhoHang.getValueAt(banGhiChon, 2).toString();
-        String danhMuc = tblKhoHang.getValueAt(banGhiChon, 3).toString();
-        String nguonGoc = tblKhoHang.getValueAt(banGhiChon, 4).toString();
-        String ngayTao = tblKhoHang.getValueAt(banGhiChon, 5).toString();
-        String ngaySua = tblKhoHang.getValueAt(banGhiChon, 6).toString();
-        String nSX = tblKhoHang.getValueAt(banGhiChon, 7).toString();
-        String hSD = tblKhoHang.getValueAt(banGhiChon, 8).toString();
-        String donGia = tblKhoHang.getValueAt(banGhiChon, 9).toString();
-        String trangThai = tblKhoHang.getValueAt(banGhiChon, 10).toString();
+        String soLuong = tblKhoHang.getValueAt(banGhiChon, 3).toString();
+        String danhMuc = tblKhoHang.getValueAt(banGhiChon, 4).toString();
+        String nguonGoc = tblKhoHang.getValueAt(banGhiChon, 5).toString();
+        String ngayTao = tblKhoHang.getValueAt(banGhiChon, 6).toString();
+        String ngaySua = tblKhoHang.getValueAt(banGhiChon, 7).toString();
+        String nSX = tblKhoHang.getValueAt(banGhiChon, 8).toString();
+        String hSD = tblKhoHang.getValueAt(banGhiChon, 9).toString();
+        String donGia = tblKhoHang.getValueAt(banGhiChon, 10).toString();
+        String trangThai = tblKhoHang.getValueAt(banGhiChon, 11).toString();
 
         txtID.setText(id);
         txtMaSP.setText(ma);
         txtTenSp.setText(ten);
+        lbQuantityNumber.setText(soLuong);
         cbbDanhMuc.setSelectedItem(danhMuc);
         txtNguonGoc.setText(nguonGoc);
         txtNgayTao.setText(ngayTao);
@@ -135,7 +138,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
                 }
             }
 
-            Product product = new Product(ma, ten, nguonGoc, donGia, sqlDate3, sqlDate4, idDanhMuc, sqlDate1, sqlDate2, trangThai);
+            Product product = new Product(ma, ten,1, nguonGoc, donGia, sqlDate3, sqlDate4, idDanhMuc, sqlDate1, sqlDate2, trangThai);
 
             this.productService.insert(product);
             // this.productService.insert(new Product(ma,ten, nguonGoc, donGia, sqlDate3, sqlDate4, idDanhMuc, sqlDate1, sqlDate2, trangThai));
@@ -232,6 +235,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
         this.txtMaSP.setText("");
         this.txtTenSp.setText("");
         this.cbbDanhMuc.setSelectedIndex(0);
+        this.lbQuantityNumber.setText("0");
         this.txtNguonGoc.setText("");
         this.txtNgayTao.setText("");
         this.txtNgaySua.setText("");
@@ -292,6 +296,9 @@ public class JFrQuanLy extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         cbbDanhMuc = new javax.swing.JComboBox<>();
+        lbQuantity = new javax.swing.JLabel();
+        lbQuantityNumber = new javax.swing.JLabel();
+        btnLoadTable = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -336,7 +343,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Mã SP", "Tên SP", "Danh mục", "Nguồn gốc", "Ngày tạo", "Ngày sửa", "NSX", "HSD", "Đơn giá", "Trạng thái"
+                "ID", "Mã SP", "Tên SP", "Số lượng ", "Danh mục", "Nguồn gốc", "Ngày tạo", "Ngày sửa", "NSX", "HSD", "Đơn giá", "Trạng thái"
             }
         ));
         tblKhoHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -542,6 +549,17 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
         cbbDanhMuc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Danh mục" }));
 
+        lbQuantity.setText("Số lượng");
+
+        lbQuantityNumber.setText("0");
+
+        btnLoadTable.setText("Load ");
+        btnLoadTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadTableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -552,18 +570,17 @@ public class JFrQuanLy extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbQuantity))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTenSp, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(txtMaSP, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                    .addComponent(txtID)
-                    .addComponent(cbbDanhMuc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jpnCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbQuantityNumber)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTenSp, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                        .addComponent(txtMaSP, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                        .addComponent(txtID)
+                        .addComponent(cbbDanhMuc, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -575,7 +592,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
                             .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNguonGoc, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNgaySua, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -593,7 +610,13 @@ public class JFrQuanLy extends javax.swing.JFrame {
                             .addGroup(jPanel10Layout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(14, 14, 14))))
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jpnCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLoadTable, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,9 +676,15 @@ public class JFrQuanLy extends javax.swing.JFrame {
                         .addGap(29, 29, 29)))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpnCRUD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(cbbDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(cbbDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbQuantity)
+                            .addComponent(lbQuantityNumber)))
+                    .addComponent(btnLoadTable, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 
@@ -746,6 +775,11 @@ public class JFrQuanLy extends javax.swing.JFrame {
         searchProductByID();
     }//GEN-LAST:event_btnTimTheoMaActionPerformed
 
+    private void btnLoadTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTableActionPerformed
+        // TODO add your handling code here:
+        this.loadTable();
+    }//GEN-LAST:event_btnLoadTableActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -785,6 +819,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInput;
+    private javax.swing.JButton btnLoadTable;
     private javax.swing.JButton btnNhapKho;
     private javax.swing.JButton btnOutput;
     private javax.swing.JButton btnTimTheoMa;
@@ -813,6 +848,8 @@ public class JFrQuanLy extends javax.swing.JFrame {
     private javax.swing.JPanel jpnKhoHang;
     private javax.swing.JPanel jpnNavigation;
     private javax.swing.JLabel lbClose;
+    private javax.swing.JLabel lbQuantity;
+    private javax.swing.JLabel lbQuantityNumber;
     private javax.swing.JTable tblKhoHang;
     private javax.swing.JTextField txtDonGia;
     private javax.swing.JTextField txtHSD;

@@ -7,6 +7,7 @@ public class Product {
     private String id;
     private String ma;
     private String name;
+    private int quantity;
     private String nguonGoc;
     private double giaGoc;
     private Date ngaySx;
@@ -23,19 +24,12 @@ public class Product {
         this.id = id;
         this.ma = ma;
         this.name = name;
-        this.nguonGoc = nguonGoc;
-        this.giaGoc = giaGoc;
-        this.ngaySx = ngaySx;
-        this.hsd = hsd;
-        this.idDanhMuc = idDanhMuc;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
-    }    
-    
-    public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
-        this.name = name;
+    }
+    public Product(String id, String ma, String name, int quantity, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
+        this.id = id;
         this.ma = ma;
+        this.name = name;
+        this.quantity = quantity;
         this.nguonGoc = nguonGoc;
         this.giaGoc = giaGoc;
         this.ngaySx = ngaySx;
@@ -45,6 +39,25 @@ public class Product {
         this.ngaySua = ngaySua;
         this.status = status;
     }
+
+    public Product(String ma, String name, int quantity, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
+        this.ma = ma;
+        this.name = name;
+        this.quantity = quantity;
+        this.nguonGoc = nguonGoc;
+        this.giaGoc = giaGoc;
+        this.ngaySx = ngaySx;
+        this.hsd = hsd;
+        this.idDanhMuc = idDanhMuc;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.status = status;
+    }
+    
+    
+    
+    
+
 
     public String getName() {
         return name;
@@ -53,6 +66,18 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+
+
+
 
     public String getId() {
         return id;

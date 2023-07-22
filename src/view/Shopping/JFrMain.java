@@ -9,6 +9,7 @@ import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
 import DAO.StoreDAO;
 import DAO.UserDAO;
+import Erro.InsufficientProductQuantityException;
 import IO.InvoicePDFGenerator;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Items;
@@ -1297,11 +1300,13 @@ public class JFrMain extends javax.swing.JFrame {
     }
     
     private void thanhtoan() {
+    try {
         double tienThua = Double.parseDouble(this.txtTienThua.getText());
         if (tienThua < 0) {
-            JOptionPane.showMessageDialog(this, "yeu cau khach tra du tien moi thanh toan");
+            JOptionPane.showMessageDialog(this, "Yêu cầu khách trả đủ tiền mới thanh toán.");
             return;
         }
+        
         Random random = new Random();
         
         String ma = String.valueOf(random.nextInt(10000 - 1 + 1) + 2);
@@ -1331,9 +1336,33 @@ public class JFrMain extends javax.swing.JFrame {
         
         InvoicePDFGenerator.exportPDF(order, detail, shopping);
         JOptionPane.showMessageDialog(this, "Tạo hoá đợn thành công");
+        
+        ProductDAO pdao = new ProductDAO();
+        for (Items items : itemList) {
+            String productCode = items.getMaSP();
+            Product product = pdao.getProductByCode(productCode);
+
+            if (product != null) {
+                int quantityToAdd = items.getSoLuong();
+                if (quantityToAdd > 0) {
+                    try {
+                        pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
+                    } catch (InsufficientProductQuantityException ex) {
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getName() + "' không đủ.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với mã '" + productCode + "'.");
+            }
+        }
         itemList.clear();
 
         this.clearALl();
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập số tiền thừa hợp lệ.");
+}
         
     }
     
