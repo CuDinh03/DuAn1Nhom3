@@ -12,6 +12,13 @@
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ProductDAO.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/quanlychuoich/QuanlyChuoiCH.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Items.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/OrderDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Utilities/JdbcHelper.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/LoginForm/JFrLogin.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/JFrMain.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/SellOrderDetail.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/UserSession.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/OrderDAO.java</file>
         </group>
     </open-files>
 </project-private>
