@@ -1361,7 +1361,7 @@ public class JFrMain extends javax.swing.JFrame {
 
         this.clearALl();
     } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập số tiền thừa hợp lệ.");
+        JOptionPane.showMessageDialog(this, "Vui lòng nhập số tiền thanh toán hợp lệ.");
 }
         
     }
