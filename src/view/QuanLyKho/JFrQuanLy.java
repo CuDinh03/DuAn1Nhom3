@@ -6,11 +6,13 @@ package view.QuanLyKho;
 
 import DAO.ProductDAO;
 import IO.ReadFileExcel;
+import IO.WriteFileExecl;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -707,27 +709,17 @@ public class JFrQuanLy extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void btnInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputActionPerformed
-        
-//        String importFilePath = "/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Excel/Products.xlsx" ;
-//        try {
-//            productDAO.importProductsFromExcel(importFilePath);
-//        } catch (IOException ex) {
-//            Logger.getLogger(JFrQuanLy.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
         ReadFileExcel.readFile();
         loadTable();
 
     }//GEN-LAST:event_btnInputActionPerformed
 
     private void btnOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutputActionPerformed
-        
-//        String exportFilePath = "Products.xlsx";
-//        try {
-//            productDAO.exportProductsToExcel(exportFilePath);
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(JFrQuanLy.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        List<Product> productList = null;
 
+        WriteFileExecl.writeFile(productList);
+        loadTable();
     }//GEN-LAST:event_btnOutputActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed

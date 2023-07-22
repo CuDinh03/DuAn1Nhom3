@@ -10,12 +10,12 @@ public class Role {
     private String name;
     private Date ngayTao;
     private Date ngaySua;
-    private boolean status;
+    private int status;
 
     public Role() {
     }
 
-    public Role(String id, String name, Date ngayTao, Date ngaySua, boolean status) {
+    public Role(String id, String name, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.name = name;
         this.ngayTao = ngayTao;
@@ -55,12 +55,14 @@ public class Role {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
 }

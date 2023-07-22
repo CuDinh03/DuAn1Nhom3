@@ -22,7 +22,7 @@ public class ReadFileExcel {
 
     public static void readFile() {
         try {
-            FileInputStream excelFile = new FileInputStream(new File("/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/Excel/Products.xlsx"));
+            FileInputStream excelFile = new FileInputStream(new File("D:\\DuAn1_Java_PTPM\\Du_an_1\\DuAn1Nhom3\\src\\Excel\\Products.xlsx"));
             Workbook workbook = new XSSFWorkbook(excelFile);
             Sheet sheet = workbook.getSheetAt(0);
 
@@ -53,5 +53,7 @@ public class ReadFileExcel {
             e.printStackTrace();
         }
     }
+    
+    
 
 }

@@ -14,14 +14,14 @@ public class User {
     private int gender;
     private String sdt;
     private String idKho;
-        private Date ngayTao;
+    private Date ngayTao;
     private Date ngaySua;
-    private boolean status;
+    private int status;
 
     public User() {
     }
 
-    public User(String id, String maNv, String tenNV, int tuoi, String diaChi, String email, int gender, String sdt, String idKho, Date ngayTao, Date ngaySua, boolean status) {
+    public User(String id, String maNv, String tenNV, int tuoi, String diaChi, String email, int gender, String sdt, String idKho, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.maNv = maNv;
         this.tenNV = tenNV;
@@ -124,13 +124,15 @@ public class User {
         this.ngaySua = ngaySua;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+
     
     
 }

@@ -362,8 +362,8 @@ public class JFrLogin extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_lblCloseMouseClicked
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-                try {
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
             if (this.txtusername.getText().equals("")) {
                 this.lblErrUserName.setText("Không để trống username");
                 this.lblErrUserName.setForeground(Color.red);
@@ -396,23 +396,25 @@ public class JFrLogin extends javax.swing.JFrame {
             for (Account account : account1) {
                 if (account.getUsername().equals(this.txtusername.getText()) && account.getPassWord().equals(String.valueOf(this.txtpassword.getPassword()))) {
 
-            for (Role role : list) {
-                if (idRole.equals(role.getId())) {
-                    if (role.getName().equals("VT001")) {
-                                    UserSession session = new UserSession(getAccount().getUsername());
-            loggedInUsers.put(getAccount().getUsername(), session);
-
-
-                        JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
-                        setVisible(false);
-                        new JFrMain().setVisible(true);
-                        break;
-                    } else if (role.getName().equals("VT002")) {
-                        JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
-                        setVisible(false);
-                        new pnlSanPham().setVisible(true);
-
-                        break;
+                    for (Role role : list) {
+                        if (idRole.equals(role.getId())) {
+                            if (role.getName().equals("VT001")) {
+                                JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
+                                setVisible(false);
+                                new JFrMain().setVisible(true);
+                                break;
+                            } else if (role.getName().equals("VT002")) {
+                                JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
+                                setVisible(false);
+                                new pnlSanPham().setVisible(true);
+                                break;
+                            } else if (role.getName().equals("VT005")){
+                                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                                setVisible(false);
+                                new JFrQuanLy().setVisible(true);
+                                break;
+                            }
+                        }
                     }
 
                 }
