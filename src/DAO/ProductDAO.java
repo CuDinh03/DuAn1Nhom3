@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import java.util.List;
@@ -216,13 +218,12 @@ public class ProductDAO {
             e.printStackTrace();
         }
     }
-        private Date getCurrentDateTime() {
+
+    private Date getCurrentDateTime() {
         return new Date();
     }
 
-
     // neu san pham ton tai
-
     private boolean productExists(String productCode) {
         String query = "SELECT COUNT(*) FROM sanPham WHERE ma = ?";
         try {
@@ -238,21 +239,72 @@ public class ProductDAO {
         }
         return false;
     }
+
     //tim theo ma
     public Product getProductByCode(String productCode) {
-    String query = "SELECT * FROM sanPham WHERE ma = ?";
-    try {
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, productCode);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            return extractProductFromResultSet(resultSet);
+        String query = "SELECT * FROM sanPham WHERE ma = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, productCode);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return extractProductFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return null;
     }
-    return null; 
-}
+    // lay list san pham co cung ten khac ma 
 
+    public List<Product> getProductsByNameAndExpiration(String productName, String productCode, Date expirationDateThreshold) {
+        String query = "SELECT * FROM sanPham WHERE ten = ? AND ma <> ? AND trangThai = 1 AND soLuong > 0 AND hanSD > ?";
+        List<Product> products = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, productName);
+            statement.setString(2, productCode);
+            statement.setDate(3, new java.sql.Date(expirationDateThreshold.getTime()));
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Product product = extractProductFromResultSet(resultSet);
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Sort the products based on the expiration dates in ascending order
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product product1, Product product2) {
+                return product1.getHsd().compareTo(product2.getHsd());
+            }
+        });
+
+        return products;
+    }
+    
+    public List<Product> getProductsByName(String name) {
+        String query = "SELECT * FROM sanPham WHERE ten = ? AND trangThai = 1";
+        List<Product> products = new ArrayList<>();
+
+        try { 
+             PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setString(1, name);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Product product = extractProductFromResultSet(resultSet);
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return products;
+    }
 
 }

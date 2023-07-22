@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Product;
 import service.ProductService;
+import view.Shopping.JFrMain;
 
 public class JFrQuanLy extends javax.swing.JFrame {
 
@@ -28,6 +29,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
         this.loadTable();
         this.loadCbbDanhMuc();
         this.productService = new ProductService();
+        setLocationRelativeTo(this);
     }
 
     private void loadTable() {
@@ -268,6 +270,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnInput = new javax.swing.JButton();
         btnOutput = new javax.swing.JButton();
+        btnBackMain = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtMaSP = new javax.swing.JTextField();
@@ -425,6 +428,13 @@ public class JFrQuanLy extends javax.swing.JFrame {
             }
         });
 
+        btnBackMain.setText("Back");
+        btnBackMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackMainActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnNavigationLayout = new javax.swing.GroupLayout(jpnNavigation);
         jpnNavigation.setLayout(jpnNavigationLayout);
         jpnNavigationLayout.setHorizontalGroup(
@@ -432,9 +442,11 @@ public class JFrQuanLy extends javax.swing.JFrame {
             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
             .addGroup(jpnNavigationLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                    .addComponent(btnInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBackMain)
+                    .addGroup(jpnNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                        .addComponent(btnInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnNavigationLayout.setVerticalGroup(
@@ -445,7 +457,9 @@ public class JFrQuanLy extends javax.swing.JFrame {
                 .addComponent(btnInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(btnOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBackMain)
+                .addGap(14, 14, 14))
         );
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -780,6 +794,12 @@ public class JFrQuanLy extends javax.swing.JFrame {
         this.loadTable();
     }//GEN-LAST:event_btnLoadTableActionPerformed
 
+    private void btnBackMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackMainActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new JFrMain().setVisible(true);
+    }//GEN-LAST:event_btnBackMainActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -816,6 +836,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackMain;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnInput;

@@ -26,7 +26,6 @@ import model.AccountRole;
 import model.Role;
 import model.UserSession;
 import view.Shopping.JFrMain;
-import view.Shopping.pnlSanPham;
 
 /**
  *
@@ -342,7 +341,7 @@ public class JFrLogin extends javax.swing.JFrame {
                             } else if (role.getName().equals("VT002")) {
                                 JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
                                 setVisible(false);
-                                new pnlSanPham().setVisible(true);
+//                                new pnlSanPham().setVisible(true);
 
                                 break;
                             }
