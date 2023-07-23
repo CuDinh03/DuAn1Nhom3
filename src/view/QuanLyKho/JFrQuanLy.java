@@ -877,9 +877,9 @@ public class JFrQuanLy extends javax.swing.JFrame {
     }// GEN-LAST:event_btnInputActionPerformed
 
     private void btnOutputActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnOutputActionPerformed
-        List<Product> productList = null;
-
-        WriteFileExecl.writeFile(productList);
+//        List<Product> productList = null;
+//
+//        WriteFileExecl.writeFile(productList);
         loadTable();
     }// GEN-LAST:event_btnOutputActionPerformed
 

@@ -30,7 +30,6 @@ public class ProductDAO {
             String updateQuery = "UPDATE sanPham SET soLuong = ?, ngaySua = ? WHERE ma = ?";
 
             try {
-                // Get the current quantity of the product from the database
                 PreparedStatement quantityStatement = connection.prepareStatement(quantityQuery);
                 quantityStatement.setString(1, productCode);
                 ResultSet resultSet = quantityStatement.executeQuery();
@@ -44,7 +43,7 @@ public class ProductDAO {
                 // tinh so luong moi
                 int newQuantity = currentQuantity + product.getQuantity();
 
-// cap nhat lai so luong 
+                // cap nhat lai so luong 
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
                 updateStatement.setInt(1, newQuantity);
                 updateStatement.setTimestamp(2, new java.sql.Timestamp(getCurrentDateTime().getTime()));
