@@ -5,18 +5,22 @@
 package DAO;
 
 import Utilities.JdbcHelper;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Store;
 
 /**
  *
- * @author maccuacu
+ * @author trung
  */
 public class StoreDAO {
 
-    private final Connection conn = JdbcHelper.getConnection();
+    private Connection conn = JdbcHelper.getConnection();
 
     public void insertStore(Store store) {
 
@@ -68,7 +72,7 @@ public class StoreDAO {
     }
 
     public void updateStore(Store store) {
-        String sql = "UPDATE cuaHang SET ma=?, ten=?, diaChi=?, idPhieuNhanHang=?, ngayTao=?, ngaySua=? WHERE id=?";
+        String sql = "UPDATE cuaHang SET ma=?, ten=?, diaChi=?, idPhieuNhanHang=?, ngayTao=?, ngaySua=?, trangThai=? WHERE id=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -80,7 +84,8 @@ public class StoreDAO {
             store.setNgaySua(new java.util.Date());
 
             statement.setDate(6, new java.sql.Date(store.getNgaySua().getTime()));
-            statement.setString(7, store.getId());
+            statement.setInt(7, store.getStatus());
+            statement.setString(8, store.getId());
 
             statement.executeUpdate();
 
@@ -107,6 +112,7 @@ public class StoreDAO {
             e.printStackTrace();
         }
     }
+
     public Store findStoreByName(String storeName) {
         String sql = "SELECT * FROM cuaHang WHERE ten LIKE ? AND trangThai = 1";
         try {

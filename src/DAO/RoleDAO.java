@@ -34,7 +34,7 @@ public class RoleDAO {
         String ma = resultSet.getString("ma");
         Date ngayTao = resultSet.getDate("ngayTao");
         Date ngaySua = resultSet.getDate("ngaySua");
-        boolean status = resultSet.getBoolean("trangThai");
+        int status = resultSet.getInt("trangThai");
 
         return new Role(id, ma, ngayTao, ngaySua, status);
     }

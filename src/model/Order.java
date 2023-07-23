@@ -3,7 +3,6 @@ package model;
 
 import java.util.Date;
 
-
 public class Order {
 
     private String id;
@@ -101,5 +100,4 @@ public class Order {
     public void setStatus(int status) {
         this.status = status;
     }
-
 }

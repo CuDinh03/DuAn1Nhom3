@@ -10,13 +10,9 @@ import java.util.Date;
  * @author maccuacu
  */
 
-
-
-
-
 public class Report {
     private String id;
-    private String ma;
+    private String maBC;
     private String noiDung;
     private String ten;
     private Date ngayTao;
@@ -29,9 +25,9 @@ public class Report {
     public Report() {
     }
 
-    public Report(String id, String ma, String noiDung, String ten, Date ngayTao, Date ngaySua, BigDecimal doanhThu, int trangThai, String idNV, String idCH) {
+    public Report(String id, String maBC, String noiDung, String ten, Date ngayTao, Date ngaySua, BigDecimal doanhThu, int trangThai, String idNV, String idCH) {
         this.id = id;
-        this.ma = ma;
+        this.maBC = maBC;
         this.noiDung = noiDung;
         this.ten = ten;
         this.ngayTao = ngayTao;
@@ -50,12 +46,12 @@ public class Report {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
+    public String getMaBC() {
+        return maBC;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setMaBC(String maBC) {
+        this.maBC = maBC;
     }
 
     public String getNoiDung() {
@@ -121,6 +117,7 @@ public class Report {
     public void setIdCH(String idCH) {
         this.idCH = idCH;
     }
+
     
     
 }
