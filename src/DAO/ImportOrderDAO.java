@@ -24,7 +24,7 @@ public class ImportOrderDAO {
         
     private Connection conn = JdbcHelper.getConnection();
 
-    public void insertStore(ImportOrder importOrder) {
+    public void insertImportOrder(ImportOrder importOrder) {
 
         String sql = "INSERT INTO phieuNhap ( ma, ngayTao, ngaySua,DonViTinh,giaNhap, trangThai) VALUES ( ?, ?, ?, ?, ?, ?)";
         try {
@@ -74,7 +74,7 @@ public class ImportOrderDAO {
         return importOrders;
     }
 
-    public void updateStore(ImportOrder importOrder) {
+    public void updateImportOrder(ImportOrder importOrder) {
         String sql = "UPDATE phieuNhap SET ma=?, ngayTao=?, ngaySua=?,DonViTinh=?,giaNhap=?, trangThai=? WHERE id=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -98,7 +98,7 @@ public class ImportOrderDAO {
     }
 
     
-     public void deleteStoreById(String id) {
+     public void deleteImportOrderById(String id) {
         String sql = "UPDATE kho SET trangThai = 0  WHERE id=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);

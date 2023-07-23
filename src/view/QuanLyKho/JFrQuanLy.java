@@ -67,6 +67,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
                 product.getGiaGoc(),
                 status
             };
+
             dtm.addRow(rowData);
             
         }
@@ -79,6 +80,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
         for (Product product : productDAO.getAllProducts()) {
             this.cbbDanhMuc.addItem(product.getIdDanhMuc());
             this.cbbFinddanhMuc.addItem(product.getIdDanhMuc());
+            
         }
     }
     

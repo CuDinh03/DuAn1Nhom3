@@ -18,7 +18,7 @@ public class WareHouseDAO {
     
     private Connection conn = JdbcHelper.getConnection();
 
-    public void insertStore(WareHouse wareHouse) {
+    public void insertWareHouse(WareHouse wareHouse) {
 
         String sql = "INSERT INTO kho ( ma, tenKho, ngayTao, ngaySua,diaChi, trangThai, idPhieuNhap) VALUES ( ?, ?, ?, ?, ?, ?,?)";
         try {
@@ -69,7 +69,7 @@ public class WareHouseDAO {
         return wareHouses;
     }
 
-    public void updateStore(WareHouse wareHouse) {
+    public void updateWareHouse(WareHouse wareHouse) {
         String sql = "UPDATE kho SET ma=?, tenKho=?, ngayTao=?, ngaySua=?, diaChi=? ,idPhieuNhap, trangThai=? WHERE id=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -93,7 +93,7 @@ public class WareHouseDAO {
     }
 
     
-     public void deleteStoreById(String id) {
+     public void deleteWareHouseById(String id) {
         String sql = "UPDATE kho SET trangThai = 0  WHERE id=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);

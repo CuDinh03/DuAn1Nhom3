@@ -102,10 +102,10 @@ public class StoreDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, id);
-//            Store store = new Store();
-//            store.setNgaySua(new java.util.Date());
-//
-//            statement.setDate(7, new java.sql.Date(store.getNgaySua().getTime()));
+            Store store = new Store();
+            store.setNgaySua(new java.util.Date());
+
+            statement.setDate(7, new java.sql.Date(store.getNgaySua().getTime()));
             statement.executeUpdate();
 
             System.out.println("Xóa bản ghi thành công.");
@@ -115,16 +115,16 @@ public class StoreDAO {
     }
     
     
-    public Store findById(String id) {
-        String sql = "SELECT * FROM cuaHang WHERE id = ?";
-        Store store = null;
+     public Store findStoreByName(String storeName) {
+        String sql = "SELECT * FROM cuaHang WHERE ten LIKE ? AND trangThai = 1";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, id);
+            statement.setString(1, "%" + storeName + "%");
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                store = new Store();
+            while (resultSet.next()) {
+
+                Store store = new Store();
                 store.setId(resultSet.getString("id"));
                 store.setMa(resultSet.getString("ma"));
                 store.setTen(resultSet.getString("ten"));
@@ -133,11 +133,13 @@ public class StoreDAO {
                 store.setNgayTao(resultSet.getDate("ngayTao"));
                 store.setNgaySua(resultSet.getDate("ngaySua"));
                 store.setStatus(resultSet.getInt("trangThai"));
+                return store;
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return store;
+        return null;
     }
 }
