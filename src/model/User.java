@@ -21,7 +21,8 @@ public class User {
     public User() {
     }
 
-    public User(String id, String maNv, String tenNV, int tuoi, String diaChi, String email, int gender, String sdt, String idKho, Date ngayTao, Date ngaySua, int status) {
+    public User(String id, String maNv, String tenNV, int tuoi, String diaChi, String email, int gender, String sdt,
+            String idKho, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.maNv = maNv;
         this.tenNV = tenNV;

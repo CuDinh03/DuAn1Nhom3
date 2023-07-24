@@ -34,7 +34,7 @@ public class ExportOrderDAO {
                 String ma = resultSet.getString("ma");               
                 Date ngayTao = resultSet.getDate("ngayTao");
                 Date ngaySua = resultSet.getDate("ngaySua");
-                String donViTinh = resultSet.getString("ma");
+                String donViTinh = resultSet.getString("donViTinh");
                 int status = resultSet.getInt("trangThai");
                 String idKho = resultSet.getString("idKho");
 

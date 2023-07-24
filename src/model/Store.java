@@ -3,7 +3,6 @@ package model;
 
 import java.util.Date;
 
-
 public class Store {
     private String id;
     private String ma;
@@ -17,12 +16,23 @@ public class Store {
     public Store() {
     }
 
-    public Store(String id, String ma, String ten, String diaChi, String idPhieuNhanHang, Date ngayTao, Date ngaySua, int status) {
+    public Store(String id, String ma, String ten, String diaChi, String idPhieuNhanHang, Date ngayTao, Date ngaySua,
+            int status) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
         this.diaChi = diaChi;
         this.idPhieuNhanHang = idPhieuNhanHang;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.status = status;
+    }
+
+    public Store(String id, String ma, String ten, String diaChi, Date ngayTao, Date ngaySua, int status) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.diaChi = diaChi;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
         this.status = status;
@@ -91,5 +101,5 @@ public class Store {
     public void setStatus(int status) {
         this.status = status;
     }
-    
+
 }
