@@ -7,6 +7,7 @@ import java.util.Date;
 public class Account {
     
     private String id;
+    private String iduser;
     private String maTk;
     private Date ngayTao;
     private Date ngaySua;
@@ -41,6 +42,26 @@ public class Account {
         this.passWord = passWord;
         this.status = status;
     }
+
+    public Account(String id, String iduser, String maTk, Date ngayTao, Date ngaySua, String username, String passWord, int status) {
+        this.id = id;
+        this.iduser = iduser;
+        this.maTk = maTk;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.username = username;
+        this.passWord = passWord;
+        this.status = status;
+    }
+
+    public String getIduser() {
+        return iduser;
+    }
+
+    public void setIduser(String iduser) {
+        this.iduser = iduser;
+    }
+    
 
     public String getId() {
         return id;

@@ -5,6 +5,7 @@ import IO.ReadFileExcel;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -40,7 +41,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
         for (Product product : productDAO.getAllProducts()) {
             String status;
-            if (product.getStatus() == 0 || product.getQuantity() == 0) {
+            if (product.getStatus() == 0 || product.getQuantity() == 0  ) {
                 status = "Hết hàng";
             } else {
                 status = "Còn hàng";

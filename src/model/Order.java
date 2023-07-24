@@ -9,6 +9,7 @@ public class Order {
     private String id;
     private String ma;
     private String name;
+    private String tenNv;
     private String tenKh;
     private String idCh;
     private Date ngayTao;
@@ -18,10 +19,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(String id, String ma, String name, String tenKh, String idCh, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
+    public Order(String ma, String name, String tenNv, String tenKh, String idCh, Date ngayTao, Date ngaySua, int status) {
         this.ma = ma;
         this.name = name;
+        this.tenNv = tenNv;
         this.tenKh = tenKh;
         this.idCh = idCh;
         this.ngayTao = ngayTao;
@@ -29,14 +30,39 @@ public class Order {
         this.status = status;
     }
 
-    public Order(String idCh1, String ma, String name, String tenKh1, String idch0, Date ngaytao, Date ngaySua) {
+    public Order(String id, String ma, String name, String tenNv, String tenKh, String idCh, Date ngayTao, Date ngaySua, int status) {
+        this.id = id;
         this.ma = ma;
         this.name = name;
-        this.tenKh = tenKh1;
-        this.idCh = idCh1;
-        this.ngayTao = ngaytao;
+        this.tenNv = tenNv;
+        this.tenKh = tenKh;
+        this.idCh = idCh;
+        this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+        this.status = status;
     }
+
+
+    
+    
+
+    public String getTenNv() {
+        return tenNv;
+    }
+
+    public void setTenNv(String tenNv) {
+        this.tenNv = tenNv;
+    }
+
+    public String getTenKh() {
+        return tenKh;
+    }
+
+    public void setTenKh(String tenKh) {
+        this.tenKh = tenKh;
+    }
+    
+    
 
     public String getId() {
         return id;

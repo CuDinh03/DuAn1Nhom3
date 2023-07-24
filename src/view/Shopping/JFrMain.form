@@ -133,7 +133,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtNameUser" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUserName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="lbClose" min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -149,7 +149,7 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNameUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUserName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
@@ -180,8 +180,6 @@
             <Property name="text" type="java.lang.String" value="Xin ch&#xe0;o:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="txtNameUser">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -192,6 +190,11 @@
               <Image iconType="3" name="/view/icon/Shop.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nh&#xf3;m 3"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtUserName">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="_"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -666,7 +669,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="jButton1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Thanh To&#xe1;n "/>
+                        <Property name="text" type="java.lang.String" value="T&#x1ea1;o ho&#xe1; &#x111;&#x1a1;n "/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

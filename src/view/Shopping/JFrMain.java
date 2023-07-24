@@ -60,6 +60,7 @@ public class JFrMain extends javax.swing.JFrame {
         this.loadTableCart();
         this.showTotal();
         this.loadCbb();
+        this.loadOrder();
 
     }
 
@@ -75,6 +76,26 @@ public class JFrMain extends javax.swing.JFrame {
             dtm.addRow(data);
         }
 
+    }
+    public void loadOrder (){
+        OrderDAO orderDAO = new OrderDAO();
+        dtmHD = (DefaultTableModel) this.tblHoaDon.getModel();
+        dtmHD.setRowCount(0);
+        
+        String status = "";
+        
+
+        for (Order orders : orderDAO.findAllByStatus()) {
+                    if (orders.getStatus()== 0) {
+            status = "Chưa thanh toán";
+        }else{
+            status = "Đã thanh toán";
+        }
+            Object [] data = {
+              orders.getMa(), orders.getTenNv(), orders.getTenKh(), status
+            };
+            dtmHD.addRow(data);
+        }
     }
 
     private void loadTableCart() {
@@ -143,8 +164,8 @@ public class JFrMain extends javax.swing.JFrame {
         panelHeader = new javax.swing.JPanel();
         lbClose = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        txtNameUser = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JLabel();
         panelBody = new javax.swing.JPanel();
         panelBanHang = new javax.swing.JPanel();
         panelGioHang = new javax.swing.JPanel();
@@ -255,6 +276,8 @@ public class JFrMain extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/icon/Shop.png"))); // NOI18N
         jLabel1.setText("Nhóm 3");
 
+        txtUserName.setText("_");
+
         javax.swing.GroupLayout panelHeaderLayout = new javax.swing.GroupLayout(panelHeader);
         panelHeader.setLayout(panelHeaderLayout);
         panelHeaderLayout.setHorizontalGroup(
@@ -264,7 +287,7 @@ public class JFrMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNameUser)
+                .addComponent(txtUserName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -277,7 +300,7 @@ public class JFrMain extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(txtNameUser))
+                    .addComponent(txtUserName))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addContainerGap()
@@ -443,7 +466,7 @@ public class JFrMain extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 2, 10, 5));
 
-        jButton1.setText("Thanh Toán ");
+        jButton1.setText("Tạo hoá đơn ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -719,6 +742,11 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
 
+        int col = this.tblHoaDon.getSelectedRow();
+        if (col == -1) {
+            return;
+        }
+
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void txtTenKHTaiQuayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenKHTaiQuayKeyReleased
@@ -762,7 +790,7 @@ public class JFrMain extends javax.swing.JFrame {
     }//GEN-LAST:event_tblDanhSachSPMouseClicked
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
- String keyword = txtTimKiem.getText();
+        String keyword = txtTimKiem.getText();
     }//GEN-LAST:event_txtTimKiemKeyReleased
 
     private void pnlThongKtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlThongKtActionPerformed
@@ -948,13 +976,13 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JTable tblDanhSachSP;
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTable tblHoaDon;
-    private javax.swing.JLabel txtNameUser;
     private javax.swing.JTextField txtSDTTQ;
     private javax.swing.JTextField txtTenKHTaiQuay;
     private javax.swing.JTextField txtTienKhachDuaTQ;
     private javax.swing.JLabel txtTienThua;
     private javax.swing.JTextField txtTimKiem;
     private javax.swing.JLabel txtTongTien;
+    private javax.swing.JLabel txtUserName;
     private javax.swing.JSeparator txtsdt;
     // End of variables declaration//GEN-END:variables
 
@@ -965,8 +993,14 @@ public class JFrMain extends javax.swing.JFrame {
     private void thanhtoan() {
         try {
             double tienThua = Double.parseDouble(this.txtTienThua.getText());
-            if (tienThua < 0) {
+            String tienkhd = this.txtTenKHTaiQuay.getText().trim();
+            String sdt = this.txtSDTTQ.getText().trim();
+            if (tienThua < 0 || tienkhd.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Yêu cầu khách trả đủ tiền mới thanh toán.");
+                return;
+            }
+            if (sdt.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Yêu cầu nhập số điện thoại của khách mới thanh toán.");
                 return;
             }
 
@@ -983,7 +1017,7 @@ public class JFrMain extends javax.swing.JFrame {
 
             ShoppingCart shopping = new ShoppingCart(idch, itemList, tenkh, tenNv);
 
-            Order order = new Order(idch, ma, name, tenkh, idch, ngaytao, ngaySua, 1);
+            Order order = new Order( ma, name, tenNv, tenkh, idch, ngaytao, ngaySua, 0);
 
             OrderDAO odao = new OrderDAO();
             odao.createOrder(order);
@@ -993,32 +1027,34 @@ public class JFrMain extends javax.swing.JFrame {
 
             String maDetail = String.valueOf(random.nextInt(10000 - 1 + 1) + 1);
 
-            OrderDetail detail = new OrderDetail(maDetail, ma, total, ngaytao, ngaySua, 1);
+            OrderDetail detail = new OrderDetail(maDetail, ma, total, ngaytao, ngaySua, 0);
             odDao.addOrderDetail(detail);
 
             InvoicePDFGenerator.exportPDF(order, detail, shopping);
             JOptionPane.showMessageDialog(this, "Tạo hoá đợn thành công");
 
-            ProductDAO pdao = new ProductDAO();
-            for (Items items : itemList) {
-                String productCode = items.getMaSP();
-                Product product = pdao.getProductByCode(productCode);
-
-                if (product != null) {
-                    int quantityToAdd = items.getSoLuong();
-                    if (quantityToAdd > 0) {
-                        try {
-                            pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
-                        } catch (InsufficientProductQuantityException ex) {
-                            JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getName() + "' không đủ.");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với mã '" + productCode + "'.");
-                }
-            }
+//            ProductDAO pdao = new ProductDAO();
+//            for (Items items : itemList) {
+//                String productCode = items.getMaSP();
+//                Product product = pdao.getProductByCode(productCode);
+//
+//                if (product != null) {
+//                    int quantityToAdd = items.getSoLuong();
+//                    if (quantityToAdd > 0) {
+//                        try {
+//                            pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
+//                            
+//                        } catch (InsufficientProductQuantityException ex) {
+//                            JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getName() + "' không đủ.");
+//                        }
+//                    } else {
+//                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với mã '" + productCode + "'.");
+//                }
+//            }
+            this.loadOrder();
             itemList.clear();
 
             this.clearALl();
