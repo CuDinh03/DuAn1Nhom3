@@ -33,13 +33,14 @@ public class OrderDAO {
                 String id = resultSet.getString(1);
                 String ma = resultSet.getString(2);
                 String name = resultSet.getString(3);
-                Date ngayTao = resultSet.getDate(4);
-                Date ngaySua = resultSet.getDate(5);
-                String tenKh = resultSet.getString(6);
-                String idCh = resultSet.getString(7);
-                int status = resultSet.getInt(8);
+                String tenNv = resultSet.getString(4);
+                Date ngayTao = resultSet.getDate(5);
+                Date ngaySua = resultSet.getDate(6);
+                String tenKh = resultSet.getString(7);
+                String idCh = resultSet.getString(8);
+                int status = resultSet.getInt(9);
 
-                Order order = new Order(id, ma, name, tenKh, idCh, ngayTao, ngaySua, status);
+                Order order = new Order(id, ma, name,tenNv, tenKh, idCh, ngayTao, ngaySua, status);
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -145,9 +146,33 @@ public class OrderDAO {
 
     public void deleteOrder(String orderId) {
         try {
-            String query = "UPDATE hoaDon SET trangThai = 0 WHERE id = ?";
+            String query = "UPDATE hoaDon SET trangThai = 2 WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderId);
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteOrderByMa(String orderma) {
+        try {
+            String query = "UPDATE hoaDon SET trangThai = 2 WHERE ma = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderma);
+
+            int rowsDeleted = preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateOrderByMa(String orderma) {
+        try {
+            String query = "UPDATE hoaDon SET trangThai = 1 WHERE ma = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderma);
 
             int rowsDeleted = preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -172,6 +197,63 @@ public class OrderDAO {
         }
 
         return totalPaidInvoices;
+    }
+
+    public Order getOrderByMa(String orderMa) {
+        String query = "SELECT * FROM hoaDon WHERE ma = ? AND trangThai = 0";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderMa);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String id = resultSet.getString(1);
+                String ma = resultSet.getString(2);
+                String name = resultSet.getString(3);
+                String tennv = resultSet.getString(4);
+                Date ngayTao = resultSet.getDate(5);
+                Date ngaySua = resultSet.getDate(6);
+                String tenKh = resultSet.getString(7);
+                String idCh = resultSet.getString(8);
+                int status = resultSet.getInt(9);
+
+                return new Order(id, ma, name, tennv, tenKh, idCh, ngayTao, ngaySua, status);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Order> getPendingOrdersByCustomerName(String customerName) {
+        List<Order> pendingOrders = new ArrayList<>();
+        String query = "SELECT * FROM hoaDon WHERE tenKh = ? AND trangThai = 0";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, customerName);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String id = resultSet.getString("id");
+                    String ma = resultSet.getString("ma");
+                    String name = resultSet.getString("ten");
+                    String tenNv = resultSet.getString("tenNv");
+                    Date ngayTao = resultSet.getDate("ngayTao");
+                    Date ngaySua = resultSet.getDate("ngaySua");
+                    String tenKh = resultSet.getString("tenKh");
+                    String idCh = resultSet.getString("idCh");
+                    int status = resultSet.getInt("trangThai");
+
+                    Order order = new Order(id, ma, name, tenNv, tenKh, idCh, ngayTao, ngaySua, status);
+                    pendingOrders.add(order);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pendingOrders;
     }
 
 }

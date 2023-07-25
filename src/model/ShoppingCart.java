@@ -44,6 +44,10 @@ public class ShoppingCart {
         this.status = status;
     }
 
+
+
+    
+
     public String getMa() {
         return ma;
     }

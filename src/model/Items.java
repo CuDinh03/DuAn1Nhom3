@@ -30,6 +30,20 @@ public class Items {
         this.status = status;
     }
 
+    public Items(String id, String idCart, String idOrder, String maSP, String tenSp, int soLuong, double giaban, Date ngayTao, Date ngaySua, int status) {
+        this.id = id;
+        this.idCart = idCart;
+        this.idOrder = idOrder;
+        this.maSP = maSP;
+        this.tenSp = tenSp;
+        this.soLuong = soLuong;
+        this.giaban = giaban;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+        this.status = status;
+    }
+    
+
 
 
     public String getTenSp() {

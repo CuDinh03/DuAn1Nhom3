@@ -4,9 +4,11 @@
  */
 package view.Shopping;
 
+import DAO.ItemsDAO;
 import DAO.OrderDAO;
 import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
+import DAO.ShoppingCartDAO;
 import DAO.StoreDAO;
 import DAO.UserDAO;
 import Erro.InsufficientProductQuantityException;
@@ -77,22 +79,22 @@ public class JFrMain extends javax.swing.JFrame {
         }
 
     }
-    public void loadOrder (){
+
+    public void loadOrder() {
         OrderDAO orderDAO = new OrderDAO();
         dtmHD = (DefaultTableModel) this.tblHoaDon.getModel();
         dtmHD.setRowCount(0);
-        
+
         String status = "";
-        
 
         for (Order orders : orderDAO.findAllByStatus()) {
-                    if (orders.getStatus()== 0) {
-            status = "Chưa thanh toán";
-        }else{
-            status = "Đã thanh toán";
-        }
-            Object [] data = {
-              orders.getMa(), orders.getTenNv(), orders.getTenKh(), status
+            if (orders.getStatus() == 0) {
+                status = "Chưa thanh toán";
+            } else {
+                status = "Đã thanh toán";
+            }
+            Object[] data = {
+                orders.getMa(), orders.getTenNv(), orders.getTenKh(), status
             };
             dtmHD.addRow(data);
         }
@@ -205,6 +207,7 @@ public class JFrMain extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDanhSachSP = new javax.swing.JTable();
+        btnTT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -475,6 +478,11 @@ public class JFrMain extends javax.swing.JFrame {
         jPanel5.add(jButton1);
 
         jButton6.setText("Huỷ ");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jPanel5.add(jButton6);
 
         btnTinhTien.setText("Tính tiền ");
@@ -645,6 +653,13 @@ public class JFrMain extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnTT.setText("Thanh Toán");
+        btnTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBanHangLayout = new javax.swing.GroupLayout(panelBanHang);
         panelBanHang.setLayout(panelBanHangLayout);
         panelBanHangLayout.setHorizontalGroup(
@@ -657,9 +672,15 @@ public class JFrMain extends javax.swing.JFrame {
                         .addGap(0, 0, 0)
                         .addComponent(panelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelGioHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(9, 9, 9))
+                .addGroup(panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBanHangLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(9, 9, 9))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBanHangLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTT)
+                        .addGap(109, 109, 109))))
         );
         panelBanHangLayout.setVerticalGroup(
             panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -675,7 +696,9 @@ public class JFrMain extends javax.swing.JFrame {
             .addGroup(panelBanHangLayout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(panelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTT, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         panelBody.add(panelBanHang, "card3");
@@ -746,6 +769,24 @@ public class JFrMain extends javax.swing.JFrame {
         if (col == -1) {
             return;
         }
+        this.clearALl();
+        String orderMa = this.tblHoaDon.getValueAt(col, 0).toString();
+        OrderDAO odao = new OrderDAO();
+        String orderId = odao.getOrderByMa(orderMa).getId();
+        ItemsDAO idao = new ItemsDAO();
+        this.itemList = idao.getAllItemsByOrderId(orderId);
+
+        dtmGH = (DefaultTableModel) tblGioHang.getModel();
+        dtmGH.setRowCount(0);
+        for (Items items : itemList) {
+            Object[] data = {
+                items.getMaSP(), items.getTenSp(), items.getSoLuong(), items.getGiaban(), (items.getGiaban() * (double) items.getSoLuong())
+            };
+            dtmGH.addRow(data);
+        }
+        this.txtTenKHTaiQuay.setText((String) this.tblHoaDon.getValueAt(col, 2));
+        this.cbbNhanVien.setSelectedItem(this.tblHoaDon.getValueAt(col, 1));
+        this.showTotal();
 
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
@@ -896,6 +937,63 @@ public class JFrMain extends javax.swing.JFrame {
         quanLy.setVisible(true);
     }//GEN-LAST:event_btnQuanLyActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        int col = this.tblHoaDon.getSelectedRow();
+        if (col == -1) {
+            return;
+        }
+        String ma = this.tblHoaDon.getValueAt(col, 0).toString();
+
+        OrderDAO orderDAO = new OrderDAO();
+        orderDAO.deleteOrderByMa(ma);
+        JOptionPane.showMessageDialog(this, "Xóa thành công");
+        this.clearALl();
+        this.loadOrder();
+        this.loadTable();
+        this.loadTableCart();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void btnTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTActionPerformed
+        // TODO add your handling code here:
+        ProductDAO pdao = new ProductDAO();
+        for (Items items : itemList) {
+            String productCode = items.getMaSP();
+            Product product = pdao.getProductByCode(productCode);
+
+            if (product != null) {
+                int quantityToAdd = items.getSoLuong();
+                if (quantityToAdd > 0) {
+                    try {
+                        pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
+
+                    } catch (InsufficientProductQuantityException ex) {
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getName() + "' không đủ.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với mã '" + productCode + "'.");
+            }
+        }
+        int col = this.tblHoaDon.getSelectedRow();
+        if (col == -1) {
+            return;
+        }
+        String ma = this.tblHoaDon.getValueAt(col, 0).toString();
+
+        OrderDAO orderDAO = new OrderDAO();
+        orderDAO.updateOrderByMa(ma);
+        JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+        this.clearALl();
+        this.loadOrder();
+        this.loadTable();
+        this.loadTableCart();
+
+//        InvoicePDFGenerator.exportPDF(order, detail, shopping);
+    }//GEN-LAST:event_btnTTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -939,6 +1037,7 @@ public class JFrMain extends javax.swing.JFrame {
     private javax.swing.JButton btnClearItems;
     private javax.swing.JButton btnDeletebyMa;
     private javax.swing.JButton btnQuanLy;
+    private javax.swing.JButton btnTT;
     private javax.swing.JButton btnTinhTien;
     private javax.swing.JComboBox<String> cbbCH;
     private javax.swing.JComboBox<String> cbbNhanVien;
@@ -1015,9 +1114,11 @@ public class JFrMain extends javax.swing.JFrame {
             Date ngaytao = new Date();
             Date ngaySua = new Date();
 
-            ShoppingCart shopping = new ShoppingCart(idch, itemList, tenkh, tenNv);
+            ShoppingCartDAO scdao = new ShoppingCartDAO();
+            ShoppingCart shopping = new ShoppingCart("", ma, idch, itemList, tenkh, tenNv, ngaytao, ngaySua, 1);
+            scdao.insertShoppingCart(shopping);
 
-            Order order = new Order( ma, name, tenNv, tenkh, idch, ngaytao, ngaySua, 0);
+            Order order = new Order(ma, name, tenNv, tenkh, idch, ngaytao, ngaySua, 0);
 
             OrderDAO odao = new OrderDAO();
             odao.createOrder(order);
@@ -1030,30 +1131,16 @@ public class JFrMain extends javax.swing.JFrame {
             OrderDetail detail = new OrderDetail(maDetail, ma, total, ngaytao, ngaySua, 0);
             odDao.addOrderDetail(detail);
 
-            InvoicePDFGenerator.exportPDF(order, detail, shopping);
+            ItemsDAO idao = new ItemsDAO();
+            for (Items items : itemList) {
+                items.setIdOrder(odao.getOrderByMa(ma).getId());
+                items.setIdCart(scdao.getShoppingCartByMa(ma).getId());
+                items.setNgayTao(ngaytao);
+                items.setNgaySua(ngaySua);
+                idao.insertItem(items);
+            }
             JOptionPane.showMessageDialog(this, "Tạo hoá đợn thành công");
 
-//            ProductDAO pdao = new ProductDAO();
-//            for (Items items : itemList) {
-//                String productCode = items.getMaSP();
-//                Product product = pdao.getProductByCode(productCode);
-//
-//                if (product != null) {
-//                    int quantityToAdd = items.getSoLuong();
-//                    if (quantityToAdd > 0) {
-//                        try {
-//                            pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
-//                            
-//                        } catch (InsufficientProductQuantityException ex) {
-//                            JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getName() + "' không đủ.");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
-//                    }
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với mã '" + productCode + "'.");
-//                }
-//            }
             this.loadOrder();
             itemList.clear();
 
