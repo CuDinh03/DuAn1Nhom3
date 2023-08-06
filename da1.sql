@@ -64,8 +64,15 @@ CREATE TABLE inventory
     updateDate DATE,
     inventoryStatus BIT
 );
-CREATE TABLE inventory(
-
+CREATE TABLE inventory_detail
+(
+    ID uniqueidentifier not null DEFAULT (newid()) primary key,
+    ma NVARCHAR(50),
+    inventoryId uniqueidentifier not null,
+    total DECIMAL,
+    createDate DATE,
+    updateDate DATE,
+    inventoryStatus BIT
 );
 
 
@@ -80,4 +87,66 @@ CREATE TABLE customer
     cusStatus BIT
 );
 
+CREATE TABLE Items
+(
+    ID uniqueidentifier not null DEFAULT (newid()) primary key,
+    idCart uniqueidentifier not null,
+    idInventory uniqueidentifier not null,
+    codeProducts NVARCHAR(50),
+    nameProducs NVARCHAR(50),
+    quantity INT,
+    price DECIMAL,
+    createDate DATE,
+    updateDate DATE,
+    itemsStatus BIT
+);
 
+CREATE TABLE Store
+(
+    ID uniqueidentifier not null DEFAULT (newid()) primary key,
+    nameStore NVARCHAR(50),
+    adrStore NVARCHAR(max),
+    createDate DATE,
+    updateDate DATE,
+    storeStatus BIT
+);
+CREATE TABLE income
+(
+    ID uniqueidentifier not null DEFAULT (newid()) primary key,
+    code NVARCHAR(max),
+    total DECIMAL,
+    createDate DATE,
+    updateDate DATE,
+    incomeStatus BIT
+);
+
+CREATE TABLE report
+(
+    ID uniqueidentifier not null DEFAULT (newid()) primary key,
+    code NVARCHAR(max),
+    reportDESCRIPTION NVARCHAR(max),
+    namerp NVARCHAR(50),
+    idnv uniqueidentifier,
+    income uniqueidentifier,
+    createDate DATE,
+    updateDate DATE,
+    rpStatus BIT
+);
+
+CREATE table Cart
+(
+    ID uniqueidentifier not null DEFAULT (newid()) primary key,
+    code NVARCHAR(max),
+    idstore uniqueidentifier,
+    idCustomer uniqueidentifier,
+    iduser uniqueidentifier,
+    createDate DATE,
+    updateDate DATE,
+    cartStatus BIT
+);
+
+
+
+
+
+drop table store ;
