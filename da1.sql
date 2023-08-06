@@ -145,6 +145,14 @@ CREATE table Cart
     cartStatus BIT
 );
 
+CREATE TABLE productType(
+        ID uniqueidentifier not null DEFAULT (newid()) primary key,
+        typename NVARCHAR(max),
+         createDate DATE,
+    updateDate DATE,
+    prtypeStatus BIT
+);
+
 
 
 
