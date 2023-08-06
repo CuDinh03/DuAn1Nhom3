@@ -57,6 +57,7 @@ public class ProductDAO {
 // neu chua ton tai thi them moi san pham
             String insertQuery = "INSERT INTO sanPham (ma, ten, soLuong, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
             try {
                 PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
                 insertStatement.setString(1, product.getMa());
@@ -113,8 +114,9 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE sanPham SET ma = ?, ten =?, nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
+        String query = "UPDATE sanPham SET ma = ?, ten = ?, nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
                 + "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
+
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getMa());
@@ -136,7 +138,7 @@ public class ProductDAO {
 
     // Delete
     public void deleteProduct(String id) {
-        String query = "UPDATE sanPham WHERE id = ? SET trangThai=0, ngaySua = ?";
+        String query = "UPDATE sanPham SET trangThai = 0, ngaySua = ? WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
@@ -283,13 +285,13 @@ public class ProductDAO {
 
         return products;
     }
-    
+
     public List<Product> getProductsByName(String name) {
         String query = "SELECT * FROM sanPham WHERE ten = ? AND trangThai = 1";
         List<Product> products = new ArrayList<>();
 
-        try { 
-             PreparedStatement statement = connection.prepareStatement(query);
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, name);
 

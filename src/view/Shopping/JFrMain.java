@@ -804,6 +804,21 @@ public class JFrMain extends javax.swing.JFrame {
 
     private void tblDanhSachSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPMouseClicked
         // TODO add your handling code here:
+        
+//        int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xoá không?", "Confirmation", JOptionPane.YES_NO_OPTION);
+//        switch (option) {
+//            case JOptionPane.YES_OPTION -> {
+//                itemList.clear();
+//                JOptionPane.showMessageDialog(this, "Xoá thành công");
+//                this.loadTableCart();
+//            }
+//            case JOptionPane.NO_OPTION -> {
+//            }
+//            case JOptionPane.CANCEL_OPTION, JOptionPane.CLOSED_OPTION -> {
+//            }
+//            default -> {
+//            }
+//        }
         int col = this.tblDanhSachSP.getSelectedRow();
         if (col == -1) {
             return;
@@ -828,6 +843,8 @@ public class JFrMain extends javax.swing.JFrame {
         this.loadTableCart();
 
         this.showTotal();
+        
+        
     }//GEN-LAST:event_tblDanhSachSPMouseClicked
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
