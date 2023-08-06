@@ -147,14 +147,23 @@ CREATE table Cart
 
 CREATE TABLE productType(
         ID uniqueidentifier not null DEFAULT (newid()) primary key,
-        typename NVARCHAR(max),
+        typename NVARCHAR(100),
          createDate DATE,
     updateDate DATE,
     prtypeStatus BIT
 );
 
 
+insert into productType(typename,createDate,updateDate,prtypeStatus) VALUES('Đồ đông lạnh', '2023-8-6','2023-8-6',1)
+insert into productType(typename,createDate,updateDate,prtypeStatus) VALUES('Đồ tươi', '8-6-2023','8-6-2023',1)
+
+ALTER TABLE productType
+ALTER COLUMN typename NVARCHAR(max) COLLATE Vietnamese_100_CI_AS;
+
+
+SELECT * from productType;
 
 
 
-drop table store ;
+
+
