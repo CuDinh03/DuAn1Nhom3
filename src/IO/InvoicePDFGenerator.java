@@ -38,7 +38,7 @@ public class InvoicePDFGenerator {
 
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/InvoicePDF/invoice.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("D:\\DuAn1_Java_PTPM\\Du_an_1\\DuAn1Nhom3\\src\\InvoicePDF\\invoice.pdf"));
             document.open();
             Font vietnameseFont = FontFactory.getFont("Arial", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 

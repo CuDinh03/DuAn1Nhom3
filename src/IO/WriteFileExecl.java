@@ -20,6 +20,7 @@ public class WriteFileExecl {
             Row headerRow = sheet.createRow(0);
             headerRow.createCell(0).setCellValue("Ma");
             headerRow.createCell(1).setCellValue("Name");
+            
             headerRow.createCell(2).setCellValue("NguonGoc");
             headerRow.createCell(3).setCellValue("GiaGoc");
             headerRow.createCell(4).setCellValue("NgaySx");
