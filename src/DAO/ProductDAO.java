@@ -25,9 +25,9 @@ public class ProductDAO {
         String productCode = product.getMa();
 
         if (productExists(productCode)) {
-            // neu ton tai ma san pham nay r 
-            String quantityQuery = "SELECT soLuong FROM sanPham WHERE ma = ?";
-            String updateQuery = "UPDATE sanPham SET soLuong = ?, ngaySua = ? WHERE ma = ?";
+            // neu ton tai code san pham nay r 
+            String quantityQuery = "SELECT prQuantity FROM products WHERE code = ?";
+            String updateQuery = "UPDATE products SET prQuantity = ?, updateDate = ? WHERE code = ?";
 
             try {
                 PreparedStatement quantityStatement = connection.prepareStatement(quantityQuery);
@@ -36,7 +36,7 @@ public class ProductDAO {
 
                 int currentQuantity = 0;
                 if (resultSet.next()) {
-                    currentQuantity = resultSet.getInt("soLuong");
+                    currentQuantity = resultSet.getInt("prQuantity");
                 }
                 quantityStatement.close();
 
@@ -55,7 +55,7 @@ public class ProductDAO {
             }
         } else {
 // neu chua ton tai thi them moi san pham
-            String insertQuery = "INSERT INTO sanPham (ma, ten, soLuong, nguonGoc, giaGoc, ngaySx, hanSD, idDanhMuc, ngayTao, ngaySua, trangThai) "
+            String insertQuery = "INSERT INTO products (code, prName, prQuantity, original, cost, MFG, expiry, idType, createDate, updateDate, prStatus) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             try {
@@ -81,7 +81,7 @@ public class ProductDAO {
 
     // Read
     public Product getProductById(String id) {
-        String query = "SELECT * FROM sanPham WHERE id = ?";
+        String query = "SELECT * FROM products WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
@@ -97,7 +97,7 @@ public class ProductDAO {
     //show toan bo san pham
 
     public List<Product> getAllProducts() {
-        String query = "SELECT * FROM sanPham WHERE trangThai = 1 AND soLuong > 0 AND hanSD >= GETDATE()";
+        String query = "SELECT * FROM products WHERE prStatus = 1 AND prQuantity > 0 AND hanSD >= GETDATE()";
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -114,8 +114,8 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE sanPham SET ma = ?, ten = ?, nguonGoc = ?, giaGoc = ?, ngaySx = ?, hanSD = ?, "
-                + "idDanhMuc = ?, ngayTao = ?, ngaySua = ?, trangThai = ? WHERE id = ?";
+        String query = "UPDATE products SET code = ?, prName = ?, original = ?, cost = ?, MFG = ?, hanSD = ?, "
+                + "idType = ?, createDate = ?, updateDate = ?, prStatus = ? WHERE id = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -138,7 +138,7 @@ public class ProductDAO {
 
     // Delete
     public void deleteProduct(String id) {
-        String query = "UPDATE sanPham SET trangThai = 0, ngaySua = ? WHERE id = ?";
+        String query = "UPDATE products SET prStatus = 0, updateDate = ? WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
@@ -153,26 +153,26 @@ public class ProductDAO {
     //lay du lieu tu db len java
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
         String id = resultSet.getString("id");
-        String ma = resultSet.getString("ma");
-        String ten = resultSet.getString("ten");
-        int soLuong = resultSet.getInt("soLuong");
-        String nguonGoc = resultSet.getString("nguonGoc");
-        BigDecimal giaGoc = resultSet.getBigDecimal("giaGoc");
-        double giaGocdb = giaGoc.doubleValue();
-        Date ngaySx = resultSet.getDate("ngaySx");
+        String code = resultSet.getString("code");
+        String prName = resultSet.getString("prName");
+        int prQuantity = resultSet.getInt("prQuantity");
+        String original = resultSet.getString("original");
+        BigDecimal cost = resultSet.getBigDecimal("cost");
+        double costdb = cost.doubleValue();
+        Date MFG = resultSet.getDate("MFG");
         Date hsd = resultSet.getDate("hanSD");
-        String idDanhMuc = resultSet.getString("idDanhMuc");
-        Date ngayTao = resultSet.getDate("ngayTao");
-        Date ngaySua = resultSet.getDate("ngaySua");
+        String idType = resultSet.getString("idType");
+        Date createDate = resultSet.getDate("createDate");
+        Date updateDate = resultSet.getDate("updateDate");
 
-        int status = resultSet.getInt("trangThai");
+        int status = resultSet.getInt("prStatus");
 
-        return new Product(id, ma, ten, soLuong, nguonGoc, giaGocdb, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+        return new Product(id, code, prName, prQuantity, original, costdb, MFG, hsd, idType, createDate, updateDate, status);
     }
     //tim kiem theo id
 
     public Product findById(String id) {
-        String query = "SELECT * FROM sanPham WHERE id = ?";
+        String query = "SELECT * FROM products WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, id);
@@ -188,7 +188,7 @@ public class ProductDAO {
     //truong hop ban het hang
 
     public void updateStatusForZeroQuantityProducts() {
-        String updateQuery = "UPDATE sanPham SET trangThai = 0 WHERE soLuong = 0";
+        String updateQuery = "UPDATE products SET prStatus = 0 WHERE prQuantity = 0";
         try {
             PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
             updateStatement.executeUpdate();
@@ -200,7 +200,7 @@ public class ProductDAO {
 
     // thuc hien sau khi thanh toan 
     public void updateProductQuantityAfterPayment(String productId, int quantityToReduce) throws InsufficientProductQuantityException {
-        String updateQuery = "UPDATE sanPham SET soLuong = soLuong - ?, ngaySua = ? WHERE id = ? AND soLuong >= ?";
+        String updateQuery = "UPDATE products SET prQuantity = prQuantity - ?, updateDate = ? WHERE id = ? AND prQuantity >= ?";
         try {
             PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
             updateStatement.setInt(1, quantityToReduce);
@@ -226,7 +226,7 @@ public class ProductDAO {
 
     // neu san pham ton tai
     private boolean productExists(String productCode) {
-        String query = "SELECT COUNT(*) FROM sanPham WHERE ma = ?";
+        String query = "SELECT COUNT(*) FROM products WHERE code = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, productCode);
@@ -241,9 +241,9 @@ public class ProductDAO {
         return false;
     }
 
-    //tim theo ma
+    //tim theo code
     public Product getProductByCode(String productCode) {
-        String query = "SELECT * FROM sanPham WHERE ma = ?";
+        String query = "SELECT * FROM products WHERE code = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, productCode);
@@ -256,10 +256,10 @@ public class ProductDAO {
         }
         return null;
     }
-    // lay list san pham co cung ten khac ma 
+    // lay list san pham co cung prName khac code 
 
     public List<Product> getProductsByNameAndExpiration(String productName, String productCode, Date expirationDateThreshold) {
-        String query = "SELECT * FROM sanPham WHERE ten = ? AND ma <> ? AND trangThai = 1 AND soLuong > 0 AND hanSD > ?";
+        String query = "SELECT * FROM products WHERE prName = ? AND code <> ? AND prStatus = 1 AND prQuantity > 0 AND hanSD > ?";
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -287,7 +287,7 @@ public class ProductDAO {
     }
 
     public List<Product> getProductsByName(String name) {
-        String query = "SELECT * FROM sanPham WHERE ten = ? AND trangThai = 1";
+        String query = "SELECT * FROM products WHERE prName = ? AND prStatus = 1";
         List<Product> products = new ArrayList<>();
 
         try {

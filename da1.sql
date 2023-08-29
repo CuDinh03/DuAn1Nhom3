@@ -147,11 +147,13 @@ CREATE table Cart
 
 CREATE TABLE productType(
         ID uniqueidentifier not null DEFAULT (newid()) primary key,
-        typename NVARCHAR(100),
+        typename NVARCHAR(max),
          createDate DATE,
     updateDate DATE,
     prtypeStatus BIT
 );
+
+ALTER DATABASE da1 COLLATE Latin1_General_100_CI_AS_SC_UTF8;
 
 
 insert into productType(typename,createDate,updateDate,prtypeStatus) VALUES('Đồ đông lạnh', '2023-8-6','2023-8-6',1)
