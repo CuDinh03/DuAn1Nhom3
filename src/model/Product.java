@@ -1,83 +1,38 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
 
     private String id;
-    private String ma;
-    private String name;
-    private int quantity;
+    private String prName;
+    private int prQuantity;
     private String nguonGoc;
-    private double giaGoc;
-    private Date ngaySx;
-    private Date hsd;
-    private String idDanhMuc;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private BigDecimal giaGoc;
+    private Date expiry;
+    private Date MFG;
+    private String idType;
+    private Date createDate;
+    private Date updateDate;
+    private int prStatus;
 
     public Product() {
     }
 
-    public Product(String id, String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
+    public Product(String id, String prName, int prQuantity, String nguonGoc, BigDecimal giaGoc, Date expiry, Date MFG, String idType, Date createDate, Date updateDate, int prStatus) {
         this.id = id;
-        this.ma = ma;
-        this.name = name;
-    }
-    public Product(String id, String ma, String name, int quantity, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
-        this.ma = ma;
-        this.name = name;
-        this.quantity = quantity;
+        this.prName = prName;
+        this.prQuantity = prQuantity;
         this.nguonGoc = nguonGoc;
         this.giaGoc = giaGoc;
-        this.ngaySx = ngaySx;
-        this.hsd = hsd;
-        this.idDanhMuc = idDanhMuc;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.expiry = expiry;
+        this.MFG = MFG;
+        this.idType = idType;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.prStatus = prStatus;
     }
-
-    public Product(String ma, String name, int quantity, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
-        this.ma = ma;
-        this.name = name;
-        this.quantity = quantity;
-        this.nguonGoc = nguonGoc;
-        this.giaGoc = giaGoc;
-        this.ngaySx = ngaySx;
-        this.hsd = hsd;
-        this.idDanhMuc = idDanhMuc;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
-    }
-    
-    
-    
-    
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-    
-
-
-
 
     public String getId() {
         return id;
@@ -87,12 +42,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
+    public String getPrName() {
+        return prName;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setPrName(String prName) {
+        this.prName = prName;
+    }
+
+    public int getPrQuantity() {
+        return prQuantity;
+    }
+
+    public void setPrQuantity(int prQuantity) {
+        this.prQuantity = prQuantity;
     }
 
     public String getNguonGoc() {
@@ -103,60 +66,62 @@ public class Product {
         this.nguonGoc = nguonGoc;
     }
 
-    public double getGiaGoc() {
+    public BigDecimal getGiaGoc() {
         return giaGoc;
     }
 
-    public void setGiaGoc(double giaGoc) {
+    public void setGiaGoc(BigDecimal giaGoc) {
         this.giaGoc = giaGoc;
     }
 
-    public Date getNgaySx() {
-        return ngaySx;
+    public Date getExpiry() {
+        return expiry;
     }
 
-    public void setNgaySx(Date ngaySx) {
-        this.ngaySx = ngaySx;
+    public void setExpiry(Date expiry) {
+        this.expiry = expiry;
     }
 
-    public Date getHsd() {
-        return hsd;
+    public Date getMFG() {
+        return MFG;
     }
 
-    public void setHsd(Date hsd) {
-        this.hsd = hsd;
+    public void setMFG(Date MFG) {
+        this.MFG = MFG;
     }
 
-    public String getIdDanhMuc() {
-        return idDanhMuc;
+    public String getIdType() {
+        return idType;
     }
 
-    public void setIdDanhMuc(String idDanhMuc) {
-        this.idDanhMuc = idDanhMuc;
+    public void setIdType(String idType) {
+        this.idType = idType;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public int getStatus() {
-        return status;
+    public int getPrStatus() {
+        return prStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setPrStatus(int prStatus) {
+        this.prStatus = prStatus;
     }
+
+
 
 }

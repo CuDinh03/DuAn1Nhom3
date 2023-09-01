@@ -17,7 +17,7 @@ public class AccountRoleDAO {
 
 
     public static void create(AccountRole accountRole) {
-        String sql = "INSERT INTO taiKhoanVaiTro (idTaiKhoan, idVaiTro) VALUES (?, ?)";
+        String sql = "INSERT INTO roles_acc (idAcc, idRole) VALUES (?, ?)";
 
         try  {
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class AccountRoleDAO {
 
     public static AccountRole getById(String idAccount) {
         AccountRole accountRole = null;
-                    String sql = "SELECT * FROM taiKhoanVaiTro WHERE idTaiKhoan = ?";
+                    String sql = "SELECT * FROM roles_acc WHERE idAcc = ?";
 
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -53,15 +53,15 @@ public class AccountRoleDAO {
 
     public static List<AccountRole> getAll() {
         List<AccountRole> accountRoles = new ArrayList<>();
-                    String sql = "SELECT * FROM taiKhoanVaiTro";
+                    String sql = "SELECT * FROM roles_acc";
 
         try  {
             PreparedStatement statement = conn.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
            while (resultSet.next()) {
-                String idAccount = resultSet.getString("idTaiKhoan");
-                String idRole = resultSet.getString("idVaiTro");
+                String idAccount = resultSet.getString("idAcc");
+                String idRole = resultSet.getString("idRole");
 
                 AccountRole accountRole = new AccountRole(idAccount, idRole);
                 accountRoles.add(accountRole);

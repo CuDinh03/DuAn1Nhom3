@@ -5,37 +5,22 @@ import java.util.Date;
 
 public class Store {
     private String id;
-    private String ma;
-    private String ten;
-    private String diaChi;
-    private String idPhieuNhanHang;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String nameStore;
+    private String adrStore;
+    private Date createDate;
+    private Date updateDate;
+    private int storeStatus;
 
     public Store() {
     }
 
-    public Store(String id, String ma, String ten, String diaChi, String idPhieuNhanHang, Date ngayTao, Date ngaySua,
-            int status) {
+    public Store(String id, String nameStore, String adrStore, Date createDate, Date updateDate, int storeStatus) {
         this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.diaChi = diaChi;
-        this.idPhieuNhanHang = idPhieuNhanHang;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
-    }
-
-    public Store(String id, String ma, String ten, String diaChi, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.diaChi = diaChi;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.nameStore = nameStore;
+        this.adrStore = adrStore;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.storeStatus = storeStatus;
     }
 
     public String getId() {
@@ -46,60 +31,46 @@ public class Store {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
+    public String getNameStore() {
+        return nameStore;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setNameStore(String nameStore) {
+        this.nameStore = nameStore;
     }
 
-    public String getTen() {
-        return ten;
+    public String getAdrStore() {
+        return adrStore;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setAdrStore(String adrStore) {
+        this.adrStore = adrStore;
     }
 
-    public String getDiaChi() {
-        return diaChi;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public String getIdPhieuNhanHang() {
-        return idPhieuNhanHang;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setIdPhieuNhanHang(String idPhieuNhanHang) {
-        this.idPhieuNhanHang = idPhieuNhanHang;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public int getStoreStatus() {
+        return storeStatus;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setStoreStatus(int storeStatus) {
+        this.storeStatus = storeStatus;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
-    }
-
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    
 
 }

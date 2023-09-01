@@ -5,21 +5,23 @@ import java.util.Date;
 
 
 public class ProductTypes {
+    
     private String id;
-    private String name;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String typename;
+    private Date createDate;
+    private Date updateDate;
+    private int prtypeStatus;
 
+    
     public ProductTypes() {
     }
 
-    public ProductTypes(String id, String name, Date ngayTao, Date ngaySua, int status) {
+    public ProductTypes(String id, String typename, Date createDate, Date updateDate, int prtypeStatus) {
         this.id = id;
-        this.name = name;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.typename = typename;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.prtypeStatus = prtypeStatus;
     }
 
     public String getId() {
@@ -30,38 +32,37 @@ public class ProductTypes {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTypename() {
+        return typename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTypename(String typename) {
+        this.typename = typename;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public int getStatus() {
-        return status;
+    public int getPrtypeStatus() {
+        return prtypeStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setPrtypeStatus(int prtypeStatus) {
+        this.prtypeStatus = prtypeStatus;
     }
 
-   
     
 }

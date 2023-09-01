@@ -15,19 +15,19 @@ public class ItemsDAO {
 
     // Create (Insert) Operation
     public void insertItem(Items item) {
-        String sql = "INSERT INTO items ( idCart, idOrder, maSP, tenSp, soLuong, giaban, ngayTao, ngaySua, status) "
+        String sql = "INSERT INTO items ( idCart, idInventory, codeProducts, nameProducs, quantity, price, createDate, updateDate, itemsStatus) "
                 + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, item.getIdCart());
-            preparedStatement.setString(2, item.getIdOrder());
-            preparedStatement.setString(3, item.getMaSP());
-            preparedStatement.setString(4, item.getTenSp());
-            preparedStatement.setInt(5, item.getSoLuong());
-            preparedStatement.setDouble(6, item.getGiaban());
-            preparedStatement.setDate(7, new java.sql.Date(item.getNgayTao().getTime()));
-            preparedStatement.setDate(8, new java.sql.Date(item.getNgaySua().getTime()));
-            preparedStatement.setInt(9, item.getStatus());
+            preparedStatement.setString(2, item.getIdInventory());
+            preparedStatement.setString(3, item.getCodeProducts());
+            preparedStatement.setString(4, item.getNameProducs());
+            preparedStatement.setInt(5, item.getQuantity());
+            preparedStatement.setBigDecimal(6, item.getPrice());
+            preparedStatement.setDate(7, new java.sql.Date(item.getCreateDate().getTime()));
+            preparedStatement.setDate(8, new java.sql.Date(item.getUpdateDate().getTime()));
+            preparedStatement.setInt(9, item.getItemsStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,14 +47,14 @@ public class ItemsDAO {
                     item = new Items(
                             resultSet.getString("id"),
                             resultSet.getString("idCart"),
-                            resultSet.getString("idOrder"),
-                            resultSet.getString("maSP"),
-                            resultSet.getString("tenSp"),
-                            resultSet.getInt("soLuong"),
-                            resultSet.getDouble("giaban"),
-                            resultSet.getDate("ngayTao"),
-                            resultSet.getDate("ngaySua"),
-                            resultSet.getInt("status")
+                            resultSet.getString("idInventory"),
+                            resultSet.getString("codeProducts"),
+                            resultSet.getString("nameProducs"),
+                            resultSet.getInt("quantity"),
+                            resultSet.getBigDecimal("price"),
+                            resultSet.getDate("createDate"),
+                            resultSet.getDate("updateDate"),
+                            resultSet.getInt("itemsStatus")
                     );
                 }
             }
@@ -66,19 +66,19 @@ public class ItemsDAO {
 
     // Update Operation
     public void updateItem(Items item) {
-        String sql = "UPDATE items SET idCart = ?, idOrder = ?, maSP = ?, tenSp = ?, soLuong = ?, giaban = ?, "
-                + "ngayTao = ?, ngaySua = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE items SET idCart = ?, idInventory = ?, codeProducts = ?, nameProducs = ?, quantity = ?, price = ?, "
+                + "createDate = ?, updateDate = ?, itemsStatus = ? WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, item.getIdCart());
-            preparedStatement.setString(2, item.getIdOrder());
-            preparedStatement.setString(3, item.getMaSP());
-            preparedStatement.setString(4, item.getTenSp());
-            preparedStatement.setInt(5, item.getSoLuong());
-            preparedStatement.setDouble(6, item.getGiaban());
-            preparedStatement.setDate(7, new java.sql.Date(item.getNgayTao().getTime()));
-            preparedStatement.setDate(8, new java.sql.Date(item.getNgaySua().getTime()));
-            preparedStatement.setInt(9, item.getStatus());
+            preparedStatement.setString(2, item.getIdInventory());
+            preparedStatement.setString(3, item.getCodeProducts());
+            preparedStatement.setString(4, item.getNameProducs());
+            preparedStatement.setInt(5, item.getQuantity());
+            preparedStatement.setBigDecimal(6, item.getPrice());
+            preparedStatement.setDate(7, new java.sql.Date(item.getCreateDate().getTime()));
+            preparedStatement.setDate(8, new java.sql.Date(item.getUpdateDate().getTime()));
+            preparedStatement.setInt(9, item.getItemsStatus());
             preparedStatement.setString(10, item.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -110,14 +110,14 @@ public class ItemsDAO {
                 Items item = new Items(
                         resultSet.getString("id"),
                         resultSet.getString("idCart"),
-                        resultSet.getString("idOrder"),
-                        resultSet.getString("maSP"),
-                        resultSet.getString("tenSp"),
-                        resultSet.getInt("soLuong"),
-                        resultSet.getDouble("giaban"),
-                        resultSet.getDate("ngayTao"),
-                        resultSet.getDate("ngaySua"),
-                        resultSet.getInt("status")
+                        resultSet.getString("idInventory"),
+                        resultSet.getString("codeProducts"),
+                        resultSet.getString("nameProducs"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getBigDecimal("price"),
+                        resultSet.getDate("createDate"),
+                        resultSet.getDate("updateDate"),
+                        resultSet.getInt("itemsStatus")
                 );
                 itemsList.add(item);
             }
@@ -128,7 +128,7 @@ public class ItemsDAO {
     }
     public List<Items> getAllItemsByOrderId(String orderId) {
         List<Items> itemsList = new ArrayList<>();
-        String sql = "SELECT * FROM items WHERE idOrder = ?";
+        String sql = "SELECT * FROM items WHERE id = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -139,14 +139,14 @@ public class ItemsDAO {
                 Items item = new Items(
                         resultSet.getString("id"),
                         resultSet.getString("idCart"),
-                        resultSet.getString("idOrder"),
-                        resultSet.getString("maSP"),
-                        resultSet.getString("tenSp"),
-                        resultSet.getInt("soLuong"),
-                        resultSet.getDouble("giaban"),
-                        resultSet.getDate("ngayTao"),
-                        resultSet.getDate("ngaySua"),
-                        resultSet.getInt("status")
+                        resultSet.getString("idInventory"),
+                        resultSet.getString("codeProducts"),
+                        resultSet.getString("nameProducs"),
+                        resultSet.getInt("quantity"),
+                        resultSet.getBigDecimal("price"),
+                        resultSet.getDate("createDate"),
+                        resultSet.getDate("updateDate"),
+                        resultSet.getInt("itemsStatus")
                 );
                 itemsList.add(item);
             }

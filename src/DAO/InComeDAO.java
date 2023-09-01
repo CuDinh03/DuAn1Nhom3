@@ -24,15 +24,15 @@ public class InComeDAO {
 
     public void insertIncome(Income income) {
 
-        String sql = "INSERT INTO doanhThu ( ma, ngayTao, ngaySua, doanhThu) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO income ( code,total ,createDate ,updateDate ) VALUES (?, ?, ?, ?)";
         try {
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, income.getMa());
-            statement.setDate(2, new java.sql.Date(income.getNgayTao().getTime()));
-            statement.setDate(3, new java.sql.Date(income.getNgaySua().getTime()));
-            statement.setBigDecimal(4, income.getDoanhThu());
+            statement.setString(1, income.getCode());
+            statement.setDate(2, new java.sql.Date(income.getCreateDate().getTime()));
+            statement.setDate(3, new java.sql.Date(income.getUpdateDate().getTime()));
+            statement.setBigDecimal(4, income.getTotal());
             
             statement.executeUpdate();
 
@@ -44,7 +44,7 @@ public class InComeDAO {
 
     public List<Income> getAllStores() {
         List<Income> incomes = new ArrayList<>();
-        String sql = "SELECT * FROM doanhThu";
+        String sql = "SELECT * FROM total";
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -52,11 +52,11 @@ public class InComeDAO {
             while (resultSet.next()) {
                 Income income = new Income();
                 
-                income.setIdCh(resultSet.getString("idCH"));
-                income.setMa(resultSet.getString("ma"));
-                income.setNgayTao(resultSet.getDate("ngayTao"));
-                income.setNgaySua(resultSet.getDate("ngaySua"));
-                income.setDoanhThu(resultSet.getBigDecimal("doanhThu"));
+                income.setIdCh(resultSet.getString("ID"));
+                income.setCode(resultSet.getString("code"));
+                income.setCreateDate(resultSet.getDate("createDate"));
+                income.setUpdateDate(resultSet.getDate("updateDate"));
+                income.setTotal(resultSet.getBigDecimal("total"));
 
                 incomes.add(income);
             }
@@ -68,19 +68,19 @@ public class InComeDAO {
     }
 
     public void updateIncome(Income income) {
-        String sql = "UPDATE doanhThu SET ma=?, ngayTao=?, ngaySua=?, doanhThu=? WHERE idCH=?";
+        String sql = "UPDATE total SET code=?, createDate=?, updateDate=?, total=? WHERE ID=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, income.getMa());
-            statement.setDate(2, new java.sql.Date(income.getNgayTao().getTime()));
+            statement.setString(1, income.getCode());
+            statement.setDate(2, new java.sql.Date(income.getCreateDate().getTime()));
 
-            income.setNgaySua(new java.util.Date());
-            statement.setDate(3, new java.sql.Date(income.getNgaySua().getTime()));
-            statement.setBigDecimal(4, income.getDoanhThu());
+            income.setUpdateDate(new java.util.Date());
+            statement.setDate(3, new java.sql.Date(income.getUpdateDate().getTime()));
+            statement.setBigDecimal(4, income.getTotal());
 
             
-            statement.setString(6, income.getIdCh());
+            statement.setString(5, income.getIdCh());
 
             statement.executeUpdate();
 
@@ -92,15 +92,15 @@ public class InComeDAO {
 
     
      public void deleteInComeById(String idCH) {
-        String sql = "UPDATE doanhThu SET trangThai = 0  WHERE idCH=?";
+        String sql = "UPDATE total SET incomeStatus = 0  WHERE ID=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1,idCH);
             Income income = new Income();
-            income.setNgaySua(new java.util.Date());
+            income.setUpdateDate(new java.util.Date());
 
-            statement.setDate(4, new java.sql.Date(income.getNgaySua().getTime()));
+            statement.setDate(5, new java.sql.Date(income.getUpdateDate().getTime()));
             statement.executeUpdate();
 
             System.out.println("Xóa bản ghi thành công.");
@@ -111,7 +111,7 @@ public class InComeDAO {
     
     
     public Income findById(String id) {
-        String sql = "SELECT * FROM doanhThu WHERE idCH = ?";
+        String sql = "SELECT * FROM total WHERE ID = ?";
         Income income = null;
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -120,11 +120,11 @@ public class InComeDAO {
 
             if (resultSet.next()) {
                 income = new Income();
-                income.setIdCh(resultSet.getString("idCH"));
-                income.setMa(resultSet.getString("ma"));
-                income.setNgayTao(resultSet.getDate("ngayTao"));
-                income.setNgaySua(resultSet.getDate("ngaySua"));
-                income.setDoanhThu(resultSet.getBigDecimal("doanhThu"));
+                income.setIdCh(resultSet.getString("ID"));
+                income.setCode(resultSet.getString("code"));
+                income.setCreateDate(resultSet.getDate("createDate"));
+                income.setUpdateDate(resultSet.getDate("updateDate"));
+                income.setTotal(resultSet.getBigDecimal("total"));
  
             }
         } catch (SQLException e) {

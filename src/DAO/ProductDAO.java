@@ -22,7 +22,7 @@ public class ProductDAO {
 
     // Create
     public void addProduct(Product product) {
-        String productCode = product.getMa();
+        String productCode = product.getId();
 
         if (productExists(productCode)) {
             // neu ton tai code san pham nay r 

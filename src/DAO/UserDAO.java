@@ -17,20 +17,17 @@ public class UserDAO {
 
     // Method to insert a new user record into the database
     public static void insertUser(User user) {
-        String sql = "INSERT INTO NhanVien (maNv, tenNV, tuoi, diaChi, email, gioiTinh, soDienThoai, idKho, ngayTao, ngaySua, trangThai) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
+        String sql = "INSERT INTO USERs (userName, phone, userAddress, idAcc, createDate, updateDate, userStatus) "
+                + "VALUES (?, ?, ?, ?, ?, ?, 1)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getMaNv());
-            statement.setString(2, user.getTenNV());
-            statement.setInt(3, user.getTuoi());
-            statement.setString(4, user.getDiaChi());
-            statement.setString(5, user.getEmail());
-            statement.setInt(6, user.getGender());
-            statement.setString(7, user.getSdt());
-            statement.setString(8, user.getIdKho());
-            statement.setDate(9, new java.sql.Date(user.getNgayTao().getTime()));
-            statement.setDate(10, new java.sql.Date(user.getNgaySua().getTime()));
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getPhone());
+            statement.setString(3, user.getUserAddress());
+            statement.setString(4, user.getIdAcc());
+            
+            statement.setDate(5, new java.sql.Date(user.getCreateDate().getTime()));
+            statement.setDate(6, new java.sql.Date(user.getUpdateDate().getTime()));
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -40,23 +37,20 @@ public class UserDAO {
 
     // Method to update an existing user record in the database
     public static void updateUser(User user) {
-        String sql = "UPDATE NhanVien SET maNv=?, tenNV=?, tuoi=?, diaChi=?, email=?, gioiTinh=?, soDienThoai=?, idKho=?, ngayTao=?, ngaySua=?, trangThai=? "
+        String sql = "UPDATE USERs SET userName=?, phone=?, userAddress=?, idAcc=?, createDate=?, updateDate=?, userStatus=? "
                 + "WHERE id=?";
         try { PreparedStatement statement = connection.prepareStatement(sql);
                 
 
-            statement.setString(1, user.getMaNv());
-            statement.setString(2, user.getTenNV());
-            statement.setInt(3, user.getTuoi());
-            statement.setString(4, user.getDiaChi());
-            statement.setString(5, user.getEmail());
-            statement.setInt(6, user.getGender());
-            statement.setString(7, user.getSdt());
-            statement.setString(8, user.getIdKho());
-            statement.setDate(9, new java.sql.Date(user.getNgayTao().getTime()));
-            statement.setDate(10, new java.sql.Date(user.getNgaySua().getTime()));
-            statement.setInt(11, user.getStatus());
-            statement.setString(12, user.getId());
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getPhone());
+            statement.setString(3, user.getUserAddress());
+            statement.setString(4, user.getIdAcc());
+           
+            statement.setDate(5, new java.sql.Date(user.getCreateDate().getTime()));
+            statement.setDate(6, new java.sql.Date(user.getUpdateDate().getTime()));
+            statement.setInt(7, user.getUserStatus());
+            statement.setString(8, user.getId());
 
            statement.executeUpdate();
         } catch (SQLException e) {
@@ -66,7 +60,7 @@ public class UserDAO {
 
     // Method to delete a user record from the database
     public static void deleteUser(String userId) {
-        String sql = "UPDATE NhanVien SET trangThai = 0 WHERE id=?";
+        String sql = "UPDATE USERs SET userStatus = 0 WHERE id=?";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
                 
@@ -81,7 +75,7 @@ public class UserDAO {
 
     // Method to retrieve a user record from the database by its ID
     public static User getUserById(String userId) {
-        String sql = "SELECT * FROM NhanVien WHERE id=?";
+        String sql = "SELECT * FROM USERs WHERE id=?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -101,7 +95,7 @@ public class UserDAO {
     // Method to retrieve all user records from the database
     public static List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
-        String sql = "SELECT * FROM NhanVien";
+        String sql = "SELECT * FROM USERs";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -119,18 +113,14 @@ public class UserDAO {
     // Helper method to map a ResultSet to a User object
     private static User mapResultSetToUser(ResultSet resultSet) throws SQLException {
         String id = resultSet.getString("id");
-        String maNv = resultSet.getString("maNv");
-        String tenNV = resultSet.getString("tenNV");
-        int tuoi = resultSet.getInt("tuoi");
-        String diaChi = resultSet.getString("diaChi");
-        String email = resultSet.getString("email");
-        int gender = resultSet.getInt("gioiTinh");
-        String sdt = resultSet.getString("soDienThoai");
-        String idKho = resultSet.getString("idKho");
-        Date ngayTao = resultSet.getDate("ngayTao");
-        Date ngaySua = resultSet.getDate("ngaySua");
-        int status = resultSet.getInt("trangThai");
+        String userName = resultSet.getString("userName");
+        String phone = resultSet.getString("phone");        
+        String userAddress = resultSet.getString("userAddress");
+        String idAcc = resultSet.getString("idAcc");
+        Date createDate = resultSet.getDate("createDate");
+        Date updateDate = resultSet.getDate("updateDate");
+        int userStatus = resultSet.getInt("userStatus");
 
-        return new User(id, maNv, tenNV, tuoi, diaChi, email, gender, sdt, idKho, ngayTao, ngaySua, status);
+        return new User(id, userName, phone, userAddress, idAcc, createDate, updateDate, userStatus);
     }
 }

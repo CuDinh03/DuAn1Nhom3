@@ -6,35 +6,26 @@ import java.util.Date;
 public class User {
 
     private String id;
-    private String maNv;
-    private String tenNV;
-    private int tuoi;
-    private String diaChi;
-    private String email;
-    private int gender;
-    private String sdt;
-    private String idKho;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String userName;
+    private String phone;
+    private String userAddress;
+    private String idAcc;
+    private Date createDate;
+    private Date updateDate;
+    private int userStatus;
 
     public User() {
     }
 
-    public User(String id, String maNv, String tenNV, int tuoi, String diaChi, String email, int gender, String sdt,
-            String idKho, Date ngayTao, Date ngaySua, int status) {
+    public User(String id, String userName, String phone, String userAddress, String idAcc, Date createDate, Date updateDate, int userStatus) {
         this.id = id;
-        this.maNv = maNv;
-        this.tenNV = tenNV;
-        this.tuoi = tuoi;
-        this.diaChi = diaChi;
-        this.email = email;
-        this.gender = gender;
-        this.sdt = sdt;
-        this.idKho = idKho;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.userName = userName;
+        this.phone = phone;
+        this.userAddress = userAddress;
+        this.idAcc = idAcc;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.userStatus = userStatus;
     }
 
     public String getId() {
@@ -45,92 +36,62 @@ public class User {
         this.id = id;
     }
 
-    public String getMaNv() {
-        return maNv;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setMaNv(String maNv) {
-        this.maNv = maNv;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getTenNV() {
-        return tenNV;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTenNV(String tenNV) {
-        this.tenNV = tenNV;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public int getTuoi() {
-        return tuoi;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setTuoi(int tuoi) {
-        this.tuoi = tuoi;
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
-    public String getDiaChi() {
-        return diaChi;
+    public String getIdAcc() {
+        return idAcc;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setIdAcc(String idAcc) {
+        this.idAcc = idAcc;
     }
 
-    public String getEmail() {
-        return email;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public int getGender() {
-        return gender;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public String getSdt() {
-        return sdt;
+    public int getUserStatus() {
+        return userStatus;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setUserStatus(int userStatus) {
+        this.userStatus = userStatus;
     }
 
-    public String getIdKho() {
-        return idKho;
-    }
-
-    public void setIdKho(String idKho) {
-        this.idKho = idKho;
-    }
-
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    public Date getNgaySua() {
-        return ngaySua;
-    }
-
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
+  
+   
 }

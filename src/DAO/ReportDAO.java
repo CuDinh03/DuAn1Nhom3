@@ -24,20 +24,19 @@ public class ReportDAO {
 
     public void insertReport(Report report) {
 
-        String sql = "INSERT INTO baoCao ( maBC, noiDung, ten, ngayTao, ngaySua,doanhThu,trangThai, idNV, idCuaHang) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO report ( code, reportDESCRIPTION, namerp, idnv,income,createDate, updateDate, rpStatus) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
 
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, report.getMaBC());
-            statement.setString(2, report.getNoiDung());
-            statement.setString(3, report.getTen());
-            statement.setDate(4, new java.sql.Date(report.getNgayTao().getTime()));
-            statement.setDate(5, new java.sql.Date(report.getNgaySua().getTime()));
-            statement.setBigDecimal(6,report.getDoanhThu() );
-            statement.setInt(7, report.getTrangThai());
-            statement.setString(8, report.getIdNV());
-            statement.setString(9, report.getIdCH());
+            statement.setString(1, report.getCode());
+            statement.setString(2, report.getReportDESCRIPTION());
+            statement.setString(3, report.getNamerp());
+            statement.setDate(4, new java.sql.Date(report.getCreateDate().getTime()));
+            statement.setDate(5, new java.sql.Date(report.getUpdateDate().getTime()));
+            statement.setInt(6, report.getRpStatus());
+            statement.setString(7, report.getIdnv());
+            statement.setString(8, report.getIncome());
             
             statement.executeUpdate();
 
@@ -49,7 +48,7 @@ public class ReportDAO {
 
     public List<Report> getAllStores() {
         List<Report> reports = new ArrayList<>();
-        String sql = "SELECT * FROM baoCao";
+        String sql = "SELECT * FROM report";
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -58,15 +57,14 @@ public class ReportDAO {
                 Report report = new Report();
                 
                 report.setId(resultSet.getString("id"));
-                report.setMaBC(resultSet.getString("maBC"));
-                report.setNoiDung(resultSet.getString("noiDung"));
-                report.setTen(resultSet.getString("ten"));
-                report.setNgayTao(resultSet.getDate("ngayTao"));
-                report.setNgayTao(resultSet.getDate("ngaySua"));
-                report.setDoanhThu(resultSet.getBigDecimal("doanhThu"));
-                report.setTrangThai(resultSet.getInt("trangThai"));
-                report.setIdNV(resultSet.getString("idNV"));
-                report.setIdCH(resultSet.getString("idCuaHang"));
+                report.setCode(resultSet.getString("code"));
+                report.setReportDESCRIPTION(resultSet.getString("reportDESCRIPTION"));
+                report.setNamerp(resultSet.getString("namerp"));
+                report.setCreateDate(resultSet.getDate("createDate"));
+                report.setUpdateDate(resultSet.getDate("updateDate"));
+                report.setRpStatus(resultSet.getInt("rpStatus"));
+                report.setIdnv(resultSet.getString("idnv"));
+                report.setIncome(resultSet.getString("income"));
 
                 reports.add(report);
             }
@@ -78,20 +76,19 @@ public class ReportDAO {
     }
 
     public void updateReport(Report report) {
-        String sql = "UPDATE baoCao SET maBC=?, noiDung=?, ten=?, ngayTao=?, ngaySua=?, doanhThu=? , trangThai=?, idNV=? , idCuaHang=? WHERE id=?";
+        String sql = "UPDATE report SET code=?, reportDESCRIPTION=?, namerp=?, createDate=?, updateDate=?, rpStatus=?, idnv=? , income=? WHERE id=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, report.getMaBC());
-            statement.setString(2, report.getNoiDung());
-            statement.setString(3, report.getTen());
-            statement.setDate(4, new java.sql.Date(report.getNgayTao().getTime()));
-            report.setNgaySua(new java.util.Date());
-            statement.setDate(5, new java.sql.Date(report.getNgaySua().getTime()));
-            statement.setBigDecimal(6, report.getDoanhThu());
-            statement.setInt(7, report.getTrangThai());
-            statement.setString(8, report.getIdNV());
-            statement.setString(9, report.getIdCH());
+            statement.setString(1, report.getCode());
+            statement.setString(2, report.getReportDESCRIPTION());
+            statement.setString(3, report.getNamerp());
+            statement.setDate(4, new java.sql.Date(report.getCreateDate().getTime()));
+            report.setUpdateDate(new java.util.Date());
+            statement.setDate(5, new java.sql.Date(report.getUpdateDate().getTime()));
+            statement.setInt(6, report.getRpStatus());
+            statement.setString(7, report.getIdnv());
+            statement.setString(8, report.getIncome());
             
             statement.setString(10, report.getId());
 
@@ -105,15 +102,15 @@ public class ReportDAO {
 
     
      public void deleteReportById(String id) {
-        String sql = "UPDATE baoCao SET trangThai = 0  WHERE id=?";
+        String sql = "UPDATE report SET rpStatus = 0  WHERE id=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, id);
             Report report = new Report();
-            report.setNgaySua(new java.util.Date());
+            report.setUpdateDate(new java.util.Date());
 
-            statement.setDate(6, new java.sql.Date(report.getNgaySua().getTime()));
+            statement.setDate(6, new java.sql.Date(report.getUpdateDate().getTime()));
             statement.executeUpdate();
 
             System.out.println("Xóa bản ghi thành công.");
@@ -124,7 +121,7 @@ public class ReportDAO {
     
     
     public Report findById(String id) {
-        String sql = "SELECT * FROM baoCao WHERE id = ?";
+        String sql = "SELECT * FROM report WHERE id = ?";
         Report report = null;
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -134,15 +131,14 @@ public class ReportDAO {
             if (resultSet.next()) {
                 report = new Report();
                 report.setId(resultSet.getString("id"));
-                report.setMaBC(resultSet.getString("maBC"));
-                report.setNoiDung(resultSet.getString("noiDung"));
-                report.setTen(resultSet.getString("ten"));
-                report.setNgayTao(resultSet.getDate("ngayTao"));
-                report.setNgayTao(resultSet.getDate("ngaySua"));
-                report.setDoanhThu(resultSet.getBigDecimal("doanhThu"));
-                report.setTrangThai(resultSet.getInt("trangThai"));
-                report.setIdNV(resultSet.getString("idNV"));
-                report.setIdCH(resultSet.getString("idCuaHang"));
+                report.setCode(resultSet.getString("code"));
+                report.setReportDESCRIPTION(resultSet.getString("reportDESCRIPTION"));
+                report.setNamerp(resultSet.getString("namerp"));
+                report.setCreateDate(resultSet.getDate("createDate"));
+                report.setUpdateDate(resultSet.getDate("updateDate"));
+                report.setRpStatus(resultSet.getInt("rpStatus"));
+                report.setIdnv(resultSet.getString("idnv"));
+                report.setIncome(resultSet.getString("income"));
 
             }
         } catch (SQLException e) {

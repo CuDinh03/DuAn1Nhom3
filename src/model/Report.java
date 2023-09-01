@@ -12,30 +12,28 @@ import java.util.Date;
 
 public class Report {
     private String id;
-    private String maBC;
-    private String noiDung;
-    private String ten;
-    private Date ngayTao;
-    private Date ngaySua;
-    private BigDecimal doanhThu;
-    private int trangThai;
-    private String idNV;
-    private String idCH;
+    private String code;
+    private String reportDESCRIPTION;
+    private String namerp;
+    private String idnv;
+    private String income;
+    private Date createDate;
+    private Date updateDate;
+    private int rpStatus;
 
     public Report() {
     }
 
-    public Report(String id, String maBC, String noiDung, String ten, Date ngayTao, Date ngaySua, BigDecimal doanhThu, int trangThai, String idNV, String idCH) {
+    public Report(String id, String code, String reportDESCRIPTION, String namerp, String idnv, String income, Date createDate, Date updateDate, int rpStatus) {
         this.id = id;
-        this.maBC = maBC;
-        this.noiDung = noiDung;
-        this.ten = ten;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.doanhThu = doanhThu;
-        this.trangThai = trangThai;
-        this.idNV = idNV;
-        this.idCH = idCH;
+        this.code = code;
+        this.reportDESCRIPTION = reportDESCRIPTION;
+        this.namerp = namerp;
+        this.idnv = idnv;
+        this.income = income;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.rpStatus = rpStatus;
     }
 
     public String getId() {
@@ -46,77 +44,72 @@ public class Report {
         this.id = id;
     }
 
-    public String getMaBC() {
-        return maBC;
+    public String getCode() {
+        return code;
     }
 
-    public void setMaBC(String maBC) {
-        this.maBC = maBC;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getNoiDung() {
-        return noiDung;
+    public String getReportDESCRIPTION() {
+        return reportDESCRIPTION;
     }
 
-    public void setNoiDung(String noiDung) {
-        this.noiDung = noiDung;
+    public void setReportDESCRIPTION(String reportDESCRIPTION) {
+        this.reportDESCRIPTION = reportDESCRIPTION;
     }
 
-    public String getTen() {
-        return ten;
+    public String getNamerp() {
+        return namerp;
     }
 
-    public void setTen(String ten) {
-        this.ten = ten;
+    public void setNamerp(String namerp) {
+        this.namerp = namerp;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public String getIdnv() {
+        return idnv;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setIdnv(String idnv) {
+        this.idnv = idnv;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public String getIncome() {
+        return income;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setIncome(String income) {
+        this.income = income;
     }
 
-    public BigDecimal getDoanhThu() {
-        return doanhThu;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDoanhThu(BigDecimal doanhThu) {
-        this.doanhThu = doanhThu;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public String getIdNV() {
-        return idNV;
+    public int getRpStatus() {
+        return rpStatus;
     }
 
-    public void setIdNV(String idNV) {
-        this.idNV = idNV;
+    public void setRpStatus(int rpStatus) {
+        this.rpStatus = rpStatus;
     }
 
-    public String getIdCH() {
-        return idCH;
-    }
 
-    public void setIdCH(String idCH) {
-        this.idCH = idCH;
-    }
+
 
     
     
