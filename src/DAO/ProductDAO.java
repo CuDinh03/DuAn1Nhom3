@@ -141,8 +141,8 @@ public class ProductDAO {
         String query = "UPDATE products SET prStatus = 0, updateDate = ? WHERE id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, id);
-            statement.setTimestamp(2, new java.sql.Timestamp(getCurrentDateTime().getTime()));
+            statement.setTimestamp(1, new java.sql.Timestamp(getCurrentDateTime().getTime()));
+            statement.setString(2, id);
 
             statement.executeUpdate();
         } catch (SQLException e) {
