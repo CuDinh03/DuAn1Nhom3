@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 import model.Product;
 import org.apache.poi.ss.usermodel.Row;
@@ -29,7 +30,7 @@ public class ReadFileExcel {
                 String name = row.getCell(1).getStringCellValue();
                 int soLuong = (int) row.getCell(2).getNumericCellValue();
                 String nguonGoc = row.getCell(3).getStringCellValue();
-                double giaGoc = row.getCell(4).getNumericCellValue();
+                BigDecimal giaGoc = BigDecimal.valueOf( row.getCell(4).getNumericCellValue());
                 Date ngaySx = new Date(row.getCell(5).getDateCellValue().getTime());
                 Date hsd = new Date(row.getCell(6).getDateCellValue().getTime());
                 String idDanhMuc = row.getCell(7).getStringCellValue();
@@ -37,7 +38,7 @@ public class ReadFileExcel {
                 Date ngaySua = new Date(row.getCell(9).getDateCellValue().getTime());
                 int status = (int) row.getCell(10).getNumericCellValue();
 
-                Product product = new Product(ma, name, soLuong, nguonGoc, giaGoc, ngaySx, hsd, idDanhMuc, ngayTao, ngaySua, status);
+                Product product = new Product("",ma, name, soLuong, nguonGoc, giaGoc, hsd, ngaySx, idDanhMuc, ngayTao, ngaySua, status);
                 ProductDAO pdao = new ProductDAO();
                 pdao.addProduct(product);
             }

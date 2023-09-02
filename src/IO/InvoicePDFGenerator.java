@@ -48,9 +48,9 @@ public class InvoicePDFGenerator {
             int i=0;
             for (Items items : list) {
                 i++;
-                document.add(new Paragraph("Sản phẩm " + i + ": " + items.getTenSp(),vietnameseFont));
-                document.add(new Paragraph("Số lượng sản phẩm " + i + ": " + items.getSoLuong(),vietnameseFont));
-                document.add(new Paragraph("Giá sản phẩm " + i + ": " + items.getGiaban(),vietnameseFont));
+                document.add(new Paragraph("Sản phẩm " + i + ": " + items.getNameProducs(),vietnameseFont));
+                document.add(new Paragraph("Số lượng sản phẩm " + i + ": " + items.getQuantity(),vietnameseFont));
+                document.add(new Paragraph("Giá sản phẩm " + i + ": " + items.getPrice(),vietnameseFont));
 
             }
             document.add(new Paragraph("Ngày mua: " + date.toString(),vietnameseFont));

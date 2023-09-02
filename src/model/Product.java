@@ -6,10 +6,11 @@ import java.util.Date;
 public class Product {
 
     private String id;
+    private String code;
     private String prName;
     private int prQuantity;
-    private String nguonGoc;
-    private BigDecimal giaGoc;
+    private String original;
+    private BigDecimal cost;
     private Date expiry;
     private Date MFG;
     private String idType;
@@ -20,12 +21,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(String id, String prName, int prQuantity, String nguonGoc, BigDecimal giaGoc, Date expiry, Date MFG, String idType, Date createDate, Date updateDate, int prStatus) {
+    public Product(String id, String code, String prName, int prQuantity, String original, BigDecimal cost, Date expiry, Date MFG, String idType, Date createDate, Date updateDate, int prStatus) {
         this.id = id;
+        this.code = code;
         this.prName = prName;
         this.prQuantity = prQuantity;
-        this.nguonGoc = nguonGoc;
-        this.giaGoc = giaGoc;
+        this.original = original;
+        this.cost = cost;
         this.expiry = expiry;
         this.MFG = MFG;
         this.idType = idType;
@@ -33,6 +35,16 @@ public class Product {
         this.updateDate = updateDate;
         this.prStatus = prStatus;
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    
 
     public String getId() {
         return id;
@@ -58,21 +70,22 @@ public class Product {
         this.prQuantity = prQuantity;
     }
 
-    public String getNguonGoc() {
-        return nguonGoc;
+    public String getOriginal() {
+        return original;
     }
 
-    public void setNguonGoc(String nguonGoc) {
-        this.nguonGoc = nguonGoc;
+    public void setOriginal(String original) {
+        this.original = original;
     }
 
-    public BigDecimal getGiaGoc() {
-        return giaGoc;
+    public BigDecimal getCost() {
+        return cost;
     }
 
-    public void setGiaGoc(BigDecimal giaGoc) {
-        this.giaGoc = giaGoc;
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
     }
+    
 
     public Date getExpiry() {
         return expiry;

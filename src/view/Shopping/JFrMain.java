@@ -15,6 +15,7 @@ import Erro.InsufficientProductQuantityException;
 import IO.InvoicePDFGenerator;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -73,7 +74,7 @@ public class JFrMain extends javax.swing.JFrame {
         dtm.setRowCount(0);
         for (Product pr : prdao.getAllProducts()) {
             Object[] data = {
-                pr.getMa(), pr.getName(), pr.getIdDanhMuc(), pr.getHsd(), pr.getNgaySx(), pr.getNguonGoc(), pr.getGiaGoc(), pr.getStatus()
+                pr.getCode(), pr.getPrName(), pr.getIdType(), pr.getExpiry(), pr.getMFG(), pr.getOriginal(), pr.getCost(), pr.getPrStatus()
             };
             dtm.addRow(data);
         }
@@ -105,7 +106,7 @@ public class JFrMain extends javax.swing.JFrame {
         dtmGH.setRowCount(0);
         for (Items items : itemList) {
             Object[] data = {
-                items.getMaSP(), items.getTenSp(), items.getSoLuong(), items.getGiaban(), (items.getGiaban() * (double) items.getSoLuong())
+                items.getCodeProducts(), items.getNameProducs(), items.getQuantity(), items.getPrice(), items.getPrice().multiply(BigDecimal.valueOf(items.getQuantity()))
             };
             dtmGH.addRow(data);
         }
@@ -113,28 +114,31 @@ public class JFrMain extends javax.swing.JFrame {
 
     }
 
-    private void tienThua(double tienKhachdua) {
-        double tienthua = tienKhachdua - this.calculateTotalPrice();
-        if (tienthua < 0) {
-            JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + (tienthua * (-1)) + "k");
-        }
-
-        this.txtTienThua.setText(Double.toString(tienthua));
+private void tienThua(BigDecimal tienKhachdua) {
+    BigDecimal tienthua = tienKhachdua.subtract(this.calculateTotalPrice());
+    if (tienthua.compareTo(BigDecimal.ZERO) < 0) {
+        JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + tienthua.abs() + "k");
     }
+
+    this.txtTienThua.setText(tienthua.toString());
+}
 
     private Items findItemByProductId(String maSP) {
         for (Items item : itemList) {
-            if (item.getMaSP().equals(maSP)) {
+            if (item.getCodeProducts().equals(maSP)) {
                 return item;
             }
         }
         return null;
     }
 
-    public double calculateTotalPrice() {
-        double totalPrice = 0.0;
+    public BigDecimal calculateTotalPrice() {
+        BigDecimal totalPrice = BigDecimal.ZERO;
         for (Items item : itemList) {
-            totalPrice += item.getSoLuong() * item.getGiaban();
+        BigDecimal itemPrice = item.getPrice();
+        int itemQuantity = item.getQuantity();
+        BigDecimal itemTotal = itemPrice.multiply(BigDecimal.valueOf(itemQuantity));
+        totalPrice = totalPrice.add(itemTotal);;
         }
         return totalPrice;
     }
@@ -142,10 +146,10 @@ public class JFrMain extends javax.swing.JFrame {
     public void loadCbb() {
 
         for (Store store : sdao.getAllStores()) {
-            this.cbbCH.addItem(store.getTen());
+            this.cbbCH.addItem(store.getNameStore());
         }
         for (User users : UserDAO.getAllUsers()) {
-            this.cbbNhanVien.addItem(users.getTenNV());
+            this.cbbNhanVien.addItem(users.getUserName());
         }
     }
 
@@ -780,7 +784,7 @@ public class JFrMain extends javax.swing.JFrame {
         dtmGH.setRowCount(0);
         for (Items items : itemList) {
             Object[] data = {
-                items.getMaSP(), items.getTenSp(), items.getSoLuong(), items.getGiaban(), (items.getGiaban() * (double) items.getSoLuong())
+                items.getCodeProducts(), items.getNameProducs(), items.getQuantity(), items.getPrice(), items.getPrice().multiply(BigDecimal.valueOf(items.getQuantity()))
             };
             dtmGH.addRow(data);
         }
@@ -819,32 +823,32 @@ public class JFrMain extends javax.swing.JFrame {
 //            default -> {
 //            }
 //        }
-        int col = this.tblDanhSachSP.getSelectedRow();
-        if (col == -1) {
-            return;
-        }
-
-//        pr.getMa(),pr.getName(),pr.getIdDanhMuc(),pr.getHsd(),pr.getNgaySx(),pr.getNguonGoc(),pr.getGiaGoc(),pr.getStatus()
-        String ma = this.tblDanhSachSP.getValueAt(col, 0).toString();
-        String name = this.tblDanhSachSP.getValueAt(col, 1).toString();
-        String pr = this.tblDanhSachSP.getValueAt(col, 6).toString();
-
-        double price = Double.parseDouble(pr) * 2;
-
-        Items existingItem = this.findItemByProductId(ma);
-
-        if (existingItem != null) {
-            existingItem.setSoLuong(existingItem.getSoLuong() + 1);
-        } else {
-            Items item = new Items("", "", "", ma, name, 1, price, 1);
-            itemList.add(item);
-        }
-
-        this.loadTableCart();
-
-        this.showTotal();
-        
-        
+//        int col = this.tblDanhSachSP.getSelectedRow();
+//        if (col == -1) {
+//            return;
+//        }
+//
+////        pr.getMa(),pr.getName(),pr.getIdDanhMuc(),pr.getHsd(),pr.getNgaySx(),pr.getNguonGoc(),pr.getGiaGoc(),pr.getStatus()
+//        String ma = this.tblDanhSachSP.getValueAt(col, 0).toString();
+//        String name = this.tblDanhSachSP.getValueAt(col, 1).toString();
+//        String pr = this.tblDanhSachSP.getValueAt(col, 6).toString();
+//
+//        BigDecimal price = BigDecimal.valueOf( Double.parseDouble(pr) * 2);
+//
+//        Items existingItem = this.findItemByProductId(ma);
+//
+//        if (existingItem != null) {
+//            existingItem.setQuantity(existingItem.getQuantity()+ 1);
+//        } else {
+//            Items item = new Items("", pr, pr, pr, name, SOMEBITS, price, createDate, updateDate, 1)
+//            itemList.add(item);
+//        }
+//
+//        this.loadTableCart();
+//
+//        this.showTotal();
+//        
+//        
     }//GEN-LAST:event_tblDanhSachSPMouseClicked
 
     private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
@@ -891,7 +895,7 @@ public class JFrMain extends javax.swing.JFrame {
         }
 
         try {
-            double tienkdua = Double.parseDouble(tienkd);
+            BigDecimal tienkdua = BigDecimal.valueOf(Double.parseDouble(tienkd));
             this.tienThua(tienkdua);
 
         } catch (NumberFormatException e) {
@@ -921,7 +925,7 @@ public class JFrMain extends javax.swing.JFrame {
                 String ma = tblGioHang.getValueAt(row, 0).toString();
 
                 for (Items items : itemList) {
-                    if (items.getMaSP().equals(ma)) {
+                    if (items.getCodeProducts().equals(ma)) {
                         itemList.remove(items);
                         JOptionPane.showMessageDialog(this, "Xoá thành công");
                         break;
@@ -975,17 +979,17 @@ public class JFrMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         ProductDAO pdao = new ProductDAO();
         for (Items items : itemList) {
-            String productCode = items.getMaSP();
+            String productCode = items.getCodeProducts();
             Product product = pdao.getProductByCode(productCode);
 
             if (product != null) {
-                int quantityToAdd = items.getSoLuong();
+                int quantityToAdd = items.getQuantity();
                 if (quantityToAdd > 0) {
                     try {
                         pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
 
                     } catch (InsufficientProductQuantityException ex) {
-                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getName() + "' không đủ.");
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getPrName()+ "' không đủ.");
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
@@ -1103,7 +1107,9 @@ public class JFrMain extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void showTotal() {
-        this.txtTongTien.setText(Double.toString(calculateTotalPrice()));
+         BigDecimal totalPrice = calculateTotalPrice();
+    String totalPriceString = totalPrice.toString();
+    this.txtTongTien.setText(totalPriceString);
     }
 
     private void thanhtoan() {
@@ -1150,10 +1156,10 @@ public class JFrMain extends javax.swing.JFrame {
 
             ItemsDAO idao = new ItemsDAO();
             for (Items items : itemList) {
-                items.setIdOrder(odao.getOrderByMa(ma).getId());
+                items.setIdInventory(odao.getOrderByMa(ma).getId());
                 items.setIdCart(scdao.getShoppingCartByMa(ma).getId());
-                items.setNgayTao(ngaytao);
-                items.setNgaySua(ngaySua);
+                items.setCreateDate(ngaytao);
+                items.setUpdateDate(ngaySua);
                 idao.insertItem(items);
             }
             JOptionPane.showMessageDialog(this, "Tạo hoá đợn thành công");

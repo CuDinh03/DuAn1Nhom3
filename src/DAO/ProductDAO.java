@@ -22,7 +22,7 @@ public class ProductDAO {
 
     // Create
     public void addProduct(Product product) {
-        String productCode = product.getId();
+        String productCode = product.getCode();
 
         if (productExists(productCode)) {
             // neu ton tai code san pham nay r 
@@ -41,7 +41,7 @@ public class ProductDAO {
                 quantityStatement.close();
 
                 // tinh so luong moi
-                int newQuantity = currentQuantity + product.getQuantity();
+                int newQuantity = currentQuantity + product.getPrQuantity();
 
                 // cap nhat lai so luong 
                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
@@ -60,17 +60,17 @@ public class ProductDAO {
 
             try {
                 PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
-                insertStatement.setString(1, product.getMa());
-                insertStatement.setString(2, product.getName());
-                insertStatement.setInt(3, product.getQuantity());
-                insertStatement.setString(4, product.getNguonGoc());
-                insertStatement.setDouble(5, product.getGiaGoc());
-                insertStatement.setDate(6, new java.sql.Date(product.getNgaySx().getTime()));
-                insertStatement.setDate(7, new java.sql.Date(product.getHsd().getTime()));
-                insertStatement.setString(8, product.getIdDanhMuc());
-                insertStatement.setDate(9, new java.sql.Date(product.getNgayTao().getTime()));
-                insertStatement.setDate(10, new java.sql.Date(product.getNgaySua().getTime()));
-                insertStatement.setInt(11, product.getStatus());
+                insertStatement.setString(1, product.getCode());
+                insertStatement.setString(2, product.getPrName());
+                insertStatement.setInt(3, product.getPrQuantity());
+                insertStatement.setString(4, product.getOriginal());
+                insertStatement.setBigDecimal(5, product.getCost());
+                insertStatement.setDate(6, new java.sql.Date(product.getMFG().getTime()));
+                insertStatement.setDate(7, new java.sql.Date(product.getExpiry().getTime()));
+                insertStatement.setString(8, product.getIdType());
+                insertStatement.setDate(9, new java.sql.Date(product.getCreateDate().getTime()));
+                insertStatement.setDate(10, new java.sql.Date(product.getUpdateDate().getTime()));
+                insertStatement.setInt(11, product.getPrStatus());
                 insertStatement.executeUpdate();
                 insertStatement.close();
             } catch (SQLException e) {
@@ -97,7 +97,7 @@ public class ProductDAO {
     //show toan bo san pham
 
     public List<Product> getAllProducts() {
-        String query = "SELECT * FROM products WHERE prStatus = 1 AND prQuantity > 0 AND hanSD >= GETDATE()";
+        String query = "SELECT * FROM products WHERE prStatus = 1 AND prQuantity > 0 AND expiry >= GETDATE()";
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -114,21 +114,21 @@ public class ProductDAO {
 
     // Update
     public void updateProduct(Product product) {
-        String query = "UPDATE products SET code = ?, prName = ?, original = ?, cost = ?, MFG = ?, hanSD = ?, "
+        String query = "UPDATE products SET code = ?, prName = ?, original = ?, cost = ?, MFG = ?, expiry = ?, "
                 + "idType = ?, createDate = ?, updateDate = ?, prStatus = ? WHERE id = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, product.getMa());
-            statement.setString(2, product.getName());
-            statement.setString(3, product.getNguonGoc());
-            statement.setDouble(4, product.getGiaGoc());
-            statement.setDate(5, new java.sql.Date(product.getNgaySx().getTime()));
-            statement.setDate(6, new java.sql.Date(product.getHsd().getTime()));
-            statement.setString(7, product.getIdDanhMuc());
-            statement.setDate(8, new java.sql.Date(product.getNgayTao().getTime()));
+            statement.setString(1, product.getCode());
+            statement.setString(2, product.getPrName());
+            statement.setString(3, product.getOriginal());
+            statement.setBigDecimal(4, product.getCost());
+            statement.setDate(5, new java.sql.Date(product.getMFG().getTime()));
+            statement.setDate(6, new java.sql.Date(product.getExpiry().getTime()));
+            statement.setString(7, product.getIdType());
+            statement.setDate(8, new java.sql.Date(product.getCreateDate().getTime()));
             statement.setTimestamp(9, new java.sql.Timestamp(getCurrentDateTime().getTime()));
-            statement.setInt(10, product.getStatus());
+            statement.setInt(10, product.getPrStatus());
             statement.setString(11, product.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -158,16 +158,15 @@ public class ProductDAO {
         int prQuantity = resultSet.getInt("prQuantity");
         String original = resultSet.getString("original");
         BigDecimal cost = resultSet.getBigDecimal("cost");
-        double costdb = cost.doubleValue();
         Date MFG = resultSet.getDate("MFG");
-        Date hsd = resultSet.getDate("hanSD");
+        Date hsd = resultSet.getDate("expiry");
         String idType = resultSet.getString("idType");
         Date createDate = resultSet.getDate("createDate");
         Date updateDate = resultSet.getDate("updateDate");
 
         int status = resultSet.getInt("prStatus");
 
-        return new Product(id, code, prName, prQuantity, original, costdb, MFG, hsd, idType, createDate, updateDate, status);
+        return new Product(id, code, prName, prQuantity, original, cost, MFG, hsd, idType, createDate, updateDate, status);
     }
     //tim kiem theo id
 
@@ -259,7 +258,7 @@ public class ProductDAO {
     // lay list san pham co cung prName khac code 
 
     public List<Product> getProductsByNameAndExpiration(String productName, String productCode, Date expirationDateThreshold) {
-        String query = "SELECT * FROM products WHERE prName = ? AND code <> ? AND prStatus = 1 AND prQuantity > 0 AND hanSD > ?";
+        String query = "SELECT * FROM products WHERE prName = ? AND code <> ? AND prStatus = 1 AND prQuantity > 0 AND expiry > ?";
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -279,7 +278,7 @@ public class ProductDAO {
         Collections.sort(products, new Comparator<Product>() {
             @Override
             public int compare(Product product1, Product product2) {
-                return product1.getHsd().compareTo(product2.getHsd());
+                return product1.getExpiry().compareTo(product2.getExpiry());
             }
         });
 

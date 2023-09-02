@@ -2,6 +2,7 @@ package view.QuanLyKho;
 
 import DAO.ProductDAO;
 import IO.ReadFileExcel;
+import java.math.BigDecimal;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
@@ -41,23 +42,23 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
         for (Product product : productDAO.getAllProducts()) {
             String status;
-            if (product.getStatus() == 0 || product.getQuantity() == 0  ) {
+            if (product.getPrStatus()== 0 || product.getPrQuantity()== 0  ) {
                 status = "Hết hàng";
             } else {
                 status = "Còn hàng";
             }
             Object[] rowData = {
                     product.getId(),
-                    product.getMa(),
-                    product.getName(),
-                    product.getQuantity(),
-                    product.getIdDanhMuc(),
-                    product.getNguonGoc(),
-                    product.getNgayTao(),
-                    product.getNgaySua(),
-                    product.getNgaySx(),
-                    product.getHsd(),
-                    product.getGiaGoc(),
+                    product.getCode(),
+                    product.getPrName(),
+                    product.getPrQuantity(),
+                    product.getIdType(),
+                    product.getOriginal(),
+                    product.getCreateDate(),
+                    product.getUpdateDate(),
+                    product.getMFG(),
+                    product.getExpiry(),
+                    product.getCost(),
                     status
             };
 
@@ -69,8 +70,8 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
     public void loadCbbDanhMuc() {
         for (Product product : productDAO.getAllProducts()) {
-            this.cbbDanhMuc.addItem(product.getIdDanhMuc());
-            this.cbbFinddanhMuc.addItem(product.getIdDanhMuc());
+            this.cbbDanhMuc.addItem(product.getIdType());
+            this.cbbFinddanhMuc.addItem(product.getIdType());
 
         }
     }
@@ -133,17 +134,17 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
             String donGiaStr = txtDonGia.getText().trim();
             String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
-            double donGia = Double.parseDouble(donGiaStr);
+            BigDecimal donGia = BigDecimal.valueOf(Double.parseDouble(donGiaStr));
             int trangThai = Integer.parseInt(trangThaiStr);
 
             for (Product product : this.productService.findAll()) {
-                if (product.getMa().equals(ma)) {
+                if (product.getCode().equals(ma)) {
                     JOptionPane.showMessageDialog(this, "Mã này đã tồn tại");
                     return;
                 }
             }
 
-            Product product = new Product(ma, ten, 1, nguonGoc, donGia, sqlDate3, sqlDate4, idDanhMuc, sqlDate1,
+            Product product = new Product("",ma, ten, 1, nguonGoc, donGia, sqlDate3, sqlDate4, idDanhMuc, sqlDate1,
                     sqlDate2, trangThai);
 
             this.productService.insert(product);
@@ -206,11 +207,11 @@ public class JFrQuanLy extends javax.swing.JFrame {
 
             String donGiaStr = txtDonGia.getText().trim();
             String trangThaiStr = cbbTrangThai.getSelectedItem().toString();
-            double donGia = Double.parseDouble(donGiaStr);
+            BigDecimal donGia = BigDecimal.valueOf(Double.parseDouble(donGiaStr));
             int trangThai = Integer.parseInt(trangThaiStr);
 
             for (Product pr : this.productService.findAll()) {
-                if (ma.contains(pr.getMa())) {
+                if (ma.contains(pr.getCode())) {
                     JOptionPane.showMessageDialog(this, "Không được trùng mã");
                     return;
                 }
@@ -221,7 +222,7 @@ public class JFrQuanLy extends javax.swing.JFrame {
                 return;
 
             }
-            Product product = new Product(id, ma, ten, nguonGoc, donGia, sqlDate3, sqlDate4, idDanhMuc, sqlDate1,
+            Product product = new Product(id,ma, ten, 1, nguonGoc, donGia, sqlDate3, sqlDate4, idDanhMuc, sqlDate1,
                     sqlDate2, trangThai);
 
             this.productService.update(product, id);

@@ -389,7 +389,7 @@ public class JFrLogin extends javax.swing.JFrame {
 
             for (Account account : account1) {
                 if (account.getUsername().equals(this.txtusername.getText())
-                        && account.getPassWord().equals(String.valueOf(this.txtpassword.getPassword()))) {
+                        && account.getPass().equals(String.valueOf(this.txtpassword.getPassword()))) {
 
                     for (Role role : list) {
                         if (idRole.equals(role.getId())) {
