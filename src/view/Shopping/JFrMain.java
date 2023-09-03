@@ -62,7 +62,7 @@ public class JFrMain extends javax.swing.JFrame {
 
         this.loadTableCart();
         this.showTotal();
-        this.loadCbb();
+//        this.loadCbb();
         this.loadOrder();
 
     }
@@ -89,13 +89,13 @@ public class JFrMain extends javax.swing.JFrame {
         String status = "";
 
         for (Order orders : orderDAO.findAllByStatus()) {
-            if (orders.getStatus() == 0) {
+            if (orders.getInventoryStatus()== 0) {
                 status = "Chưa thanh toán";
             } else {
                 status = "Đã thanh toán";
             }
             Object[] data = {
-                orders.getMa(), orders.getTenNv(), orders.getTenKh(), status
+                orders.getCode(), orders.getIdUser(), orders.getIdCustomer(), status
             };
             dtmHD.addRow(data);
         }
@@ -114,14 +114,14 @@ public class JFrMain extends javax.swing.JFrame {
 
     }
 
-private void tienThua(BigDecimal tienKhachdua) {
-    BigDecimal tienthua = tienKhachdua.subtract(this.calculateTotalPrice());
-    if (tienthua.compareTo(BigDecimal.ZERO) < 0) {
-        JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + tienthua.abs() + "k");
-    }
+    private void tienThua(BigDecimal tienKhachdua) {
+        BigDecimal tienthua = tienKhachdua.subtract(this.calculateTotalPrice());
+        if (tienthua.compareTo(BigDecimal.ZERO) < 0) {
+            JOptionPane.showMessageDialog(this, "Khách đưa thiếu tiền: " + tienthua.abs() + "k");
+        }
 
-    this.txtTienThua.setText(tienthua.toString());
-}
+//        this.txtTienThua.setText(tienthua.toString());
+    }
 
     private Items findItemByProductId(String maSP) {
         for (Items item : itemList) {
@@ -135,22 +135,12 @@ private void tienThua(BigDecimal tienKhachdua) {
     public BigDecimal calculateTotalPrice() {
         BigDecimal totalPrice = BigDecimal.ZERO;
         for (Items item : itemList) {
-        BigDecimal itemPrice = item.getPrice();
-        int itemQuantity = item.getQuantity();
-        BigDecimal itemTotal = itemPrice.multiply(BigDecimal.valueOf(itemQuantity));
-        totalPrice = totalPrice.add(itemTotal);;
+            BigDecimal itemPrice = item.getPrice();
+            int itemQuantity = item.getQuantity();
+            BigDecimal itemTotal = itemPrice.multiply(BigDecimal.valueOf(itemQuantity));
+            totalPrice = totalPrice.add(itemTotal);;
         }
         return totalPrice;
-    }
-
-    public void loadCbb() {
-
-        for (Store store : sdao.getAllStores()) {
-            this.cbbCH.addItem(store.getNameStore());
-        }
-        for (User users : UserDAO.getAllUsers()) {
-            this.cbbNhanVien.addItem(users.getUserName());
-        }
     }
 
     /**
@@ -163,10 +153,6 @@ private void tienThua(BigDecimal tienKhachdua) {
     private void initComponents() {
 
         panelNavigation = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        pnlThongKt = new javax.swing.JButton();
-        btnQuanLy = new javax.swing.JButton();
-        btnBackMain = new javax.swing.JButton();
         panelHeader = new javax.swing.JPanel();
         lbClose = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -182,32 +168,15 @@ private void tienThua(BigDecimal tienKhachdua) {
         panelHoaDon = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
-        panelWebCam = new javax.swing.JPanel();
         panelThanhToan = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
         txtTenKHTaiQuay = new javax.swing.JTextField();
-        jSeparator6 = new javax.swing.JSeparator();
-        jLabel14 = new javax.swing.JLabel();
-        txtSDTTQ = new javax.swing.JTextField();
-        txtsdt = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         txtTongTien = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jSeparator9 = new javax.swing.JSeparator();
         txtTienKhachDuaTQ = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
-        txtTienThua = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        btnTinhTien = new javax.swing.JButton();
-        cbbNhanVien = new javax.swing.JComboBox<>();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        cbbCH = new javax.swing.JComboBox<>();
         panelSanPham = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
-        txtTimKiem = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDanhSachSP = new javax.swing.JTable();
@@ -218,51 +187,15 @@ private void tienThua(BigDecimal tienKhachdua) {
 
         panelNavigation.setBackground(new java.awt.Color(153, 153, 255));
 
-        jPanel2.setLayout(new java.awt.GridLayout(2, 1));
-
-        pnlThongKt.setText("Thống kê ");
-        pnlThongKt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pnlThongKtActionPerformed(evt);
-            }
-        });
-        jPanel2.add(pnlThongKt);
-
-        btnQuanLy.setText("Quản Lý");
-        btnQuanLy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuanLyActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnQuanLy);
-
-        btnBackMain.setText("Back");
-        btnBackMain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackMainActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelNavigationLayout = new javax.swing.GroupLayout(panelNavigation);
         panelNavigation.setLayout(panelNavigationLayout);
         panelNavigationLayout.setHorizontalGroup(
             panelNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNavigationLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(btnBackMain)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelNavigationLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+            .addGap(0, 154, Short.MAX_VALUE)
         );
         panelNavigationLayout.setVerticalGroup(
             panelNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNavigationLayout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBackMain)
-                .addGap(34, 34, 34))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         panelHeader.setBackground(new java.awt.Color(153, 153, 255));
@@ -311,7 +244,7 @@ private void tienThua(BigDecimal tienKhachdua) {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelBody.setBackground(new java.awt.Color(204, 204, 204));
@@ -372,8 +305,8 @@ private void tienThua(BigDecimal tienKhachdua) {
         panelGioHangLayout.setVerticalGroup(
             panelGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGioHangLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClearItems)
                     .addComponent(btnDeletebyMa)))
@@ -405,7 +338,7 @@ private void tienThua(BigDecimal tienKhachdua) {
         panelHoaDonLayout.setHorizontalGroup(
             panelHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHoaDonLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         panelHoaDonLayout.setVerticalGroup(
@@ -415,25 +348,8 @@ private void tienThua(BigDecimal tienKhachdua) {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelWebCam.setBackground(new java.awt.Color(222, 231, 227));
-        panelWebCam.setBorder(javax.swing.BorderFactory.createTitledBorder("Quét mã QR"));
-        panelWebCam.setToolTipText("");
-
-        javax.swing.GroupLayout panelWebCamLayout = new javax.swing.GroupLayout(panelWebCam);
-        panelWebCam.setLayout(panelWebCamLayout);
-        panelWebCamLayout.setHorizontalGroup(
-            panelWebCamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 151, Short.MAX_VALUE)
-        );
-        panelWebCamLayout.setVerticalGroup(
-            panelWebCamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-
         panelThanhToan.setBackground(new java.awt.Color(222, 231, 227));
         panelThanhToan.setBorder(javax.swing.BorderFactory.createTitledBorder("Thanh toán"));
-
-        jLabel13.setText("Tên KH");
 
         txtTenKHTaiQuay.setBackground(new java.awt.Color(222, 231, 227));
         txtTenKHTaiQuay.setBorder(null);
@@ -443,21 +359,9 @@ private void tienThua(BigDecimal tienKhachdua) {
             }
         });
 
-        jLabel14.setText("SĐT");
-
-        txtSDTTQ.setBackground(new java.awt.Color(222, 231, 227));
-        txtSDTTQ.setBorder(null);
-        txtSDTTQ.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSDTTQKeyReleased(evt);
-            }
-        });
-
         jLabel15.setText("Tổng tiền: ");
 
         txtTongTien.setText("0");
-
-        jLabel22.setText("Tiền khách đưa");
 
         txtTienKhachDuaTQ.setBackground(new java.awt.Color(222, 231, 227));
         txtTienKhachDuaTQ.setBorder(null);
@@ -466,10 +370,6 @@ private void tienThua(BigDecimal tienKhachdua) {
                 txtTienKhachDuaTQKeyReleased(evt);
             }
         });
-
-        jLabel23.setText("Tiền thừa");
-
-        txtTienThua.setText("0");
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 2, 10, 5));
 
@@ -489,17 +389,6 @@ private void tienThua(BigDecimal tienKhachdua) {
         });
         jPanel5.add(jButton6);
 
-        btnTinhTien.setText("Tính tiền ");
-        btnTinhTien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTinhTienActionPerformed(evt);
-            }
-        });
-
-        jLabel20.setText("Tên nhân viên");
-
-        jLabel24.setText("Tên cửa hàng");
-
         javax.swing.GroupLayout panelThanhToanLayout = new javax.swing.GroupLayout(panelThanhToan);
         panelThanhToan.setLayout(panelThanhToanLayout);
         panelThanhToanLayout.setHorizontalGroup(
@@ -510,104 +399,37 @@ private void tienThua(BigDecimal tienKhachdua) {
                     .addGroup(panelThanhToanLayout.createSequentialGroup()
                         .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelThanhToanLayout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator9)
-                                    .addComponent(txtTienKhachDuaTQ)))
+                                .addGap(97, 97, 97)
+                                .addComponent(txtTienKhachDuaTQ))
                             .addGroup(panelThanhToanLayout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panelThanhToanLayout.createSequentialGroup()
-                                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel23)
-                                    .addComponent(jLabel20))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelThanhToanLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 59, Short.MAX_VALUE))
-                                    .addComponent(txtTienThua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(panelThanhToanLayout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator6)
-                                    .addComponent(txtTenKHTaiQuay)))
-                            .addGroup(panelThanhToanLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(37, 37, 37)
-                                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtsdt, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtSDTTQ))))
+                                .addGap(61, 61, 61)
+                                .addComponent(txtTenKHTaiQuay)))
                         .addContainerGap())
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelThanhToanLayout.createSequentialGroup()
-                        .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTinhTien)
-                            .addGroup(panelThanhToanLayout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbbCH, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)))
         );
         panelThanhToanLayout.setVerticalGroup(
             panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelThanhToanLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtTenKHTaiQuay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtSDTTQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(txtTenKHTaiQuay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtTongTien))
                 .addGap(10, 10, 10)
-                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
-                    .addGroup(panelThanhToanLayout.createSequentialGroup()
-                        .addComponent(txtTienKhachDuaTQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4)
-                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(txtTienThua))
-                .addGap(12, 12, 12)
-                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbbNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelThanhToanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(cbbCH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(btnTinhTien)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTienKhachDuaTQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         panelSanPham.setBackground(new java.awt.Color(222, 231, 227));
         panelSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách sản phẩm"));
-
-        jLabel27.setText("Tìm theo mã");
-
-        txtTimKiem.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTimKiemKeyReleased(evt);
-            }
-        });
 
         tblDanhSachSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -638,21 +460,12 @@ private void tienThua(BigDecimal tienKhachdua) {
         panelSanPham.setLayout(panelSanPhamLayout);
         panelSanPhamLayout.setHorizontalGroup(
             panelSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSanPhamLayout.createSequentialGroup()
-                .addGap(300, 300, 300)
-                .addComponent(jLabel27)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTimKiem)
-                .addContainerGap())
             .addComponent(jScrollPane5)
         );
         panelSanPhamLayout.setVerticalGroup(
             panelSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSanPhamLayout.createSequentialGroup()
-                .addGroup(panelSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel27)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -671,11 +484,10 @@ private void tienThua(BigDecimal tienKhachdua) {
             .addGroup(panelBanHangLayout.createSequentialGroup()
                 .addGroup(panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelSanPham, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelGioHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBanHangLayout.createSequentialGroup()
-                        .addComponent(panelWebCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(panelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelGioHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(panelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBanHangLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -689,12 +501,10 @@ private void tienThua(BigDecimal tienKhachdua) {
         panelBanHangLayout.setVerticalGroup(
             panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBanHangLayout.createSequentialGroup()
-                .addGroup(panelBanHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelWebCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(panelBanHangLayout.createSequentialGroup()
@@ -702,7 +512,7 @@ private void tienThua(BigDecimal tienKhachdua) {
                 .addComponent(panelThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTT, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelBody.add(panelBanHang, "card3");
@@ -789,26 +599,14 @@ private void tienThua(BigDecimal tienKhachdua) {
             dtmGH.addRow(data);
         }
         this.txtTenKHTaiQuay.setText((String) this.tblHoaDon.getValueAt(col, 2));
-        this.cbbNhanVien.setSelectedItem(this.tblHoaDon.getValueAt(col, 1));
+//        this.cbbNhanVien.setSelectedItem(this.tblHoaDon.getValueAt(col, 1));
         this.showTotal();
 
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
-    private void txtTenKHTaiQuayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenKHTaiQuayKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenKHTaiQuayKeyReleased
-
-    private void txtSDTTQKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSDTTQKeyReleased
-
-    }//GEN-LAST:event_txtSDTTQKeyReleased
-
-    private void txtTienKhachDuaTQKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaTQKeyReleased
-
-    }//GEN-LAST:event_txtTienKhachDuaTQKeyReleased
-
     private void tblDanhSachSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachSPMouseClicked
         // TODO add your handling code here:
-        
+
 //        int option = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xoá không?", "Confirmation", JOptionPane.YES_NO_OPTION);
 //        switch (option) {
 //            case JOptionPane.YES_OPTION -> {
@@ -823,48 +621,47 @@ private void tienThua(BigDecimal tienKhachdua) {
 //            default -> {
 //            }
 //        }
-//        int col = this.tblDanhSachSP.getSelectedRow();
-//        if (col == -1) {
-//            return;
-//        }
-//
-////        pr.getMa(),pr.getName(),pr.getIdDanhMuc(),pr.getHsd(),pr.getNgaySx(),pr.getNguonGoc(),pr.getGiaGoc(),pr.getStatus()
-//        String ma = this.tblDanhSachSP.getValueAt(col, 0).toString();
-//        String name = this.tblDanhSachSP.getValueAt(col, 1).toString();
-//        String pr = this.tblDanhSachSP.getValueAt(col, 6).toString();
-//
-//        BigDecimal price = BigDecimal.valueOf( Double.parseDouble(pr) * 2);
-//
-//        Items existingItem = this.findItemByProductId(ma);
-//
-//        if (existingItem != null) {
-//            existingItem.setQuantity(existingItem.getQuantity()+ 1);
-//        } else {
-//            Items item = new Items("", pr, pr, pr, name, SOMEBITS, price, createDate, updateDate, 1)
-//            itemList.add(item);
-//        }
-//
-//        this.loadTableCart();
-//
-//        this.showTotal();
-//        
-//        
-    }//GEN-LAST:event_tblDanhSachSPMouseClicked
-
-    private void txtTimKiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimKiemKeyReleased
-        String keyword = txtTimKiem.getText();
-    }//GEN-LAST:event_txtTimKiemKeyReleased
-
-    private void pnlThongKtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlThongKtActionPerformed
-        // TODO add your handling code here:
-        try {
-            panelBody.removeAll();
-            panelBody.add(new pnlThongKe());
-            panelBody.repaint();
-            panelBody.revalidate();
-        } catch (Exception e) {
+        int col = this.tblDanhSachSP.getSelectedRow();
+        if (col == -1) {
+            return;
         }
-    }//GEN-LAST:event_pnlThongKtActionPerformed
+
+//
+//
+//        
+//        
+        String userInput = JOptionPane.showInputDialog(null, "Nhập số lượng sản phẩm:", "Nhập số lượng", JOptionPane.QUESTION_MESSAGE);
+
+        if (userInput != null && !userInput.isEmpty()) {
+            try {
+                int quantity = Integer.parseInt(userInput);
+
+                String ma = this.tblDanhSachSP.getValueAt(col, 0).toString();
+                String name = this.tblDanhSachSP.getValueAt(col, 1).toString();
+                String pr = this.tblDanhSachSP.getValueAt(col, 6).toString();
+
+                BigDecimal price = BigDecimal.valueOf(Double.parseDouble(pr) * 2);
+
+                Items existingItem = this.findItemByProductId(ma);
+
+                if (existingItem != null) {
+                    existingItem.setQuantity(existingItem.getQuantity() + quantity);
+                } else {
+                    Items item = new Items(ma, name, quantity, price, 1);
+                    itemList.add(item);
+                }
+
+                JOptionPane.showMessageDialog(null, "Bạn đã nhập: " + quantity + " sản phẩm.");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Số lượng không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn đã hủy .");
+        }
+        this.loadTableCart();
+        this.showTotal();
+
+    }//GEN-LAST:event_tblDanhSachSPMouseClicked
 
     private void btnClearItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearItemsActionPerformed
         // TODO add your handling code here:
@@ -885,32 +682,6 @@ private void tienThua(BigDecimal tienKhachdua) {
 
 
     }//GEN-LAST:event_btnClearItemsActionPerformed
-
-    private void btnTinhTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTinhTienActionPerformed
-        // TODO add your handling code here:
-        String tienkd = this.txtTienKhachDuaTQ.getText().trim();
-        if (tienkd.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách đưa");
-            return;
-        }
-
-        try {
-            BigDecimal tienkdua = BigDecimal.valueOf(Double.parseDouble(tienkd));
-            this.tienThua(tienkdua);
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Kiểu dữ liệu chưa đúng");
-
-        }
-
-
-    }//GEN-LAST:event_btnTinhTienActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-        this.thanhtoan();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnDeletebyMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletebyMaActionPerformed
         // TODO add your handling code here:
@@ -945,36 +716,6 @@ private void tienThua(BigDecimal tienKhachdua) {
 
     }//GEN-LAST:event_btnDeletebyMaActionPerformed
 
-    private void btnBackMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackMainActionPerformed
-        // TODO add your handling code here:
-        new JFrMain().setVisible(true);
-
-    }//GEN-LAST:event_btnBackMainActionPerformed
-
-    private void btnQuanLyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyActionPerformed
-        // TODO add your handling code here:
-        setVisible(false);
-        JFrQuanLy quanLy = new JFrQuanLy();
-        quanLy.setVisible(true);
-    }//GEN-LAST:event_btnQuanLyActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        int col = this.tblHoaDon.getSelectedRow();
-        if (col == -1) {
-            return;
-        }
-        String ma = this.tblHoaDon.getValueAt(col, 0).toString();
-
-        OrderDAO orderDAO = new OrderDAO();
-        orderDAO.deleteOrderByMa(ma);
-        JOptionPane.showMessageDialog(this, "Xóa thành công");
-        this.clearALl();
-        this.loadOrder();
-        this.loadTable();
-        this.loadTableCart();
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void btnTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTTActionPerformed
         // TODO add your handling code here:
         ProductDAO pdao = new ProductDAO();
@@ -989,7 +730,7 @@ private void tienThua(BigDecimal tienKhachdua) {
                         pdao.updateProductQuantityAfterPayment(product.getId(), quantityToAdd);
 
                     } catch (InsufficientProductQuantityException ex) {
-                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getPrName()+ "' không đủ.");
+                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm '" + product.getPrName() + "' không đủ.");
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Số lượng sản phẩm phải lớn hơn 0.");
@@ -1014,6 +755,37 @@ private void tienThua(BigDecimal tienKhachdua) {
 
 //        InvoicePDFGenerator.exportPDF(order, detail, shopping);
     }//GEN-LAST:event_btnTTActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        int col = this.tblHoaDon.getSelectedRow();
+        if (col == -1) {
+            return;
+        }
+        String ma = this.tblHoaDon.getValueAt(col, 0).toString();
+
+        OrderDAO orderDAO = new OrderDAO();
+        orderDAO.deleteOrderByMa(ma);
+        JOptionPane.showMessageDialog(this, "Xóa thành công");
+        this.clearALl();
+        this.loadOrder();
+        this.loadTable();
+        this.loadTableCart();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        this.thanhtoan();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtTienKhachDuaTQKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTienKhachDuaTQKeyReleased
+
+    }//GEN-LAST:event_txtTienKhachDuaTQKeyReleased
+
+    private void txtTenKHTaiQuayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTenKHTaiQuayKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTenKHTaiQuayKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1054,34 +826,19 @@ private void tienThua(BigDecimal tienKhachdua) {
 
     private javax.swing.JPanel panelQLSanPham;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBackMain;
     private javax.swing.JButton btnClearItems;
     private javax.swing.JButton btnDeletebyMa;
-    private javax.swing.JButton btnQuanLy;
     private javax.swing.JButton btnTT;
-    private javax.swing.JButton btnTinhTien;
-    private javax.swing.JComboBox<String> cbbCH;
-    private javax.swing.JComboBox<String> cbbNhanVien;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lbClose;
     private javax.swing.JPanel panelBanHang;
     private javax.swing.JPanel panelBody;
@@ -1091,60 +848,53 @@ private void tienThua(BigDecimal tienKhachdua) {
     private javax.swing.JPanel panelNavigation;
     private javax.swing.JPanel panelSanPham;
     private javax.swing.JPanel panelThanhToan;
-    private javax.swing.JPanel panelWebCam;
-    private javax.swing.JButton pnlThongKt;
     private javax.swing.JTable tblDanhSachSP;
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTable tblHoaDon;
-    private javax.swing.JTextField txtSDTTQ;
     private javax.swing.JTextField txtTenKHTaiQuay;
     private javax.swing.JTextField txtTienKhachDuaTQ;
-    private javax.swing.JLabel txtTienThua;
-    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JLabel txtTongTien;
     private javax.swing.JLabel txtUserName;
-    private javax.swing.JSeparator txtsdt;
     // End of variables declaration//GEN-END:variables
 
     private void showTotal() {
-         BigDecimal totalPrice = calculateTotalPrice();
-    String totalPriceString = totalPrice.toString();
-    this.txtTongTien.setText(totalPriceString);
+        BigDecimal totalPrice = calculateTotalPrice();
+        String totalPriceString = totalPrice.toString();
+        this.txtTongTien.setText(totalPriceString);
     }
 
     private void thanhtoan() {
         try {
-            double tienThua = Double.parseDouble(this.txtTienThua.getText());
+//            double tienThua = Double.parseDouble(this.txtTienThua.getText());
             String tienkhd = this.txtTenKHTaiQuay.getText().trim();
-            String sdt = this.txtSDTTQ.getText().trim();
-            if (tienThua < 0 || tienkhd.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Yêu cầu khách trả đủ tiền mới thanh toán.");
-                return;
-            }
-            if (sdt.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Yêu cầu nhập số điện thoại của khách mới thanh toán.");
-                return;
-            }
+//            String sdt = this.txtSDTTQ.getText().trim();
+//            if (tienThua < 0 || tienkhd.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Yêu cầu khách trả đủ tiền mới thanh toán.");
+//                return;
+//            }
+//            if (sdt.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Yêu cầu nhập số điện thoại của khách mới thanh toán.");
+//                return;
+//            }
 
             Random random = new Random();
 
             String ma = String.valueOf(random.nextInt(10000 - 1 + 1) + 2);
             String name = "Hoa don " + (new Date()).toString();
             String tenkh = this.txtTenKHTaiQuay.getText().trim();
-            String tenNv = this.cbbNhanVien.getSelectedItem().toString();
-            Store stores = sdao.findStoreByName(this.cbbCH.getSelectedItem().toString());
-            String idch = stores.getId();
+            String tenNv = "";
+//            Store stores = sdao.findStoreByName(this.cbbCH.getSelectedItem().toString());
+//            String idch = stores.getId();
             Date ngaytao = new Date();
             Date ngaySua = new Date();
 
             ShoppingCartDAO scdao = new ShoppingCartDAO();
-            ShoppingCart shopping = new ShoppingCart("", ma, idch, itemList, tenkh, tenNv, ngaytao, ngaySua, 1);
+            ShoppingCart shopping = new ShoppingCart("", ma, itemList, tenkh, tenNv, ngaytao, ngaySua, 1);
             scdao.insertShoppingCart(shopping);
 
-            Order order = new Order(ma, name, tenNv, tenkh, idch, ngaytao, ngaySua, 0);
-
+//            Order order = new Order(ma, name, tenNv, tenkh,  ngaytao, ngaySua, 0);
             OrderDAO odao = new OrderDAO();
-            odao.createOrder(order);
+//            odao.createOrder(order);
 
             double total = Double.parseDouble(this.txtTongTien.getText());
             OrderDetailDAO odDao = new OrderDetailDAO();
@@ -1178,8 +928,8 @@ private void tienThua(BigDecimal tienKhachdua) {
         itemList.clear();
         this.txtTenKHTaiQuay.setText("");
         this.txtTienKhachDuaTQ.setText("");
-        this.txtTienThua.setText("");
-        this.txtSDTTQ.setText("");
+//        this.txtTienThua.setText("");
+//        this.txtSDTTQ.setText("");
         this.loadTableCart();
 
     }

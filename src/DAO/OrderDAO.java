@@ -22,7 +22,7 @@ public class OrderDAO {
 
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
-        String query = "SELECT * FROM hoaDon WHERE trangThai = 1 ";
+        String query = "SELECT * FROM inventory WHERE inventoryStatus = 1 ";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -33,14 +33,13 @@ public class OrderDAO {
                 String id = resultSet.getString(1);
                 String ma = resultSet.getString(2);
                 String name = resultSet.getString(3);
-                String tenNv = resultSet.getString(4);
-                Date ngayTao = resultSet.getDate(5);
-                Date ngaySua = resultSet.getDate(6);
-                String tenKh = resultSet.getString(7);
-                String idCh = resultSet.getString(8);
-                int status = resultSet.getInt(9);
+                String idUser = resultSet.getString(4);
+                String idCustomer = resultSet.getString(5);
+                Date createDate = resultSet.getDate(6);
+                Date updateDate = resultSet.getDate(7);
+                int status = resultSet.getInt(8);
 
-                Order order = new Order(id, ma, name,tenNv, tenKh, idCh, ngayTao, ngaySua, status);
+                Order order = new Order(id, ma, name, idUser, idCustomer, createDate, updateDate, status);
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -54,7 +53,7 @@ public class OrderDAO {
         List<Order> orders = new ArrayList<>();
 
         try {
-            String query = "SELECT * FROM hoaDon WHERE trangThai = 0 ";
+            String query = "SELECT * FROM inventory WHERE inventoryStatus = 0 ";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -63,13 +62,12 @@ public class OrderDAO {
                 String id = resultSet.getString(1);
                 String ma = resultSet.getString(2);
                 String name = resultSet.getString(3);
-                String tenNv = resultSet.getString(4);
-                Date ngayTao = resultSet.getDate(5);
-                Date ngaySua = resultSet.getDate(6);
-                String tenKh = resultSet.getString(7);
-                String idCh = resultSet.getString(8);
-                int status = resultSet.getInt(9);
-                Order order = new Order(id, ma, name, tenNv, tenKh, idCh, ngayTao, ngaySua, status);
+                String idUser = resultSet.getString(4);
+                String idCustomer = resultSet.getString(5);
+                Date createDate = resultSet.getDate(6);
+                Date updateDate = resultSet.getDate(7);
+                int status = resultSet.getInt(8);
+                Order order = new Order(id, ma, name, idUser, idCustomer, createDate, updateDate, status);
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -81,17 +79,16 @@ public class OrderDAO {
 
     public void createOrder(Order order) {
         try {
-            String query = "INSERT INTO hoaDon ( ma, ten, tenNv, ngayTao, ngaySua, tenKh, idCh, trangThai ) VALUES ( ?, ?, ?, ?, ?, ?, ?,?)";
+            String query = "INSERT INTO inventory ( ma, ten, idUser, idCustomer, createDate, updateDate,  inventoryStatus ) VALUES ( ?, ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1, order.getMa());
-            preparedStatement.setString(2, order.getName());
-            preparedStatement.setString(3, order.getTenNv());
-            preparedStatement.setDate(4, new java.sql.Date(order.getNgayTao().getTime()));
-            preparedStatement.setDate(5, new java.sql.Date(order.getNgaySua().getTime()));
-            preparedStatement.setString(6, order.getTenKh());
-            preparedStatement.setString(7, order.getIdCh());
-            preparedStatement.setInt(8, order.getStatus());
+            preparedStatement.setString(1, order.getCode());
+            preparedStatement.setString(2, order.getInventoryName());
+            preparedStatement.setString(3, order.getIdUser());
+            preparedStatement.setString(4, order.getIdCustomer());
+            preparedStatement.setDate(5, new java.sql.Date(order.getCreateDate().getTime()));
+            preparedStatement.setDate(6, new java.sql.Date(order.getUpdateDate().getTime()));
+            preparedStatement.setInt(7, order.getInventoryStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +96,7 @@ public class OrderDAO {
     }
 
     public Order getOrderById(String orderId) {
-        String query = "SELECT * FROM hoaDon WHERE id = ? and trangThai = 1 ";
+        String query = "SELECT * FROM inventory WHERE id = ? and inventoryStatus = 1 ";
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -109,15 +106,15 @@ public class OrderDAO {
 
             if (resultSet.next()) {
                 String id = resultSet.getString("id");
-                String ma = resultSet.getString("ma");
-                String name = resultSet.getString("ten");
-                String tenKh = resultSet.getString("tenKh");
-                String idCh = resultSet.getString("idCh");
-                Date ngayTao = resultSet.getDate("ngayTao");
-                Date ngaySua = resultSet.getDate("ngaySua");
-                int status = resultSet.getInt("trangThai");
+                String ma = resultSet.getString("code");
+                String name = resultSet.getString("inventoryName");
+                String namestaff = resultSet.getString("idUser");
+                String idCustomer = resultSet.getString("idCustomer");
+                Date createDate = resultSet.getDate("createDate");
+                Date updateDate = resultSet.getDate("updateDate");
+                int status = resultSet.getInt("inventoryStatus");
 
-                return new Order(id, ma, name, tenKh, idCh, ngayTao, ngaySua, status);
+                return new Order(id, ma, name, namestaff, idCustomer, createDate, updateDate, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,16 +124,15 @@ public class OrderDAO {
 
     public void updateOrder(Order order) {
         try {
-            String query = "UPDATE hoaDon SET ma = ?, ten = ?, tenNv =?,  tenKh = ?, idCh = ?,ngaySua = ?, trangThai = ? WHERE id = ?";
+            String query = "UPDATE inventory SET code = ?, inventoryName = ?, idUser =?,  idCustomer = ?,updateDate = ?, inventoryStatus = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1, order.getMa());
-            preparedStatement.setString(2, order.getName());
-            preparedStatement.setString(3, order.getTenNv());
-            preparedStatement.setString(4, order.getIdKh());
-            preparedStatement.setString(5, order.getIdCh());
-            preparedStatement.setDate(6, new java.sql.Date(order.getNgaySua().getTime()));
-            preparedStatement.setInt(7, order.getStatus());
+            preparedStatement.setString(1, order.getCode());
+            preparedStatement.setString(2, order.getInventoryName());
+            preparedStatement.setString(3, order.getIdUser());
+            preparedStatement.setString(4, order.getIdCustomer());
+            preparedStatement.setDate(5, new java.sql.Date(order.getUpdateDate().getTime()));
+            preparedStatement.setInt(6, order.getInventoryStatus());
 
             int rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -146,7 +142,7 @@ public class OrderDAO {
 
     public void deleteOrder(String orderId) {
         try {
-            String query = "UPDATE hoaDon SET trangThai = 2 WHERE id = ?";
+            String query = "UPDATE inventory SET inventoryStatus = 2 WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderId);
 
@@ -158,7 +154,7 @@ public class OrderDAO {
 
     public void deleteOrderByMa(String orderma) {
         try {
-            String query = "UPDATE hoaDon SET trangThai = 2 WHERE ma = ?";
+            String query = "UPDATE inventory SET inventoryStatus = 2 WHERE code = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderma);
 
@@ -170,7 +166,7 @@ public class OrderDAO {
 
     public void updateOrderByMa(String orderma) {
         try {
-            String query = "UPDATE hoaDon SET trangThai = 1 WHERE ma = ?";
+            String query = "UPDATE inventory SET inventoryStatus = 1 WHERE code = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderma);
 
@@ -182,7 +178,7 @@ public class OrderDAO {
 
     public int calculateTotalPaidInvoices() {
         int totalPaidInvoices = 0;
-        String sql = "SELECT COUNT(*) AS tongHoaDon FROM hoaDon WHERE trangThai = 1 ";
+        String sql = "SELECT COUNT(*) AS tongHoaDon FROM inventory WHERE inventoryStatus = 1 ";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -200,7 +196,7 @@ public class OrderDAO {
     }
 
     public Order getOrderByMa(String orderMa) {
-        String query = "SELECT * FROM hoaDon WHERE ma = ? AND trangThai = 0";
+        String query = "SELECT * FROM inventory WHERE code = ? AND inventoryStatus = 0";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, orderMa);
@@ -212,13 +208,12 @@ public class OrderDAO {
                 String ma = resultSet.getString(2);
                 String name = resultSet.getString(3);
                 String tennv = resultSet.getString(4);
-                Date ngayTao = resultSet.getDate(5);
-                Date ngaySua = resultSet.getDate(6);
-                String tenKh = resultSet.getString(7);
-                String idCh = resultSet.getString(8);
-                int status = resultSet.getInt(9);
+                String idCustomer = resultSet.getString(5);
+                Date createDate = resultSet.getDate(6);
+                Date updateDate = resultSet.getDate(7);
+                int status = resultSet.getInt(8);
 
-                return new Order(id, ma, name, tennv, tenKh, idCh, ngayTao, ngaySua, status);
+                return new Order(id, ma, name, tennv, idCustomer, createDate, updateDate, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -228,7 +223,7 @@ public class OrderDAO {
 
     public List<Order> getPendingOrdersByCustomerName(String customerName) {
         List<Order> pendingOrders = new ArrayList<>();
-        String query = "SELECT * FROM hoaDon WHERE tenKh = ? AND trangThai = 0";
+        String query = "SELECT * FROM inventory WHERE idCustomer = ? AND inventoryStatus = 0";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, customerName);
@@ -236,16 +231,16 @@ public class OrderDAO {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     String id = resultSet.getString("id");
-                    String ma = resultSet.getString("ma");
-                    String name = resultSet.getString("ten");
-                    String tenNv = resultSet.getString("tenNv");
-                    Date ngayTao = resultSet.getDate("ngayTao");
-                    Date ngaySua = resultSet.getDate("ngaySua");
-                    String tenKh = resultSet.getString("tenKh");
-                    String idCh = resultSet.getString("idCh");
-                    int status = resultSet.getInt("trangThai");
+                    String ma = resultSet.getString("code");
+                    String name = resultSet.getString("inventoryName");
+                    String idUser = resultSet.getString("idUser");
+                                        String idCustomer = resultSet.getString("idCustomer");
 
-                    Order order = new Order(id, ma, name, tenNv, tenKh, idCh, ngayTao, ngaySua, status);
+                    Date createDate = resultSet.getDate("createDate");
+                    Date updateDate = resultSet.getDate("updateDate");
+                    int status = resultSet.getInt("inventoryStatus");
+
+                    Order order = new Order(id, ma, name, idUser, idCustomer, createDate, updateDate, status);
                     pendingOrders.add(order);
                 }
             }

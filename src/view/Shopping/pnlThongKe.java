@@ -40,14 +40,14 @@ public class pnlThongKe extends javax.swing.JPanel {
 
         for (Order ors : ordao.findAll()) {
             String status = "";
-            double total = (Double) odao.getOrderDetailById(ors.getMa()).getTongTien();
-            if (ors.getStatus() == 1) {
+            double total = (Double) odao.getOrderDetailById(ors.getCode()).getTongTien();
+            if (ors.getInventoryStatus()== 1) {
                 status = "Đã thanh toán";
             } else {
                 status = "Chưa thanh toán";
             }
             Object[] data = {
-                ors.getMa(), ors.getIdKh(), "000", ors.getNgayTao(), total, status
+                ors.getCode(), ors.getIdCustomer(), "000", ors.getCreateDate(), total, status
             };
             dtm.addRow(data);
         }

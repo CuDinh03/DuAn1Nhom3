@@ -20,6 +20,13 @@ public class Items {
     public Items() {
     }
 
+    public Items(String codeProducts, String nameProducs, int quantity, BigDecimal price, int itemsStatus) {
+        this.codeProducts = codeProducts;
+        this.nameProducs = nameProducs;
+        this.quantity = quantity;
+        this.price = price;
+        this.itemsStatus = itemsStatus;
+    }
     public Items(String id, String idCart, String idInventory, String codeProducts, String nameProducs, int quantity, BigDecimal price, Date createDate, Date updateDate, int itemsStatus) {
         this.id = id;
         this.idCart = idCart;

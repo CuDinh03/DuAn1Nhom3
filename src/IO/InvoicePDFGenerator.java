@@ -29,12 +29,12 @@ public class InvoicePDFGenerator {
         if (!folder.exists()) {
             folder.mkdir();
         }
-        String invoiceNumber = order.getMa();
-        Date date = order.getNgaySua();
+        String invoiceNumber = order.getCode();
+        Date date = order.getUpdateDate();
         double totalAmount = detail.getTongTien();
         List<Items> list = shoppingCart.getItemsList();
 
-        String tenKH = order.getIdKh();
+        String tenKH = order.getIdCustomer();
 
         try {
             Document document = new Document();

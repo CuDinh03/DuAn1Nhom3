@@ -15,12 +15,11 @@ public class ShoppingCartDAO {
 
     // Create (Insert) Operation
     public void insertShoppingCart(ShoppingCart shoppingCart) {
-        String sql = "INSERT INTO shopping_cart ( ma, idch, nameKh, nameNv, ngayTao, ngaySua, status) "
-                + "VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO shopping_cart ( ma, nameKh, nameNv, ngayTao, ngaySua, status) "
+                + "VALUES ( ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, shoppingCart.getMa());
-            preparedStatement.setString(2, shoppingCart.getIdch());
             preparedStatement.setString(3, shoppingCart.getNameKh());
             preparedStatement.setString(4, shoppingCart.getNameNv());
             preparedStatement.setDate(5, new java.sql.Date(shoppingCart.getNgayTao().getTime()));
@@ -44,8 +43,7 @@ public class ShoppingCartDAO {
                     shoppingCart = new ShoppingCart(
                             resultSet.getString("id"),
                             resultSet.getString("ma"),
-                            resultSet.getString("idch"),
-                            null, // Assuming itemsList is not loaded during retrieval
+                            null,
                             resultSet.getString("nameKh"),
                             resultSet.getString("nameNv"),
                             resultSet.getDate("ngayTao"),
@@ -62,18 +60,17 @@ public class ShoppingCartDAO {
 
     // Update Operation
     public void updateShoppingCart(ShoppingCart shoppingCart) {
-        String sql = "UPDATE shopping_cart SET ma = ?, idch = ?, nameKh = ?, nameNv = ?, "
+        String sql = "UPDATE shopping_cart SET ma = ?, nameKh = ?, nameNv = ?, "
                 + "ngayTao = ?, ngaySua = ?, status = ? WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, shoppingCart.getMa());
-            preparedStatement.setString(2, shoppingCart.getIdch());
-            preparedStatement.setString(3, shoppingCart.getNameKh());
-            preparedStatement.setString(4, shoppingCart.getNameNv());
-            preparedStatement.setDate(5, new java.sql.Date(shoppingCart.getNgayTao().getTime()));
-            preparedStatement.setDate(6, new java.sql.Date(shoppingCart.getNgaySua().getTime()));
-            preparedStatement.setInt(7, shoppingCart.getStatus());
-            preparedStatement.setString(8, shoppingCart.getId());
+            preparedStatement.setString(2, shoppingCart.getNameKh());
+            preparedStatement.setString(3, shoppingCart.getNameNv());
+            preparedStatement.setDate(4, new java.sql.Date(shoppingCart.getNgayTao().getTime()));
+            preparedStatement.setDate(5, new java.sql.Date(shoppingCart.getNgaySua().getTime()));
+            preparedStatement.setInt(6, shoppingCart.getStatus());
+            preparedStatement.setString(7, shoppingCart.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,7 +100,6 @@ public class ShoppingCartDAO {
                 ShoppingCart shoppingCart = new ShoppingCart(
                         resultSet.getString("id"),
                         resultSet.getString("ma"),
-                        resultSet.getString("idch"),
                         null, // Assuming itemsList is not loaded during retrieval
                         resultSet.getString("nameKh"),
                         resultSet.getString("nameNv"),
@@ -129,7 +125,6 @@ public class ShoppingCartDAO {
                     shoppingCart = new ShoppingCart(
                         resultSet.getString("id"),
                         resultSet.getString("ma"),
-                        resultSet.getString("idch"),
                         null, // Assuming itemsList is not loaded during retrieval
                         resultSet.getString("nameKh"),
                         resultSet.getString("nameNv"),

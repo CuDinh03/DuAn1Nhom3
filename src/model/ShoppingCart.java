@@ -14,7 +14,6 @@ import java.util.List;
 public class ShoppingCart {
     private String id;
     private String ma;
-    private String idch;
     private List<Items> itemsList;
     private String nameKh;
     private String nameNv;
@@ -32,10 +31,9 @@ public class ShoppingCart {
         this.nameNv = nameNv;
     }
 
-    public ShoppingCart(String id, String ma, String idch, List<Items> itemsList, String nameKh, String nameNv, Date ngayTao, Date ngaySua, int status) {
+    public ShoppingCart(String id, String ma, List<Items> itemsList, String nameKh, String nameNv, Date ngayTao, Date ngaySua, int status) {
         this.id = id;
         this.ma = ma;
-        this.idch = idch;
         this.itemsList = itemsList;
         this.nameKh = nameKh;
         this.nameNv = nameNv;
@@ -54,14 +52,6 @@ public class ShoppingCart {
 
     public void setMa(String ma) {
         this.ma = ma;
-    }
-
-    public String getIdch() {
-        return idch;
-    }
-
-    public void setIdch(String idch) {
-        this.idch = idch;
     }
 
     public Date getNgayTao() {
