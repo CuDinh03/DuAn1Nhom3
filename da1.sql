@@ -42,6 +42,7 @@ CREATE table roles_acc
 CREATE TABLE products
 (
     ID uniqueidentifier not null DEFAULT (newid()) primary key,
+	code nvarchar(50),
     prName NVARCHAR(50),
     prQuantity int,
     original NVARCHAR(max),
@@ -163,7 +164,12 @@ ALTER TABLE productType
 ALTER COLUMN typename NVARCHAR(max) COLLATE Vietnamese_100_CI_AS;
 
 
+SELECT * from account;
+SELECT * from roles;
+SELECT * from roles_acc;
+SELECT * from customer;
 SELECT * from productType;
+SELECT * from products;
 
 
 
