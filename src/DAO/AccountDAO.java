@@ -119,8 +119,8 @@ public class AccountDAO {
 
             if (resultSet.next()) {
                 String id = resultSet.getString("id");
-                String password = resultSet.getString("username");
-                int status = resultSet.getInt("username");
+                String password = resultSet.getString("pass");
+                int status = resultSet.getInt("accStatus");
 
                 account = new Account(id, username, password, status);
             }
