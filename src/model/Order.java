@@ -6,62 +6,37 @@ import java.util.Date;
 public class Order {
 
     private String id;
-    private String ma;
-    private String name;
-    private String tenNv;
-    private String tenKh;
-    private String idCh;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String code;
+    private String inventoryName;
+    private String idUser;
+    private String idCustomer;
+    private Date createDate;
+    private Date updateDate;
+    private int inventoryStatus;
 
     public Order() {
     }
 
-    public Order(String ma, String name, String tenNv, String tenKh, String idCh, Date ngayTao, Date ngaySua, int status) {
-        this.ma = ma;
-        this.name = name;
-        this.tenNv = tenNv;
-        this.tenKh = tenKh;
-        this.idCh = idCh;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
-    }
-
-    public Order(String id, String ma, String name, String tenNv, String tenKh, String idCh, Date ngayTao, Date ngaySua, int status) {
+    public Order(String id, String code, String inventoryName, String idUser, String idCustomer, Date createDate, Date updateDate, int inventoryStatus) {
         this.id = id;
-        this.ma = ma;
-        this.name = name;
-        this.tenNv = tenNv;
-        this.tenKh = tenKh;
-        this.idCh = idCh;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.code = code;
+        this.inventoryName = inventoryName;
+        this.idUser = idUser;
+        this.idCustomer = idCustomer;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.inventoryStatus = inventoryStatus;
     }
 
-
-    
-    
-
-    public String getTenNv() {
-        return tenNv;
+    public Order(String code, String inventoryName, String idUser, String idCustomer, Date createDate, Date updateDate, int inventoryStatus) {
+        this.code = code;
+        this.inventoryName = inventoryName;
+        this.idUser = idUser;
+        this.idCustomer = idCustomer;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.inventoryStatus = inventoryStatus;
     }
-
-    public void setTenNv(String tenNv) {
-        this.tenNv = tenNv;
-    }
-
-    public String getTenKh() {
-        return tenKh;
-    }
-
-    public void setTenKh(String tenKh) {
-        this.tenKh = tenKh;
-    }
-    
-    
 
     public String getId() {
         return id;
@@ -71,59 +46,60 @@ public class Order {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
+    public String getCode() {
+        return code;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getName() {
-        return name;
+    public String getInventoryName() {
+        return inventoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInventoryName(String inventoryName) {
+        this.inventoryName = inventoryName;
     }
 
-    public String getIdKh() {
-        return tenKh;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setIdKh(String tenKh) {
-        this.tenKh = tenKh;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
-    public String getIdCh() {
-        return idCh;
+    public String getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setIdCh(String idCh) {
-        this.idCh = idCh;
+    public void setIdCustomer(String idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public int getStatus() {
-        return status;
+    public int getInventoryStatus() {
+        return inventoryStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setInventoryStatus(int inventoryStatus) {
+        this.inventoryStatus = inventoryStatus;
     }
+    
 }

@@ -393,19 +393,13 @@ public class JFrLogin extends javax.swing.JFrame {
 
                     for (Role role : list) {
                         if (idRole.equals(role.getId())) {
-                            if (role.getName().equals("VT001")) {
+                            if (role.getName().equals("staff")) {
 
-                                JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
+                                JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
                                 setVisible(false);
                                 new JFrMain().setVisible(true);
                                 break;
-                            } else if (role.getName().equals("VT002")) {
-                                JOptionPane.showMessageDialog(this, "dang nhap thanh cong");
-                                setVisible(false);
-                                // new pnlSanPham().setVisible(true);
-
-                                break;
-                            } else if (role.getName().equals("VT005")) {
+                            } else if (role.getName().equals("admin")) {
                                 JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
                                 setVisible(false);
                                 new JFrQuanLy().setVisible(true);
