@@ -33,13 +33,14 @@ public class OrderDAO {
                 String id = resultSet.getString(1);
                 String ma = resultSet.getString(2);
                 String name = resultSet.getString(3);
-                String idUser = resultSet.getString(4);
-                String idCustomer = resultSet.getString(5);
+                String idCustomer = resultSet.getString(4);
+                String idUser = resultSet.getString(5);
+
                 Date createDate = resultSet.getDate(6);
                 Date updateDate = resultSet.getDate(7);
                 int status = resultSet.getInt(8);
 
-                Order order = new Order(id, ma, name, idUser, idCustomer, createDate, updateDate, status);
+                Order order = new Order(id, ma, name, idCustomer, idUser, createDate, updateDate, status);
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -62,12 +63,13 @@ public class OrderDAO {
                 String id = resultSet.getString(1);
                 String ma = resultSet.getString(2);
                 String name = resultSet.getString(3);
-                String idUser = resultSet.getString(4);
-                String idCustomer = resultSet.getString(5);
+                String idCustomer = resultSet.getString(4);
+
+                String idUser = resultSet.getString(5);
                 Date createDate = resultSet.getDate(6);
                 Date updateDate = resultSet.getDate(7);
                 int status = resultSet.getInt(8);
-                Order order = new Order(id, ma, name, idUser, idCustomer, createDate, updateDate, status);
+                Order order = new Order(id, ma, name, idCustomer, idUser, createDate, updateDate, status);
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -79,13 +81,13 @@ public class OrderDAO {
 
     public void createOrder(Order order) {
         try {
-            String query = "INSERT INTO inventory ( ma, ten, idUser, idCustomer, createDate, updateDate,  inventoryStatus ) VALUES ( ?, ?, ?, ?, ?, ?, ?,?)";
+            String query = "INSERT INTO inventory ( code, inventoryName,idCustomer, idUser,  createDate, updateDate,  inventoryStatus ) VALUES ( ?, ?, ?, ?, ?, ?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, order.getCode());
             preparedStatement.setString(2, order.getInventoryName());
-            preparedStatement.setString(3, order.getIdUser());
-            preparedStatement.setString(4, order.getIdCustomer());
+            preparedStatement.setString(3, order.getIdCustomer());
+            preparedStatement.setString(4, order.getIdUser());
             preparedStatement.setDate(5, new java.sql.Date(order.getCreateDate().getTime()));
             preparedStatement.setDate(6, new java.sql.Date(order.getUpdateDate().getTime()));
             preparedStatement.setInt(7, order.getInventoryStatus());
@@ -108,13 +110,14 @@ public class OrderDAO {
                 String id = resultSet.getString("id");
                 String ma = resultSet.getString("code");
                 String name = resultSet.getString("inventoryName");
-                String namestaff = resultSet.getString("idUser");
                 String idCustomer = resultSet.getString("idCustomer");
+
+                String namestaff = resultSet.getString("idUser");
                 Date createDate = resultSet.getDate("createDate");
                 Date updateDate = resultSet.getDate("updateDate");
                 int status = resultSet.getInt("inventoryStatus");
 
-                return new Order(id, ma, name, namestaff, idCustomer, createDate, updateDate, status);
+                return new Order(id, ma, name, idCustomer, namestaff, createDate, updateDate, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,15 +127,16 @@ public class OrderDAO {
 
     public void updateOrder(Order order) {
         try {
-            String query = "UPDATE inventory SET code = ?, inventoryName = ?, idUser =?,  idCustomer = ?,updateDate = ?, inventoryStatus = ? WHERE id = ?";
+            String query = "UPDATE inventory SET code = ?, inventoryName = ?,   idCustomer = ?, idUser =?,updateDate = ?, inventoryStatus = ? WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, order.getCode());
             preparedStatement.setString(2, order.getInventoryName());
-            preparedStatement.setString(3, order.getIdUser());
-            preparedStatement.setString(4, order.getIdCustomer());
+            preparedStatement.setString(3, order.getIdCustomer());
+            preparedStatement.setString(4, order.getIdUser());
             preparedStatement.setDate(5, new java.sql.Date(order.getUpdateDate().getTime()));
             preparedStatement.setInt(6, order.getInventoryStatus());
+            preparedStatement.setString(7, order.getId());
 
             int rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -207,13 +211,40 @@ public class OrderDAO {
                 String id = resultSet.getString(1);
                 String ma = resultSet.getString(2);
                 String name = resultSet.getString(3);
-                String tennv = resultSet.getString(4);
-                String idCustomer = resultSet.getString(5);
+                String idCustomer = resultSet.getString(4);
+
+                String tennv = resultSet.getString(5);
                 Date createDate = resultSet.getDate(6);
                 Date updateDate = resultSet.getDate(7);
                 int status = resultSet.getInt(8);
 
-                return new Order(id, ma, name, tennv, idCustomer, createDate, updateDate, status);
+                return new Order(id, ma, name, idCustomer, tennv, createDate, updateDate, status);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+        public Order getOrderByMa2(String orderMa) {
+        String query = "SELECT * FROM inventory WHERE code = ? AND inventoryStatus = 1";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, orderMa);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String id = resultSet.getString(1);
+                String ma = resultSet.getString(2);
+                String name = resultSet.getString(3);
+                String idCustomer = resultSet.getString(4);
+
+                String tennv = resultSet.getString(5);
+                Date createDate = resultSet.getDate(6);
+                Date updateDate = resultSet.getDate(7);
+                int status = resultSet.getInt(8);
+
+                return new Order(id, ma, name, idCustomer, tennv, createDate, updateDate, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -233,14 +264,14 @@ public class OrderDAO {
                     String id = resultSet.getString("id");
                     String ma = resultSet.getString("code");
                     String name = resultSet.getString("inventoryName");
-                    String idUser = resultSet.getString("idUser");
-                                        String idCustomer = resultSet.getString("idCustomer");
+                    String idCustomer = resultSet.getString("idCustomer");
 
+                    String idUser = resultSet.getString("idUser");
                     Date createDate = resultSet.getDate("createDate");
                     Date updateDate = resultSet.getDate("updateDate");
                     int status = resultSet.getInt("inventoryStatus");
 
-                    Order order = new Order(id, ma, name, idUser, idCustomer, createDate, updateDate, status);
+                    Order order = new Order(id, ma, name, idCustomer, idUser, createDate, updateDate, status);
                     pendingOrders.add(order);
                 }
             }

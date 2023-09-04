@@ -3,25 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/QuanLyKho/JFrQuanLy.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/pnlThongKe.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Role.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/AccountRoleDAO.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Order.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/InComeDAO.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ShoppingCart.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/AccountDAO.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Cart.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/pnlKhachHang.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/PopupExample.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Items.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/RoleDAO.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/OrderDetail.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Inventory.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/LoginForm/JFrLogin.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/StoreDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/Product.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/OrderDetailDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/popupHoaDon.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/view/Shopping/JFrMain.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/IO/InvoicePDFGenerator.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ItemsDAO.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ProductDAO.java</file>
-            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/ShoppingCartDAO.java</file>
+            <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/model/ProductTypes.java</file>
             <file>file:/Users/maccuacu/Desktop/da1/QuanlyChuoiCH/src/DAO/OrderDAO.java</file>
         </group>
     </open-files>

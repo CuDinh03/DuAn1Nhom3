@@ -10,7 +10,7 @@ public class Items {
     private String idCart;
     private String idInventory;
     private String codeProducts;
-    private String nameProducs;
+    private String idProducs;
     private int quantity;
     private BigDecimal price;
     private Date createDate;
@@ -20,19 +20,19 @@ public class Items {
     public Items() {
     }
 
-    public Items(String codeProducts, String nameProducs, int quantity, BigDecimal price, int itemsStatus) {
+    public Items(String codeProducts, String idProducs, int quantity, BigDecimal price, int itemsStatus) {
         this.codeProducts = codeProducts;
-        this.nameProducs = nameProducs;
+        this.idProducs = idProducs;
         this.quantity = quantity;
         this.price = price;
         this.itemsStatus = itemsStatus;
     }
-    public Items(String id, String idCart, String idInventory, String codeProducts, String nameProducs, int quantity, BigDecimal price, Date createDate, Date updateDate, int itemsStatus) {
+    public Items(String id, String idCart, String idInventory, String codeProducts, String idProducs, int quantity, BigDecimal price, Date createDate, Date updateDate, int itemsStatus) {
         this.id = id;
         this.idCart = idCart;
         this.idInventory = idInventory;
         this.codeProducts = codeProducts;
-        this.nameProducs = nameProducs;
+        this.idProducs = idProducs;
         this.quantity = quantity;
         this.price = price;
         this.createDate = createDate;
@@ -73,11 +73,11 @@ public class Items {
     }
 
     public String getNameProducs() {
-        return nameProducs;
+        return idProducs;
     }
 
-    public void setNameProducs(String nameProducs) {
-        this.nameProducs = nameProducs;
+    public void setNameProducs(String idProducs) {
+        this.idProducs = idProducs;
     }
 
     public int getQuantity() {

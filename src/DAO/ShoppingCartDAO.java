@@ -15,16 +15,17 @@ public class ShoppingCartDAO {
 
     // Create (Insert) Operation
     public void insertShoppingCart(ShoppingCart shoppingCart) {
-        String sql = "INSERT INTO shopping_cart ( ma, nameKh, nameNv, ngayTao, ngaySua, status) "
-                + "VALUES ( ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO shopping_cart ( code, nameCustormer, nameStaff, createDate, updateDate, status) "
+        + "VALUES ( ?, ?, ?, ?, ?, ?)";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, shoppingCart.getMa());
-            preparedStatement.setString(3, shoppingCart.getNameKh());
-            preparedStatement.setString(4, shoppingCart.getNameNv());
-            preparedStatement.setDate(5, new java.sql.Date(shoppingCart.getNgayTao().getTime()));
-            preparedStatement.setDate(6, new java.sql.Date(shoppingCart.getNgaySua().getTime()));
-            preparedStatement.setInt(7, shoppingCart.getStatus());
+            preparedStatement.setString(2, shoppingCart.getNameKh());
+            preparedStatement.setString(3, shoppingCart.getNameNv());
+            preparedStatement.setDate(4, new java.sql.Date(shoppingCart.getNgayTao().getTime()));
+            preparedStatement.setDate(5, new java.sql.Date(shoppingCart.getNgaySua().getTime()));
+            preparedStatement.setInt(6, shoppingCart.getStatus());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,12 +43,12 @@ public class ShoppingCartDAO {
                 if (resultSet.next()) {
                     shoppingCart = new ShoppingCart(
                             resultSet.getString("id"),
-                            resultSet.getString("ma"),
+                            resultSet.getString("code"),
                             null,
-                            resultSet.getString("nameKh"),
-                            resultSet.getString("nameNv"),
-                            resultSet.getDate("ngayTao"),
-                            resultSet.getDate("ngaySua"),
+                            resultSet.getString("nameCustormer"),
+                            resultSet.getString("nameStaff"),
+                            resultSet.getDate("createDate"),
+                            resultSet.getDate("updateDate"),
                             resultSet.getInt("status")
                     );
                 }
@@ -60,8 +61,9 @@ public class ShoppingCartDAO {
 
     // Update Operation
     public void updateShoppingCart(ShoppingCart shoppingCart) {
-        String sql = "UPDATE shopping_cart SET ma = ?, nameKh = ?, nameNv = ?, "
-                + "ngayTao = ?, ngaySua = ?, status = ? WHERE id = ?";
+String sql = "UPDATE shopping_cart SET code = ?, nameCustormer = ?, nameStaff = ?, "
+        + "createDate = ?, updateDate = ?, status = ? WHERE id = ?";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, shoppingCart.getMa());
@@ -79,7 +81,7 @@ public class ShoppingCartDAO {
 
     // Delete Operation
     public void deleteShoppingCart(String id) {
-        String sql = "DELETE FROM shopping_cart WHERE id = ?";
+        String sql = "update shopping_cart SET status = 0 WHERE id = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, id);
@@ -99,12 +101,12 @@ public class ShoppingCartDAO {
             while (resultSet.next()) {
                 ShoppingCart shoppingCart = new ShoppingCart(
                         resultSet.getString("id"),
-                        resultSet.getString("ma"),
+                        resultSet.getString("code"),
                         null, // Assuming itemsList is not loaded during retrieval
-                        resultSet.getString("nameKh"),
-                        resultSet.getString("nameNv"),
-                        resultSet.getDate("ngayTao"),
-                        resultSet.getDate("ngaySua"),
+                        resultSet.getString("nameCustormer"),
+                        resultSet.getString("nameStaff"),
+                        resultSet.getDate("createDate"),
+                        resultSet.getDate("updateDate"),
                         resultSet.getInt("status")
                 );
                 shoppingCartList.add(shoppingCart);
@@ -114,22 +116,22 @@ public class ShoppingCartDAO {
         }
         return shoppingCartList;
     }
-    public ShoppingCart getShoppingCartByMa(String ma) {
-        String sql = "SELECT * FROM shopping_cart WHERE ma = ?";
+    public ShoppingCart getShoppingCartByMa(String code) {
+String sql = "SELECT * FROM shopping_cart WHERE code = ?";
         ShoppingCart shoppingCart = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, ma);
+            preparedStatement.setString(1, code);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     shoppingCart = new ShoppingCart(
                         resultSet.getString("id"),
-                        resultSet.getString("ma"),
+                        resultSet.getString("code"),
                         null, // Assuming itemsList is not loaded during retrieval
-                        resultSet.getString("nameKh"),
-                        resultSet.getString("nameNv"),
-                        resultSet.getDate("ngayTao"),
-                        resultSet.getDate("ngaySua"),
+                        resultSet.getString("nameCustormer"),
+                        resultSet.getString("nameStaff"),
+                        resultSet.getDate("createDate"),
+                        resultSet.getDate("updateDate"),
                         resultSet.getInt("status")
                     );
                 }

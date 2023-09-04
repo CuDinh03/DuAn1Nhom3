@@ -17,7 +17,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String id, String code, String inventoryName, String idUser, String idCustomer, Date createDate, Date updateDate, int inventoryStatus) {
+    public Order(String id, String code, String inventoryName, String idCustomer, String idUser, Date createDate, Date updateDate, int inventoryStatus) {
         this.id = id;
         this.code = code;
         this.inventoryName = inventoryName;
@@ -28,7 +28,7 @@ public class Order {
         this.inventoryStatus = inventoryStatus;
     }
 
-    public Order(String code, String inventoryName, String idUser, String idCustomer, Date createDate, Date updateDate, int inventoryStatus) {
+    public Order(String code, String inventoryName, String idCustomer, String idUser, Date createDate, Date updateDate, int inventoryStatus) {
         this.code = code;
         this.inventoryName = inventoryName;
         this.idUser = idUser;
