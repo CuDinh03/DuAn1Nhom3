@@ -10,7 +10,7 @@ public class JdbcHelper {
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=DuAn1";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=da1";
             String username = "sa";
             String pass = "Password.1";
             return DriverManager.getConnection(url, username, pass);

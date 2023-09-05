@@ -1,64 +1,43 @@
 
 package model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
 public class Items {
     private String id;
     private String idCart;
-    private String idOrder;
-    private String maSP;
-    private String tenSp;
-    private int soLuong;
-    private double giaban;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String idInventory;
+    private String codeProducts;
+    private String idProducs;
+    private int quantity;
+    private BigDecimal price;
+    private Date createDate;
+    private Date updateDate;
+    private int itemsStatus;
 
     public Items() {
     }
 
-    public Items(String id, String idCart, String idOrder, String maSP, String tenSp, int soLuong, double giaban, int status) {
+    public Items(String codeProducts, String idProducs, int quantity, BigDecimal price, int itemsStatus) {
+        this.codeProducts = codeProducts;
+        this.idProducs = idProducs;
+        this.quantity = quantity;
+        this.price = price;
+        this.itemsStatus = itemsStatus;
+    }
+    public Items(String id, String idCart, String idInventory, String codeProducts, String idProducs, int quantity, BigDecimal price, Date createDate, Date updateDate, int itemsStatus) {
         this.id = id;
         this.idCart = idCart;
-        this.idOrder = idOrder;
-        this.maSP = maSP;
-        this.tenSp = tenSp;
-        this.soLuong = soLuong;
-        this.giaban = giaban;
-        this.status = status;
-    }
-
-
-
-    public String getTenSp() {
-        return tenSp;
-    }
-
-    public void setTenSp(String tenSp) {
-        this.tenSp = tenSp;
-    }
-
-    public String getMaSP() {
-        return maSP;
-    }
-
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
-    }    
-    
-    
-
-    public Items(String id, String idCart, String idOrder, int soLuong, double giaban, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
-        this.idCart = idCart;
-        this.idOrder = idOrder;
-        this.soLuong = soLuong;
-        this.giaban = giaban;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.idInventory = idInventory;
+        this.codeProducts = codeProducts;
+        this.idProducs = idProducs;
+        this.quantity = quantity;
+        this.price = price;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.itemsStatus = itemsStatus;
     }
 
     public String getId() {
@@ -77,53 +56,69 @@ public class Items {
         this.idCart = idCart;
     }
 
-    public String getIdOrder() {
-        return idOrder;
+    public String getIdInventory() {
+        return idInventory;
     }
 
-    public void setIdOrder(String idOrder) {
-        this.idOrder = idOrder;
+    public void setIdInventory(String idInventory) {
+        this.idInventory = idInventory;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public String getCodeProducts() {
+        return codeProducts;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setCodeProducts(String codeProducts) {
+        this.codeProducts = codeProducts;
     }
 
-    public double getGiaban() {
-        return giaban;
+    public String getNameProducs() {
+        return idProducs;
     }
 
-    public void setGiaban(double giaban) {
-        this.giaban = giaban;
+    public void setNameProducs(String idProducs) {
+        this.idProducs = idProducs;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public int getStatus() {
-        return status;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
-    
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public int getItemsStatus() {
+        return itemsStatus;
+    }
+
+    public void setItemsStatus(int itemsStatus) {
+        this.itemsStatus = itemsStatus;
+    }
+
     
 }

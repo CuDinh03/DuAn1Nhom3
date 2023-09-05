@@ -5,83 +5,82 @@ import java.util.Date;
 
 
 public class Custormer {
-    private String idKh;
-    private String maKh;
-    private String tenKh;
-    private String sdt;
-    private Date ngayTao;
-    private Date ngaySua;
-    private boolean status;
+    private String id;
+    private String userName;
+    private String userAddress;
+    private String phone;
+    private Date createDate;
+    private Date updateDate;
+    private int cusStatus;
 
     public Custormer() {
     }
 
-    public Custormer(String idKh, String maKh, String tenKh, String sdt, Date ngayTao, Date ngaySua, boolean status) {
-        this.idKh = idKh;
-        this.maKh = maKh;
-        this.tenKh = tenKh;
-        this.sdt = sdt;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+    public Custormer(String id, String userName, String userAddress, String phone, Date createDate, Date updateDate, int cusStatus) {
+        this.id = id;
+        this.userName = userName;
+        this.userAddress = userAddress;
+        this.phone = phone;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.cusStatus = cusStatus;
     }
 
-    public String getIdKh() {
-        return idKh;
+    public String getId() {
+        return id;
     }
 
-    public void setIdKh(String idKh) {
-        this.idKh = idKh;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getMaKh() {
-        return maKh;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setMaKh(String maKh) {
-        this.maKh = maKh;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getTenKh() {
-        return tenKh;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setTenKh(String tenKh) {
-        this.tenKh = tenKh;
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
-    public String getSdt() {
-        return sdt;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public boolean isStatus() {
-        return status;
+    public int getCusStatus() {
+        return cusStatus;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setCusStatus(int cusStatus) {
+        this.cusStatus = cusStatus;
     }
-    
-    
+
     
 }

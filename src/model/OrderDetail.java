@@ -1,86 +1,92 @@
-
 package model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-
 public class OrderDetail {
-    private String id;
-    private String ma;
-    private String idHD;
-    private double tongTien;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String ID;
+    private String code;
+    private String inventoryId;
+    private BigDecimal total;
+    private Date createDate;
+    private Date updateDate;
+    private int inventoryStatus;
 
-    public OrderDetail(String id, String ma, String idHD, double tongTien, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
-        this.ma = ma;
-        this.idHD = idHD;
-        this.tongTien = tongTien;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+    public OrderDetail(String code, String inventoryId, BigDecimal total, Date createDate, Date updateDate, int inventoryStatus) {
+        this.code = code;
+        this.inventoryId = inventoryId;
+        this.total = total;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.inventoryStatus = inventoryStatus;
+    }
+
+    public OrderDetail(String ID, String code, String inventoryId, BigDecimal total, Date createDate, Date updateDate, int inventoryStatus) {
+        this.ID = ID;
+        this.code = code;
+        this.inventoryId = inventoryId;
+        this.total = total;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.inventoryStatus = inventoryStatus;
     }
 
     public OrderDetail() {
     }
 
-    public String getId() {
-        return id;
+    public String getID() {
+        return ID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public String getMa() {
-        return ma;
+    public String getCode() {
+        return code;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getIdHD() {
-        return idHD;
+    public String getInventoryId() {
+        return inventoryId;
     }
 
-    public void setIdHD(String idHD) {
-        this.idHD = idHD;
+    public void setInventoryId(String inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
-    public double getTongTien() {
-        return tongTien;
+    public BigDecimal getTotal() {
+        return total;
     }
 
-    public void setTongTien(double tongTien) {
-        this.tongTien = tongTien;
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public int getStatus() {
-        return status;
+    public int getInventoryStatus() {
+        return inventoryStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setInventoryStatus(int inventoryStatus) {
+        this.inventoryStatus = inventoryStatus;
     }
-    
-    
 }
