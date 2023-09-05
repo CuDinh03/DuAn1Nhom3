@@ -281,11 +281,11 @@ public class popupHoaDon extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(this, "Số điện thoại không tồn tại trong hệ thống.");
-            String customerName;
+            String customerName = this.txtnamecustomer.getText().trim();
             try {
-                customerName = cdao.getNameByPhone(phone);
-                txtnamecustomer.setText(customerName);
-
+//                if (customerName.isEmpty()) {
+//                    return ;
+//                }
                 Date createDate = new Date();
                 long milliseconds = createDate.getTime();
                 java.sql.Date sqlDate = new java.sql.Date(milliseconds);

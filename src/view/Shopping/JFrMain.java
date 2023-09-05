@@ -758,7 +758,7 @@ public class JFrMain extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm với mã '" + productCode + "'.");
             }
         }
-        
+
         String ma = this.txtorderCode.getText().trim();
 
         OrderDAO orderDAO = new OrderDAO();
