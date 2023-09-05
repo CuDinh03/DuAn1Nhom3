@@ -283,9 +283,9 @@ public class popupHoaDon extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Số điện thoại không tồn tại trong hệ thống.");
             String customerName = this.txtnamecustomer.getText().trim();
             try {
-//                if (customerName.isEmpty()) {
-//                    return ;
-//                }
+                if (customerName.isEmpty() || customerName.length() == 0) {
+                    return ;
+                }
                 Date createDate = new Date();
                 long milliseconds = createDate.getTime();
                 java.sql.Date sqlDate = new java.sql.Date(milliseconds);
