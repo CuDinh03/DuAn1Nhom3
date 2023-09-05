@@ -7,39 +7,31 @@ import java.util.Date;
 public class Account {
     
     private String id;
-    private String maTk;
-    private Date ngayTao;
-    private Date ngaySua;
     private String username;
-    private String passWord;
-    private int status;
-
-    @Override
-    public String toString() {
-        return "Account{" + "id=" + id + ", maTk=" + maTk + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", username=" + username + ", passWord=" + passWord + ", status=" + status + '}';
-    }
+    private String pass;
+    private Date createDate;
+    private Date updateDate;
+    private int accStatus;
 
     public Account() {
     }
 
-    public Account(String id,String username, String passWord, int status) {
-        this.id =id;
-        this.username = username;
-        this.passWord = passWord;
-        this.status = status;
-    }
-    
-    
-    
-
-    public Account(String id, String maTk, Date ngayTao, Date ngaySua, String username, String passWord, int status) {
+    public Account(String id, String username, String pass, int accStatus) {
         this.id = id;
-        this.maTk = maTk;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
         this.username = username;
-        this.passWord = passWord;
-        this.status = status;
+        this.pass = pass;
+        this.accStatus = accStatus;
+    }
+
+    
+    
+    public Account(String id, String username, String pass, Date createDate, Date updateDate, int accStatus) {
+        this.id = id;
+        this.username = username;
+        this.pass = pass;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.accStatus = accStatus;
     }
 
     public String getId() {
@@ -50,30 +42,6 @@ public class Account {
         this.id = id;
     }
 
-    public String getMaTk() {
-        return maTk;
-    }
-
-    public void setMaTk(String maTk) {
-        this.maTk = maTk;
-    }
-
-    public Date getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    public Date getNgaySua() {
-        return ngaySua;
-    }
-
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -82,21 +50,37 @@ public class Account {
         this.username = username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPass() {
+        return pass;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
-    public int getStatus() {
-        return status;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public int getAccStatus() {
+        return accStatus;
+    }
+
+    public void setAccStatus(int accStatus) {
+        this.accStatus = accStatus;
     }
     
-    
+   
 }

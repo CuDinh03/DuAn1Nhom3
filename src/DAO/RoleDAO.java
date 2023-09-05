@@ -9,12 +9,12 @@ import model.Role;
 
 
 public class RoleDAO {
-     private Connection connection = JdbcHelper.getConnection();
+     private final Connection connection = JdbcHelper.getConnection();
 
 
     
     public List<Role> getAllRoles() {
-        String query = "SELECT * FROM vaiTro";
+        String query = "SELECT * FROM roles";
         List<Role> roles = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -31,10 +31,10 @@ public class RoleDAO {
     
     private Role extractRoleFromResultSet(ResultSet resultSet) throws SQLException {
         String id = resultSet.getString("id");
-        String ma = resultSet.getString("ma");
-        Date ngayTao = resultSet.getDate("ngayTao");
-        Date ngaySua = resultSet.getDate("ngaySua");
-        boolean status = resultSet.getBoolean("trangThai");
+        String ma = resultSet.getString("rolesName");
+        Date ngayTao = resultSet.getDate("createDate");
+        Date ngaySua = resultSet.getDate("updateDate");
+        int status = resultSet.getInt("rolesStatus");
 
         return new Role(id, ma, ngayTao, ngaySua, status);
     }

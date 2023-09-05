@@ -5,27 +5,28 @@ import java.util.Date;
 
 
 public class Cart {
+    
     private String id;
-    private String maCart;
-    private String idNv;
-    private String idKh;
-    private String idCh;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String code;
+    private String idstore;
+    private String idCustomer;
+    private String iduser;
+    private Date createDate;
+    private Date updateDate;
+    private int cartStatus;
 
     public Cart() {
     }
 
-    public Cart(String id, String maCart, String idNv, String idKh, String idCh, Date ngayTao, Date ngaySua, int status) {
+    public Cart(String id, String code, String idstore, String idCustomer, String iduser, Date createDate, Date updateDate, int cartStatus) {
         this.id = id;
-        this.maCart = maCart;
-        this.idNv = idNv;
-        this.idKh = idKh;
-        this.idCh = idCh;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.code = code;
+        this.idstore = idstore;
+        this.idCustomer = idCustomer;
+        this.iduser = iduser;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.cartStatus = cartStatus;
     }
 
     public String getId() {
@@ -36,61 +37,62 @@ public class Cart {
         this.id = id;
     }
 
-    public String getMaCart() {
-        return maCart;
+    public String getCode() {
+        return code;
     }
 
-    public void setMaCart(String maCart) {
-        this.maCart = maCart;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getIdNv() {
-        return idNv;
+    public String getIdstore() {
+        return idstore;
     }
 
-    public void setIdNv(String idNv) {
-        this.idNv = idNv;
+    public void setIdstore(String idstore) {
+        this.idstore = idstore;
     }
 
-    public String getIdKh() {
-        return idKh;
+    public String getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setIdKh(String idKh) {
-        this.idKh = idKh;
+    public void setIdCustomer(String idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
-    public String getIdCh() {
-        return idCh;
+    public String getIduser() {
+        return iduser;
     }
 
-    public void setIdCh(String idCh) {
-        this.idCh = idCh;
+    public void setIduser(String iduser) {
+        this.iduser = iduser;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-        public int getStatus() {
-        return status;
+    public int getCartStatus() {
+        return cartStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCartStatus(int cartStatus) {
+        this.cartStatus = cartStatus;
     }
+
     
     
 }

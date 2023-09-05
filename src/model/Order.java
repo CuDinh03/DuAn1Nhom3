@@ -3,30 +3,39 @@ package model;
 
 import java.util.Date;
 
-
 public class Order {
 
     private String id;
-    private String ma;
-    private String name;
-    private String idKh;
-    private String idCh;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String code;
+    private String inventoryName;
+    private String idUser;
+    private String idCustomer;
+    private Date createDate;
+    private Date updateDate;
+    private int inventoryStatus;
 
     public Order() {
     }
 
-    public Order(String id, String ma, String name, String idKh, String idCh, Date ngayTao, Date ngaySua, int status) {
+    public Order(String id, String code, String inventoryName, String idCustomer, String idUser, Date createDate, Date updateDate, int inventoryStatus) {
         this.id = id;
-        this.ma = ma;
-        this.name = name;
-        this.idKh = idKh;
-        this.idCh = idCh;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+        this.code = code;
+        this.inventoryName = inventoryName;
+        this.idUser = idUser;
+        this.idCustomer = idCustomer;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.inventoryStatus = inventoryStatus;
+    }
+
+    public Order(String code, String inventoryName, String idCustomer, String idUser, Date createDate, Date updateDate, int inventoryStatus) {
+        this.code = code;
+        this.inventoryName = inventoryName;
+        this.idUser = idUser;
+        this.idCustomer = idCustomer;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.inventoryStatus = inventoryStatus;
     }
 
     public String getId() {
@@ -37,60 +46,60 @@ public class Order {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
+    public String getCode() {
+        return code;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getName() {
-        return name;
+    public String getInventoryName() {
+        return inventoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setInventoryName(String inventoryName) {
+        this.inventoryName = inventoryName;
     }
 
-    public String getIdKh() {
-        return idKh;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setIdKh(String idKh) {
-        this.idKh = idKh;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
-    public String getIdCh() {
-        return idCh;
+    public String getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setIdCh(String idCh) {
-        this.idCh = idCh;
+    public void setIdCustomer(String idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public int getStatus() {
-        return status;
+    public int getInventoryStatus() {
+        return inventoryStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setInventoryStatus(int inventoryStatus) {
+        this.inventoryStatus = inventoryStatus;
     }
-
+    
 }

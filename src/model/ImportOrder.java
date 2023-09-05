@@ -6,23 +6,23 @@ import java.util.Date;
 
 public class ImportOrder {
     private String id;
-    private String dvtinh;
-    private double giaNhap;
-    private String maPn;
+    private String ma;
     private Date ngayTao;
     private Date ngaySua;
+    private String donViTinh;
+    private double giaNhap;
     private int status;
 
     public ImportOrder() {
     }
 
-    public ImportOrder(String id, String dvtinh, double giaNhap, String maPn, Date ngayTao, Date ngaySua, int status) {
+    public ImportOrder(String id, String ma, Date ngayTao, Date ngaySua, String donViTinh, double giaNhap, int status) {
         this.id = id;
-        this.dvtinh = dvtinh;
-        this.giaNhap = giaNhap;
-        this.maPn = maPn;
+        this.ma = ma;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+        this.donViTinh = donViTinh;
+        this.giaNhap = giaNhap;
         this.status = status;
     }
 
@@ -34,28 +34,12 @@ public class ImportOrder {
         this.id = id;
     }
 
-    public String getDvtinh() {
-        return dvtinh;
+    public String getMa() {
+        return ma;
     }
 
-    public void setDvtinh(String dvtinh) {
-        this.dvtinh = dvtinh;
-    }
-
-    public double getGiaNhap() {
-        return giaNhap;
-    }
-
-    public void setGiaNhap(double giaNhap) {
-        this.giaNhap = giaNhap;
-    }
-
-    public String getMaPn() {
-        return maPn;
-    }
-
-    public void setMaPn(String maPn) {
-        this.maPn = maPn;
+    public void setMa(String ma) {
+        this.ma = ma;
     }
 
     public Date getNgayTao() {
@@ -74,6 +58,22 @@ public class ImportOrder {
         this.ngaySua = ngaySua;
     }
 
+    public String getDonViTinh() {
+        return donViTinh;
+    }
+
+    public void setDonViTinh(String donViTinh) {
+        this.donViTinh = donViTinh;
+    }
+
+    public double getGiaNhap() {
+        return giaNhap;
+    }
+
+    public void setGiaNhap(double giaNhap) {
+        this.giaNhap = giaNhap;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -81,7 +81,7 @@ public class ImportOrder {
     public void setStatus(int status) {
         this.status = status;
     }
-    
 
+   
     
 }

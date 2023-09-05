@@ -1,44 +1,50 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
 
     private String id;
-    private String ma;
-    private String name;
-    private String nguonGoc;
-    private double giaGoc;
-    private Date ngaySx;
-    private Date hsd;
-    private String idDanhMuc;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String code;
+    private String prName;
+    private int prQuantity;
+    private String original;
+    private BigDecimal cost;
+    private Date expiry;
+    private Date MFG;
+    private String idType;
+    private Date createDate;
+    private Date updateDate;
+    private int prStatus;
 
     public Product() {
     }
 
-    public Product(String ma, String name, String nguonGoc, double giaGoc, Date ngaySx, Date hsd, String idDanhMuc, Date ngayTao, Date ngaySua, int status) {
-        this.name = name;
-        this.ma = ma;
-        this.nguonGoc = nguonGoc;
-        this.giaGoc = giaGoc;
-        this.ngaySx = ngaySx;
-        this.hsd = hsd;
-        this.idDanhMuc = idDanhMuc;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
+    public Product(String id, String code, String prName, int prQuantity, String original, BigDecimal cost, Date expiry, Date MFG, String idType, Date createDate, Date updateDate, int prStatus) {
+        this.id = id;
+        this.code = code;
+        this.prName = prName;
+        this.prQuantity = prQuantity;
+        this.original = original;
+        this.cost = cost;
+        this.expiry = expiry;
+        this.MFG = MFG;
+        this.idType = idType;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.prStatus = prStatus;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
     }
+
+    
 
     public String getId() {
         return id;
@@ -48,81 +54,87 @@ public class Product {
         this.id = id;
     }
 
-    public String getMa() {
-        return ma;
+    public String getPrName() {
+        return prName;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setPrName(String prName) {
+        this.prName = prName;
     }
 
-    public String getNguonGoc() {
-        return nguonGoc;
+    public int getPrQuantity() {
+        return prQuantity;
     }
 
-    public void setNguonGoc(String nguonGoc) {
-        this.nguonGoc = nguonGoc;
+    public void setPrQuantity(int prQuantity) {
+        this.prQuantity = prQuantity;
     }
 
-    public double getGiaGoc() {
-        return giaGoc;
+    public String getOriginal() {
+        return original;
     }
 
-    public void setGiaGoc(double giaGoc) {
-        this.giaGoc = giaGoc;
+    public void setOriginal(String original) {
+        this.original = original;
     }
 
-    public Date getNgaySx() {
-        return ngaySx;
+    public BigDecimal getCost() {
+        return cost;
     }
 
-    public void setNgaySx(Date ngaySx) {
-        this.ngaySx = ngaySx;
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+    
+
+    public Date getExpiry() {
+        return expiry;
     }
 
-    public Date getHsd() {
-        return hsd;
+    public void setExpiry(Date expiry) {
+        this.expiry = expiry;
     }
 
-    public void setHsd(Date hsd) {
-        this.hsd = hsd;
+    public Date getMFG() {
+        return MFG;
     }
 
-    public String getIdDanhMuc() {
-        return idDanhMuc;
+    public void setMFG(Date MFG) {
+        this.MFG = MFG;
     }
 
-    public void setIdDanhMuc(String idDanhMuc) {
-        this.idDanhMuc = idDanhMuc;
+    public String getIdType() {
+        return idType;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public void setIdType(String idType) {
+        this.idType = idType;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public int getStatus() {
-        return status;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public int getPrStatus() {
+        return prStatus;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" + "id=" + id + ", ma=" + ma + ", name=" + name + ", nguonGoc=" + nguonGoc + ", giaGoc=" + giaGoc + ", ngaySx=" + ngaySx + ", hsd=" + hsd + ", idDanhMuc=" + idDanhMuc + ", ngayTao=" + ngayTao + ", ngaySua=" + ngaySua + ", status=" + status + '}';
+    public void setPrStatus(int prStatus) {
+        this.prStatus = prStatus;
     }
+
+
 
 }

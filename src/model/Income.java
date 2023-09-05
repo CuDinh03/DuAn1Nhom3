@@ -1,37 +1,28 @@
 
 package model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
 public class Income {
-    private String id;
     private String idCh;
-    private String ma;
-    private double doanhThu;
-    private Date ngayTao;
-    private Date ngaySua;
-    private int status;
+    private String code;
+    private BigDecimal total;
+    private Date createDate;
+    private Date updateDate;
+    private int incomeStatus;
 
     public Income() {
     }
 
-    public Income(String id, String idCh, String ma, double doanhThu, Date ngayTao, Date ngaySua, int status) {
-        this.id = id;
+    public Income(String idCh, String code, BigDecimal total, Date createDate, Date updateDate, int incomeStatus) {
         this.idCh = idCh;
-        this.ma = ma;
-        this.doanhThu = doanhThu;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-        this.status = status;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.code = code;
+        this.total = total;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+        this.incomeStatus = incomeStatus;
     }
 
     public String getIdCh() {
@@ -42,46 +33,46 @@ public class Income {
         this.idCh = idCh;
     }
 
-    public String getMa() {
-        return ma;
+    public String getCode() {
+        return code;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public double getDoanhThu() {
-        return doanhThu;
+    public BigDecimal getTotal() {
+        return total;
     }
 
-    public void setDoanhThu(double doanhThu) {
-        this.doanhThu = doanhThu;
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 
-    public Date getNgayTao() {
-        return ngayTao;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setNgayTao(Date ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getNgaySua() {
-        return ngaySua;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setNgaySua(Date ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public int getStatus() {
-        return status;
+    public int getIncomeStatus() {
+        return incomeStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setIncomeStatus(int incomeStatus) {
+        this.incomeStatus = incomeStatus;
     }
-    
-    
 
+   
+   
 }
